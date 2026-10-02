@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chanwoong Hwa · Resume</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  color-scheme: light;
+  --page:#f9f9f7; --surface:#fcfcfb; --surface-2:#f1f0ec;
+  --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,.10);
+  --accent:#2a78d6; --accent-ink:#1c5cab; --accent-soft:#e6f0fc;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --good:#006300;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --page:#0d0d0d; --surface:#1a1a19; --surface-2:#242422;
+    --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+    --accent:#3987e5; --accent-ink:#86b6ef; --accent-soft:#16263a;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+    --good:#0ca30c;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --page:#0d0d0d; --surface:#1a1a19; --surface-2:#242422;
+  --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+  --accent:#3987e5; --accent-ink:#86b6ef; --accent-soft:#16263a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+  --good:#0ca30c;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--page);color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,system-ui,-apple-system,"Segoe UI","Noto Sans KR",sans-serif;
+  line-height:1.65;word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--page) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--ring)}
+header.top .wrap{display:flex;align-items:center;gap:12px;height:56px}
+.brand{font-weight:800;letter-spacing:-.02em;flex:none}
+header.top nav{display:flex;gap:18px;flex:1;overflow-x:auto;scrollbar-width:none;padding-left:8px}
+header.top nav a{color:var(--ink-2);text-decoration:none;font-size:14px;white-space:nowrap}
+header.top nav a:hover{color:var(--ink)}
+.seg{display:inline-flex;border:1px solid var(--ring);border-radius:999px;overflow:hidden;flex:none}
+.seg button{background:none;border:0;color:var(--ink-2);padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.iconbtn{background:none;border:1px solid var(--ring);border-radius:999px;color:var(--ink-2);width:32px;height:32px;cursor:pointer;flex:none;font-size:15px}
+.hero{padding:56px 0 8px}
+.hero .name{font-size:clamp(40px,8vw,64px);font-weight:800;letter-spacing:-.035em;line-height:1;margin:0}
+.hero .role{font-size:clamp(16px,2.4vw,20px);color:var(--ink-2);margin:12px 0 0;font-weight:500}
+.hero .role b{color:var(--ink);font-weight:700}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 0}
+.pillar{background:var(--surface);border:1px solid var(--ring);border-radius:16px;padding:18px}
+.pillar .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-ink);margin-bottom:10px}
+.pillar h3{margin:0 0 4px;font-size:16px}
+.pillar p{margin:0;color:var(--ink-2);font-size:14px;line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);margin:28px 0 0;background:var(--surface);border:1px solid var(--ring);border-radius:16px;overflow:hidden}
+.stat{padding:16px 14px;border-right:1px solid var(--grid)}
+.stat:last-child{border-right:0}
+.stat .v{font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.stat .v small{font-size:13px;font-weight:600;color:var(--ink-2);margin-left:2px}
+.stat .k{color:var(--ink-2);font-size:12.5px;margin-top:4px;line-height:1.35}
+.note{color:var(--muted);font-size:12px;margin-top:8px}
+section{padding:56px 0 0}
+.sh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sh h2{font-size:24px;margin:0;letter-spacing:-.02em}
+.sh span{color:var(--muted);font-size:14px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);align-items:stretch}
+.step{position:relative;background:var(--surface);border:1px solid var(--ring);border-radius:14px;padding:16px 14px;margin-right:22px}
+.step:last-child{margin-right:0;background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+.step:not(:last-child)::after{content:"";position:absolute;right:-17px;top:50%;width:10px;height:10px;border-top:2px solid var(--axis);border-right:2px solid var(--axis);transform:translateY(-50%) rotate(45deg)}
+.step .n{font-size:12px;color:var(--muted);font-weight:600}
+.step .big{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:2px 0}
+.step .d{font-size:13px;color:var(--ink-2);line-height:1.45}
+.ba{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+.bacard{background:var(--surface);border:1px solid var(--ring);border-radius:14px;padding:16px}
+.bacard .t{font-size:13px;color:var(--ink-2);margin-bottom:10px;min-height:2.7em;line-height:1.35}
+.bacard .row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.bacard .before{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px;font-size:15px}
+.bacard .arrow{color:var(--muted)}
+.bacard .after{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.bacard .x{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);border-radius:999px;padding:2px 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{border:1px solid var(--ring);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.cards{display:grid;gap:10px}
+.card{background:var(--surface);border:1px solid var(--ring);border-radius:16px;overflow:hidden}
+.card.hide{display:none}
+.card>button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:40px 1fr auto 18px;gap:14px;align-items:center;width:100%;padding:16px 18px;cursor:pointer}
+.card>button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.rank{width:34px;height:34px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;font-weight:800;color:var(--ink-2);font-size:14px}
+.card.top3 .rank{background:var(--accent);color:#fff}
+.card .ttl{font-weight:700;font-size:16.5px;letter-spacing:-.01em;line-height:1.35}
+.card .hl{color:var(--ink-2);font-size:14px;margin-top:2px;line-height:1.45}
+.card .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:11.5px;color:var(--ink-2);background:var(--surface-2);border-radius:6px;padding:1px 7px}
+.tag.on{color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
+.metric{text-align:right;white-space:nowrap}
+.metric b{display:block;font-size:18px;font-weight:800;letter-spacing:-.02em}
+.metric span{font-size:11.5px;color:var(--muted)}
+.chev{color:var(--muted);transition:transform .2s;font-size:18px}
+.card.open .chev{transform:rotate(90deg)}
+.body{display:none;padding:0 18px 18px 72px;color:var(--ink-2);font-size:14.5px}
+.card.open .body{display:block}
+.body ul{margin:0;padding-left:18px}
+.body li{margin:5px 0}
+.body .techttl{font-size:12px;font-weight:700;color:var(--accent-ink);margin:0 0 6px;letter-spacing:.01em}
+.body li.lead{list-style:none;margin-left:-18px;color:var(--ink)}
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.qc{background:var(--surface);border:1px solid var(--ring);border-radius:14px;padding:14px 16px}
+.qc .q{font-size:13px;font-weight:800;color:var(--accent-ink);letter-spacing:.02em}
+.qc ul{margin:8px 0 0;padding:0;list-style:none}
+.qc li{font-size:13.5px;line-height:1.45;padding:6px 0;border-top:1px solid var(--grid)}
+.qc li:first-child{border-top:0}
+.qc li em{font-style:normal;font-weight:700;color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.panel{background:var(--surface);border:1px solid var(--ring);border-radius:16px;padding:16px;position:relative}
+.panel h3{font-size:15px;margin:0}
+.panel .cap{color:var(--ink-2);font-size:13px;margin:2px 0 10px;padding-right:70px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);margin-bottom:6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+svg text{fill:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+svg .val{fill:var(--ink);font-size:12px;font-weight:700}
+.tablebtn{position:absolute;top:12px;right:12px;font-size:12px;background:none;border:1px solid var(--ring);border-radius:8px;color:var(--ink-2);padding:2px 8px;cursor:pointer}
+table.dt{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums;display:none}
+table.dt th,table.dt td{border-bottom:1px solid var(--grid);padding:4px 6px;text-align:right}
+table.dt th:first-child,table.dt td:first-child{text-align:left}
+.panel.tab table.dt{display:table}
+.panel.tab svg,.panel.tab .legend{display:none}
+#tip{position:fixed;pointer-events:none;background:var(--surface);border:1px solid var(--ring);box-shadow:0 6px 24px rgba(0,0,0,.12);border-radius:10px;padding:8px 10px;font-size:12px;opacity:0;transition:opacity .1s;z-index:50;min-width:140px}
+#tip .h{color:var(--ink-2);margin-bottom:4px}
+#tip .r{display:flex;align-items:center;gap:10px;justify-content:space-between}
+#tip .r b{color:var(--ink)}
+#tip .r span{display:inline-flex;align-items:center;gap:6px;color:var(--ink-2)}
+#tip .r i{width:12px;height:2px;display:inline-block}
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.skill h3{font-size:15px;margin:0 0 2px}
+.skill .en{font-size:12px;color:var(--muted);margin-bottom:8px}
+.skill ul{margin:0;padding-left:16px;color:var(--ink-2);font-size:13.5px}
+.skill li{margin:5px 0;line-height:1.45}
+footer{padding:48px 0 64px;color:var(--muted);font-size:12px}
+@media (max-width:900px){
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stat:nth-child(3n){border-right:0}
+  .stat:nth-child(-n+3){border-bottom:1px solid var(--grid)}
+  .ba{grid-template-columns:repeat(2,1fr)}
+  .tl,.skills{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:1fr;gap:18px}
+  .step{margin-right:0}
+  .step:not(:last-child)::after{right:auto;left:24px;top:auto;bottom:-14px;transform:rotate(135deg)}
+}
+@media (max-width:640px){
+  .pillars,.grid2,.skills,.tl{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat,.stat:nth-child(3n){border-right:1px solid var(--grid);border-bottom:1px solid var(--grid)}
+  .stat:nth-child(2n){border-right:0}
+  .stat:nth-last-child(-n+2){border-bottom:0}
+  .card>button{grid-template-columns:34px 1fr 18px;gap:12px;padding:14px}
+  .metric{grid-column:2;grid-row:2;text-align:left}
+  .metric b{display:inline;font-size:15px;margin-right:6px}
+  .chev{grid-column:3;grid-row:1}
+  .body{padding:0 14px 16px 14px}
+  header.top .brand{display:none}
+}
+@media print{
+  header.top,.chips,.tablebtn,.iconbtn{display:none}
+  .card .body,.card.hide{display:block}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand">Chanwoong Hwa</div>
+  <nav aria-label="sections">
+    <a href="#impact" data-i18n="nav_imp"></a>
+    <a href="#exp" data-i18n="nav_exp"></a>
+    <a href="#timeline" data-i18n="nav_tl"></a>
+    <a href="#numbers" data-i18n="nav_num"></a>
+    <a href="#skills" data-i18n="nav_sk"></a>
+  </nav>
+  <div class="seg" role="group" aria-label="language"><button data-lang="KR">KR</button><button data-lang="EN">EN</button></div>
+  <button class="iconbtn" id="themeBtn" aria-label="theme">◐</button>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1 class="name">Chanwoong Hwa</h1>
+    <p class="role" id="role"></p>
+    <div class="pillars" id="pillars"></div>
+    <div class="stats" id="stats"></div>
+    <div class="note" data-i18n="statnote"></div>
+  </div>
+
+  <section id="impact">
+    <div class="sh"><h2 data-i18n="imp_h"></h2><span data-i18n="imp_sub"></span></div>
+    <div class="flow" id="flow"></div>
+    <div class="ba" id="ba"></div>
+  </section>
+
+  <section id="exp">
+    <div class="sh"><h2 data-i18n="exp_h"></h2><span data-i18n="exp_sub"></span></div>
+    <div class="chips" id="chips" role="group" aria-label="filter"></div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section id="timeline">
+    <div class="sh"><h2 data-i18n="tl_h"></h2><span data-i18n="tl_sub"></span></div>
+    <div class="tl" id="tl"></div>
+  </section>
+
+  <section id="numbers">
+    <div class="sh"><h2 data-i18n="num_h"></h2><span data-i18n="num_sub"></span></div>
+    <div class="grid2">
+      <div class="panel">
+        <h3 data-i18n="pr_h"></h3><p class="cap" data-i18n="pr_cap"></p>
+        <button class="tablebtn"></button>
+        <div class="legend" id="lg-pr"></div>
+        <svg id="c-pr" role="img"></svg><table class="dt" id="t-pr"></table>
+      </div>
+      <div class="panel">
+        <h3 data-i18n="rv_h"></h3><p class="cap" data-i18n="rv_cap"></p>
+        <button class="tablebtn"></button>
+        <div class="legend" id="lg-rv"></div>
+        <svg id="c-rv" role="img"></svg><table class="dt" id="t-rv"></table>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sh"><h2 data-i18n="sk_h"></h2><span data-i18n="sk_sub"></span></div>
+    <div class="skills" id="sk"></div>
+  </section>
+
+  <footer data-i18n="foot"></footer>
+</main>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const DATA = {"items": [{"n": 1, "kr": "매일 돌아가는 자동 재분석으로 새 진단 찾기", "en": "Daily automated reanalysis that finds new diagnoses", "tk": "자동 재분석 파이프라인", "te": "Automated Reanalysis Pipeline", "ongoing": true, "KR": [{"d": 0, "t": "3.8만 샘플을 매일 최신 지식으로 다시 분석하고, 데이터 수집을 26배 빠르게 만듦."}, {"d": 1, "t": "일 약 38,000 샘플 규모의 자동 재분석 파이프라인을 운영·고도화함."}, {"d": 2, "t": "대상을 WES에서 WGS로 확장하고, SNV·CNV 재분석을 함께 운영함."}, {"d": 2, "t": "후보 선별 기준을 증상유사도에서 3ASC 점수로 전환함."}, {"d": 1, "t": "결과 관리를 스프레드시트에서 임상 플랫폼(GEBRA) UI·DB로 이전하는 작업에 참여함."}, {"d": 1, "t": "샘플 수집·잡 제출을 레거시 오케스트레이터에서 분리하고, 다른 변이 타입으로도 확장 가능한 병렬 I/O 구조로 재설계함."}, {"d": 2, "t": "후보 수집 시간: 78분 → 3분 (약 26배)"}, {"d": 2, "t": "후보 키 생성 병목: 5분 → 12초"}, {"d": 1, "t": "중단돼 있던 CNV 재분석을 변이 단위 구조로 재구축해 서비스를 재개하고, 일 후보 수를 약 7만 건에서 약 1만 건으로 줄여 판독 부담을 낮춤."}, {"d": 1, "t": "누락 샘플 전수조사와 레거시 데이터 1,100여 건 복구로 재분석 커버리지를 확보함. 이 파이프라인을 통한 누적 신규 진단은 1,400명 이상(회사 공개 기준)임."}], "EN": [{"d": 0, "t": "Re-analyzes ~38K samples daily against the latest knowledge; data collection made 26× faster."}, {"d": 1, "t": "Operate and extend a ~38K-sample/day automated reanalysis pipeline."}, {"d": 2, "t": "Extended coverage from WES to WGS, running reanalysis for both SNVs and CNVs."}, {"d": 2, "t": "Switched candidate selection from symptom similarity to 3ASC scores."}, {"d": 1, "t": "Contributed to moving result management from spreadsheets into the clinical platform's (GEBRA) UI and database."}, {"d": 1, "t": "Decoupled sample collection and job submission from the legacy orchestrator and rebuilt them around a parallel-I/O design that can extend to other variant types: candidate collection dropped from 78 to 3 minutes (~26×), and key generation from 5 minutes to 12 seconds."}, {"d": 1, "t": "Rebuilt the stalled CNV reanalysis around a per-variant model and brought it back into service, cutting daily candidates from ~70K to ~10K to ease clinical review."}, {"d": 1, "t": "Recovered coverage through a missing-sample audit and restoration of ~1.1K legacy results. The pipeline has contributed to 1,400+ new diagnoses (company-published figure)."}]}, {"n": 2, "kr": "AI 변이 우선순위 시스템 재구축 리드", "en": "Leading the rebuild of an AI variant-prioritization system", "tk": "3ASC 재구축 및 BI 이관 리드", "te": "3ASC Rebuild & Ownership Transfer", "ongoing": true, "KR": [{"d": 0, "t": "AI팀에서 시스템을 넘겨받아 학습 데이터 파이프라인을 새로 설계·구축함."}, {"d": 1, "t": "AI 변이 우선순위 시스템 **3ASC**에서 모델을 제외한 데이터 빌드부터 서빙까지 전 영역을 AI팀에서 이관받음."}, {"d": 2, "t": "이해관계자 회의를 주관하며 아키텍처와 전 변이 타입 feature·interface 명세를 합의함."}, {"d": 2, "t": "학습 데이터 시점 정책(판독 시점 고정, 데이터 누수 방지)을 수립함."}, {"d": 1, "t": "신규 파이프라인 레포를 구축함."}, {"d": 2, "t": "SNV·CNV·Sample 약 70개 테이블 정규화를 직접 구현하고, 7개 변이 타입 공통 스키마를 정합함."}, {"d": 2, "t": "설계 근거는 약 160만 파일 전수조사로 확보함."}, {"d": 1, "t": "AI팀에 mock 데이터를 선제공해 병렬 개발을 가능하게 함."}, {"d": 1, "t": "CNV·SV 벤치마크 데이터(586·178샘플)를 생산함."}, {"d": 1, "t": "기존 모델은 학습 데이터 결함을 진단하고 재학습 배포를 지원함."}], "EN": [{"d": 0, "t": "Took the system over from the AI team and redesigned its training-data pipeline."}, {"d": 1, "t": "Took over the 3ASC (AI variant prioritization) data-build-through-serving stack from the AI team."}, {"d": 2, "t": "Chaired stakeholder sessions to agree on the architecture and the feature/interface specs for every variant type."}, {"d": 2, "t": "Set a leakage-safe training-data policy that fixes data at report time."}, {"d": 1, "t": "Stood up a new pipeline repo and implemented ~70 normalized tables (SNV/CNV/sample) under a shared 7-variant-type schema, grounding the schema in a survey of ~1.6M output files."}, {"d": 1, "t": "Shipped mock data early so the AI team could develop in parallel, and produced CNV/SV benchmark sets (586 and 178 samples)."}, {"d": 1, "t": "Diagnosed a training-data defect in the existing model and supported its retraining and release."}]}, {"n": 3, "kr": "변이 병원성 판정 정확도 개선", "en": "More accurate variant pathogenicity calls", "tk": "ACMG 분류 정확도 개선", "te": "ACMG Classification Accuracy", "ongoing": false, "KR": [{"d": 0, "t": "국제 기준(ACMG) 판정을 점수 기반으로 전환하고 과대·과소 판정 오류를 교정함."}, {"d": 1, "t": "point-based 분류 체계 전환에 참여함. PS4 assigner를 신규 구현하고, PM2/BA1/BS1 판정 로직을 전면 개편함."}, {"d": 1, "t": "CNV 규칙 동시부여로 생긴 과대평가는 충돌 해소 로직으로, 과소평가는 인구빈도 cutoff로 교정함."}, {"d": 1, "t": "다중 유전자 변이에서 이웃 유전자의 cutoff가 잘못 적용되던 캐시 결함을 수정하고, 영향 범위를 전수조사함."}, {"d": 1, "t": "MANE 기반 대표 transcript 매핑을 적용하고, 전 변이 타입에 2차 소견 표기를 추가함."}], "EN": [{"d": 0, "t": "Moved guideline-based (ACMG) calls to a point system and fixed over- and under-calls."}, {"d": 1, "t": "Contributed to the point-based ACMG transition: implemented a new PS4 assigner and overhauled the PM2/BA1/BS1 logic."}, {"d": 1, "t": "Corrected CNV over-calls from co-assigned rules with conflict resolution, and under-calls with population-frequency cutoffs."}, {"d": 1, "t": "Fixed a caching defect that applied a neighboring gene's cutoffs to multi-gene variants, and ran a full impact survey."}, {"d": 1, "t": "Aligned outputs to MANE representative transcripts and added secondary-finding flags for every variant type."}]}, {"n": 4, "kr": "판정 로직 자동 검증과 배포 안전장치", "en": "Automated checks and release safeguards", "tk": "검증·품질 게이트 체계", "te": "Validation & Quality-Gate System", "ongoing": true, "KR": [{"d": 0, "t": "모든 판정 규칙을 자동 테스트하고, 실제 진단 사례로 배포 전 이상을 감지함."}, {"d": 1, "t": "단일 \"정답지\"에 의존해 유지보수가 어렵던 검증 체계를 재설계함."}, {"d": 2, "t": "전 변이 타입 ACMG functional test(시나리오 기반)를 구축함."}, {"d": 2, "t": "validator는 E2E smoke로 축소함."}, {"d": 2, "t": "검증 데이터는 버전관리로 이전함."}, {"d": 1, "t": "레포 전체 테스트 커버리지 90%를 달성해 CI에서 강제하고, 이 과정에서 숨은 결함 10건을 발견함."}, {"d": 1, "t": "실제 진단 기록에서 판정이 안정적인 변이 812개를 선별해 배포 전 회귀 게이트를 구축 중임."}], "EN": [{"d": 0, "t": "Every rule is tested automatically, and real diagnosed cases catch regressions before release."}, {"d": 1, "t": "Re-architected a hard-to-maintain single-truth validator:"}, {"d": 2, "t": "built scenario-based ACMG functional tests for every variant type,"}, {"d": 2, "t": "reduced the validator to an E2E smoke check,"}, {"d": 2, "t": "moved validation data under version control."}, {"d": 1, "t": "Raised repo-wide test coverage to 90% and enforced it in CI, surfacing 10 latent defects along the way."}, {"d": 1, "t": "Building a pre-deployment regression gate on 812 diagnostically stable variants drawn from real case history."}]}, {"n": 5, "kr": "분석 서버 용량 산정과 서비스 분산", "en": "Server capacity planning and service separation", "tk": "HPC·인프라 현대화", "te": "HPC & Infrastructure Modernization", "ongoing": true, "KR": [{"d": 0, "t": "처리량 데이터로 증설 규모를 정하고, 한 서버에 몰린 서비스 20개를 나눠 장애 위험을 없앰."}, {"d": 1, "t": "로그 기반 slot-hour 모델로 재분석 클러스터의 처리량과 가동률을 정량화함(가동률 약 75.6%, WGS 비용은 WES의 약 12.6배). 이를 근거로 필요한 노드 증설 규모(5→9노드)를 산출해 증설 의사결정을 지원함."}, {"d": 1, "t": "단일 서버에 혼재되어 있던 임상 웹서비스·파이프라인·DB 작업 20여 개를 운영용 VM 4대로 분산 이전해 단일 장애점을 제거함."}, {"d": 2, "t": "1주간 프로세스 메모리를 실측해 측정 허수(797G)와 실제 원인을 규명하고, 이를 근거로 VM 사양을 산정함."}, {"d": 2, "t": "6개 팀과 이전 일정을 조율함."}, {"d": 1, "t": "Slurm 제출 경로(sbatch·REST)를 구현함."}], "EN": [{"d": 0, "t": "Sized expansion from throughput data and split 20 services off one server to remove a single point of failure."}, {"d": 1, "t": "Quantified reanalysis cluster throughput with a log-based slot-hour model (~75.6% utilization; WGS ≈ 12.6× WES cost) and used it to size a 5→9 node expansion."}, {"d": 1, "t": "Migrated 20+ clinical web services, pipelines, and DB jobs off a single shared server onto 4 operational VMs, removing a single point of failure."}, {"d": 2, "t": "Sized the VMs from a week of process-memory profiling, which exposed a 797G reading as a measurement artifact and identified the actual cause."}, {"d": 2, "t": "Coordinated the cutover across six teams."}, {"d": 1, "t": "Implemented sbatch and REST (slurmrestd) submission paths for Slurm."}]}, {"n": 6, "kr": "대용량 유전체 DB 조회 속도 개선", "en": "Faster lookups in large genomic databases", "tk": "EVIDENCE 어노테이션 엔진 성능 개선", "te": "EVIDENCE Annotation Engine Performance", "ongoing": false, "KR": [{"d": 0, "t": "필요한 부분만 읽도록 바꿔 조회 시간을 1분에서 1–2초로 단축함."}, {"d": 1, "t": "약 350만 건 규모 ClinVar 등 대용량 DB를 전체 스캔하던 어노테이션을 재설계함. 변이·단백질 좌표 bin/index 조회 라이브러리로 필요한 구간만 읽도록 바꾸고, ClinVar·HGMD·in-house 빈도에 공용 적용함. missense 조회는 WGS 샘플 기준 1분 이상에서 1~2초로 단축함."}, {"d": 1, "t": "liftover DB를 블록 단위 offset 구조로 전환함."}, {"d": 2, "t": "전처리 시간: 40–60초 → 9–13초"}, {"d": 2, "t": "어노테이션 시간: 약 90초 → 약 30초"}, {"d": 2, "t": "데이터 크기: 약 26% 감소"}], "EN": [{"d": 0, "t": "Reads only what is needed: lookups went from a minute to 1–2 seconds."}, {"d": 1, "t": "Replaced full-scan annotation over large DBs (~3.5M ClinVar records) with shared bin/index lookup libraries keyed on variant and protein coordinates, applied across ClinVar, HGMD, and in-house frequencies; missense lookups on a WGS sample dropped from over a minute to 1–2 seconds."}, {"d": 1, "t": "Moved the liftover DB to a block-offset layout: preprocessing went from 40–60s to 9–13s, annotation from ~90s to ~30s, and data size dropped ~26%."}]}, {"n": 7, "kr": "가족검사 결과로 유전 양식 자동 판정", "en": "Automatic inheritance calls from family testing", "tk": "가족검사·Sanger 통합 유전 양식 자동화", "te": "Family & Sanger-Integrated Inheritance Automation", "ongoing": false, "KR": [{"d": 0, "t": "가족·확인 검사 결과를 합쳐 사람이 하던 판정 단계를 자동화함."}, {"d": 1, "t": "가족검사(trio)와 Sanger 검증 결과를 NGS 결과와 통합해 inheritance와 cis/trans를 자동 산출함. 그 결과를 바탕으로 PM3/BP2/PM6를 자동 부여하는 로직을 설계해 소프트웨어팀과 함께 임상 플랫폼에 반영함. 정기 ClinVar 3-star 큐레이션 규칙도 정의해 자동 반영함."}], "EN": [{"d": 0, "t": "Combines family and confirmation tests to automate a manual clinical step."}, {"d": 1, "t": "Integrated trio and Sanger confirmation results with NGS calls to derive inheritance and cis/trans phase automatically. Designed the downstream PM3/BP2/PM6 auto-assignment logic and delivered it into the clinical platform with the software team. Also defined the rules for recurring ClinVar 3-star curation and automated their application."}]}, {"n": 8, "kr": "최신 인구 유전체 빈도 데이터로 전환", "en": "Switched to the latest population-frequency data", "tk": "gnomAD v4 이관", "te": "Population-Frequency Migration to gnomAD v4", "ongoing": false, "KR": [{"d": 0, "t": "판정 기준이 되는 인구 빈도 DB를 최신판(gnomAD v4)으로 바꾸고 기준값을 다시 정함."}, {"d": 1, "t": "빈도 기반 ACMG 규칙(BA1/BS1/BS2/PM2)을 gnomAD v3에서 v4로 이관함. exome/genome 분리와 버전 간 차이를 전수조사하고, 문헌 근거로 규칙 부여 기준을 재정립함. GRCh38에는 FILTER=PASS 기준도 적용함."}], "EN": [{"d": 0, "t": "Replaced the population-frequency reference with gnomAD v4 and recalibrated thresholds."}, {"d": 1, "t": "Led the gnomAD v3→v4 migration for frequency-based ACMG criteria: a full exome/genome impact analysis, literature-backed threshold recalibration, and FILTER=PASS gating on GRCh38."}]}, {"n": 9, "kr": "구조변이까지 검색 범위 확장", "en": "Search extended to structural variants", "tk": "구조변이 검색 기능 확장", "te": "Structural-Variant Search Coverage", "ongoing": false, "KR": [{"d": 0, "t": "작은 변이만 찾던 검색을 큰 구조변이와 반복서열까지 넓힘."}, {"d": 1, "t": "SNV·CNV에만 제공되던 전(全)변이 검색을 BND/INV·INS·STR까지 확장함. 소프트웨어팀과 검색 스키마(parquet)를 협의해 모든 변이 타입을 지원하게 함."}], "EN": [{"d": 0, "t": "Search that covered only small variants now also covers large structural and repeat variants."}, {"d": 1, "t": "Extended whole-variant search from SNV/CNV to BND/INV, INS, and STR, agreeing the parquet search schema with the software team so every variant type is covered."}]}, {"n": 10, "kr": "임상팀 지원과 팀 협업", "en": "Clinical support and team collaboration", "tk": "운영 지원 & 임상 협업", "te": "Operational Support & Clinical Collaboration", "ongoing": false, "KR": [{"d": 0, "t": "임상·실험팀 요청 약 90건 처리, 코드 리뷰 500건 이상, 신규 입사자 온보딩."}, {"d": 1, "t": "약 90건의 임상·실험팀 요청을 처리함(개별·trio 재분석, in-house 빈도 조회, CNV/SV 콜 검증, gene-list 통계 등). 재분석·규칙 부여 이슈를 진단·수정했고, 후보 급증 원인 정량 분석처럼 다수를 제품 개선으로 환류함. 500건 이상의 코드 리뷰와 신규 입사자 온보딩 문서로 팀 역량을 뒷받침함."}], "EN": [{"d": 0, "t": "~90 clinical and lab requests, 500+ code reviews, and onboarding for new hires."}, {"d": 1, "t": "Resolved ~90 clinical and lab requests: per-sample and trio reanalysis, in-house frequency lookups, CNV/SV call validation, and gene-list statistics. Diagnosed reanalysis and rule-assignment issues and fed many back into the product, for example by quantitatively decomposing a candidate surge. Supported the team through 500+ code reviews and onboarding documentation for new hires."}]}], "skills": [{"en": "Genomic Variant Interpretation", "kr": "유전체 변이 해석", "items": ["ACMG/ACGS 분류 규칙 엔진 설계·구현 — 증거 강도 조정, 규칙 충돌 해소, point-based 분류 체계 전환", "CNV·구조변이(SV)·STR·UPD 해석 및 2차 소견(secondary finding) 처리", "유전 양식·위상(phasing) 판정 — trio·Sanger 검증 결과 통합, compound heterozygote", "어노테이션 DB 큐레이션·평가 — gnomAD v4, ClinVar, VEP·SpliceAI, MANE transcript"]}, {"en": "Programming & Data Engineering", "kr": "프로그래밍·데이터 엔지니어링", "items": ["Python 기반 재사용 라이브러리 설계 — 좌표 인덱스 기반 대용량 변이 조회, I/O 최적화", "데이터 모델링·정규화 — 스키마 계약 기반 설계, 전수조사로 설계 근거 확보", "컬럼나 데이터 처리 — parquet·PyArrow·DuckDB, 병렬 데이터 수집", "데이터 플랫폼 마이그레이션 — MySQL → ClickHouse 기반 플랫폼, DynamoDB·RDS 연동"]}, {"en": "Pipeline / Automation", "kr": "파이프라인·자동화", "items": ["대규모 자동 재분석 파이프라인 운영·고도화 — 일 약 38,000 샘플, WES·WGS, SNV·CNV", "수기 임상 워크플로 자동화 — 가족검사·Sanger 결과 반영, 스프레드시트 → 임상 플랫폼 전환", "파이프라인 장애 진단·근본 원인 분석"]}, {"en": "Cloud & HPC Infrastructure", "kr": "클라우드·HPC 인프라", "items": ["HPC 클러스터 용량 분석·증설 산정 — 로그 기반 처리량·slot-hour 모델", "서비스 VM 분산 이전 — 자원 실측 기반 사양 산정, 단일 장애점 제거", "SGE·Slurm 잡 스케줄러, Docker·nginx, AWS(DynamoDB·S3·RDS) 온프렘 하이브리드 연동"]}, {"en": "Testing / Validation / QA", "kr": "테스트·검증", "items": ["ACMG 규칙 functional test 프레임워크 설계 — 전 변이 타입 시나리오 기반", "CI 테스트 커버리지 게이트 운영 및 실제 진단 기록 기반 배포 회귀 검증", "회귀·영향도 분석"]}, {"en": "Collaboration & Process", "kr": "협업·프로세스", "items": ["팀 간 시스템 이관 — 이해관계자 회의 주관, 설계·명세 합의", "코드 리뷰(500+ 건) 및 신규 입사자 온보딩 문서 작성", "임상·SW·AI팀과의 의사결정 및 요청 트리아지"]}]};
+const T = {
+  KR:{nav_imp:"임팩트",nav_exp:"주요 성과",nav_tl:"타임라인",nav_num:"활동",nav_sk:"핵심 역량",
+    role:"임상 유전체 진단 기업 <b>3billion</b>의 <b>바이오인포매틱스·플랫폼 엔지니어</b>",
+    statnote:"2024.08 – 2026.10 · 수치는 근사치",
+    imp_h:"임팩트 한눈에",imp_sub:"자동 재분석 흐름과 대표 개선 사례",
+    exp_h:"주요 성과",exp_sub:"영향이 큰 순서 · 눌러서 자세히",
+    tl_h:"타임라인",tl_sub:"분기별 주요 업무",
+    num_h:"활동",num_sub:"분기별 PR·코드 리뷰",
+    pr_h:"작성 PR",pr_cap:"분기별 · 시스템별 누적 (총 479건, 머지율 93%)",
+    rv_h:"코드 리뷰",rv_cap:"분기별 · 다른 사람 PR (총 503건)",
+    sk_h:"핵심 역량",sk_sub:"Core Skills",table:"표 보기",chart:"차트 보기",
+    all:"전체",ongoing:"진행 중",quarter:"분기",total:"합계",reviews:"리뷰",
+    foot:"근거: 업무 이슈·코드 리뷰·협업 기록·분기 피드백 (2024–2026). 수치는 근사치이며 회사 공개 기준을 따릅니다."},
+  EN:{nav_imp:"Impact",nav_exp:"Experience",nav_tl:"Timeline",nav_num:"Activity",nav_sk:"Skills",
+    role:"<b>Bioinformatics & platform engineer</b> at clinical genomics company <b>3billion</b>",
+    statnote:"Aug 2024 – Oct 2026 · figures are approximate",
+    imp_h:"Impact at a glance",imp_sub:"The reanalysis flow and signature improvements",
+    exp_h:"Selected Experience",exp_sub:"Ordered by impact · click for details",
+    tl_h:"Timeline",tl_sub:"Main work by quarter",
+    num_h:"Activity",num_sub:"PRs and code reviews per quarter",
+    pr_h:"PRs authored",pr_cap:"Per quarter, stacked by system (479 total, 93% merged)",
+    rv_h:"Code reviews",rv_cap:"Per quarter, on others' PRs (503 total)",
+    sk_h:"Core Skills",sk_sub:"핵심 역량",table:"Table",chart:"Chart",
+    all:"All",ongoing:"Ongoing",quarter:"Quarter",total:"Total",reviews:"Reviews",
+    foot:"Sources: work tickets, code reviews, collaboration records, and quarterly reviews (2024–2026). Figures are approximate and follow company-published numbers."}
+};
+const ICONS = {
+  dna:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 3c0 6 10 6 10 12s-10 6-10 6"/><path d="M17 3c0 6-10 6-10 12s10 6 10 6"/><path d="M8 7h8M8 17h8"/></svg>',
+  loop:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>',
+  spark:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg>'
+};
+const PILLARS = [
+  {ic:"dna",KR:["변이 해석 엔진","ACMG 분류 규칙과 대용량 어노테이션을 설계해 정확도와 속도를 함께 개선"],EN:["Variant interpretation engine","Designing ACMG rules and large-scale annotation for both accuracy and speed"]},
+  {ic:"loop",KR:["자동 재분석","일 3.8만 샘플을 매일 다시 분석해 새로 진단 가능한 환자를 찾는 파이프라인 운영"],EN:["Automated reanalysis","Running a daily pipeline over ~38K samples to surface newly diagnosable patients"]},
+  {ic:"spark",KR:["AI 변이 우선순위","3ASC의 데이터 빌드·서빙을 이관받아 재구축하고 학습 데이터 품질을 관리"],EN:["AI variant prioritization","Rebuilding 3ASC's data build and serving, and owning training-data quality"]}
+];
+const STATS = [
+  {v:"26",u:{KR:"개월",EN:"mo"},k:{KR:"재직",EN:"Tenure"}},
+  {v:"650+",u:{KR:"",EN:""},k:{KR:"수행 작업",EN:"Tasks delivered"}},
+  {v:"479",u:{KR:"",EN:""},k:{KR:"작성 PR",EN:"PRs authored"}},
+  {v:"503",u:{KR:"",EN:""},k:{KR:"코드 리뷰",EN:"Code reviews"}},
+  {v:"38K",u:{KR:"/일",EN:"/day"},k:{KR:"재분석 샘플",EN:"Samples reanalyzed"}},
+  {v:"1,400+",u:{KR:"",EN:""},k:{KR:"신규 진단 기여",EN:"New diagnoses contributed"}}
+];
+const FLOW = [
+  {n:{KR:"01 입력",EN:"01 Input"},big:"38K",d:{KR:"WES·WGS 샘플을 매일 재분석",EN:"WES & WGS samples, every day"}},
+  {n:{KR:"02 해석",EN:"02 Interpret"},big:"SNV·CNV",d:{KR:"최신 DB로 ACMG 재판정 후 판독 시점과 비교",EN:"re-classified on current DBs, compared to report time"}},
+  {n:{KR:"03 우선순위",EN:"03 Prioritize"},big:"3ASC",d:{KR:"AI 점수로 후보 선별",EN:"AI scores select candidates"}},
+  {n:{KR:"04 판독",EN:"04 Review"},big:"GEBRA",d:{KR:"임상팀이 플랫폼에서 판독",EN:"Clinicians review in-platform"}},
+  {n:{KR:"05 결과",EN:"05 Outcome"},big:"1,400+",d:{KR:"재분석을 통한 신규 진단 (회사 공개 기준)",EN:"new diagnoses via reanalysis (company-published)"}}
+];
+const BA = [
+  {t:{KR:"재분석 후보 수집 시간",EN:"Reanalysis candidate collection"},b:{KR:"78분",EN:"78 min"},a:{KR:"3분",EN:"3 min"},x:{KR:"26배 빠르게",EN:"26× faster"}},
+  {t:{KR:"missense 조회 (WGS 1샘플)",EN:"Missense lookup (one WGS sample)"},b:{KR:"1분+",EN:"1 min+"},a:{KR:"1–2초",EN:"1–2 s"},x:{KR:"약 40배 빠르게",EN:"~40× faster"}},
+  {t:{KR:"CNV 재분석 일 후보 수",EN:"Daily CNV reanalysis candidates"},b:{KR:"7만",EN:"70K"},a:{KR:"1만",EN:"10K"},x:{KR:"판독 부담 86% 감소",EN:"86% less to review"}},
+  {t:{KR:"단일 서버에 혼재된 서비스",EN:"Services on one shared server"},b:{KR:"서버 1대",EN:"1 server"},a:{KR:"VM 4대",EN:"4 VMs"},x:{KR:"서비스 20개 분산",EN:"20 services split"}}
+];
+const THEMES = {pipe:{KR:"파이프라인",EN:"Pipeline"},interp:{KR:"변이 해석",EN:"Interpretation"},ml:{KR:"AI·데이터",EN:"AI & Data"},
+  qa:{KR:"품질·검증",EN:"Quality"},infra:{KR:"인프라",EN:"Infra"},perf:{KR:"성능",EN:"Performance"},collab:{KR:"협업",EN:"Collaboration"}};
+const META = {
+  1:{t:["pipe"],m:{v:{KR:"26×",EN:"26×"},k:{KR:"수집 가속",EN:"faster collection"}}},
+  2:{t:["ml","pipe"],m:{v:{KR:"160만",EN:"1.6M"},k:{KR:"파일 분석",EN:"files analyzed"}}},
+  3:{t:["interp"],m:{v:{KR:"3차",EN:"3 rounds"},k:{KR:"영향 평가",EN:"impact reviews"}}},
+  4:{t:["qa"],m:{v:{KR:"90%",EN:"90%"},k:{KR:"테스트 커버리지",EN:"test coverage"}}},
+  5:{t:["infra"],m:{v:{KR:"20개",EN:"20"},k:{KR:"서비스 분산",EN:"services split"}}},
+  6:{t:["perf"],m:{v:{KR:"1–2초",EN:"1–2 s"},k:{KR:"조회 시간",EN:"lookup time"}}},
+  7:{t:["interp","pipe"],m:{v:{KR:"자동",EN:"Auto"},k:{KR:"유전 양식 판정",EN:"inheritance calls"}}},
+  8:{t:["interp"],m:{v:{KR:"v4",EN:"v4"},k:{KR:"gnomAD",EN:"gnomAD"}}},
+  9:{t:["perf"],m:{v:{KR:"+3",EN:"+3"},k:{KR:"변이 유형",EN:"variant types"}}},
+  10:{t:["collab"],m:{v:{KR:"500+",EN:"500+"},k:{KR:"코드 리뷰",EN:"code reviews"}}}
+};
+const TL = [
+  {q:"2024 Q4",KR:["입사, 재분석 서버 운영 담당","변이 주석 오픈소스 도구의 버그를 찾아 영향 범위 공지"],EN:["Joined; took over the reanalysis servers","Found a bug in an open-source annotation tool and flagged its impact"]},
+  {q:"2025 Q1",KR:["<em>인구 빈도 DB 최신판(gnomAD v4)</em> 반영","고객용 플랫폼에 CNV 수동 판정 기능 추가"],EN:["<em>Adopted the latest population-frequency DB (gnomAD v4)</em>","Added manual CNV classification for customers"]},
+  {q:"2025 Q2",KR:["변이 해석 엔진 메이저 버전 출시","대용량 DB 조회를 빠르게 하는 공용 라이브러리 개발","재분석에 AI 우선순위 점수 도입"],EN:["Shipped a major version of the interpretation engine","Built a shared library for fast large-DB lookups","Brought AI priority scores into reanalysis"]},
+  {q:"2025 Q3",KR:["재분석이 놓치던 후보를 찾도록 비교 기준 개선","<em>단백질 변이 조회 1분 → 1–2초</em>","구조변이도 전체 검색 가능하게 확장"],EN:["Changed the comparison baseline so reanalysis stops missing candidates","<em>Protein-level variant lookup: 1 min → 1–2 s</em>","Made structural variants fully searchable"]},
+  {q:"2025 Q4",KR:["<em>전장 유전체(WGS)까지 자동 재분석 확대</em>","AI 모델 학습 데이터 정제","부수적 발견(2차 소견) 자동 표시"],EN:["<em>Extended automated reanalysis to whole genomes</em>","Cleaned up AI-model training data","Automatic flags for secondary findings"]},
+  {q:"2026 Q1",KR:["<em>ACMG 판정을 점수 기반 체계로 전환</em>","중단됐던 CNV 재분석 재구축, 판독 후보 86% 감소"],EN:["<em>Moved ACMG classification to a point-based system</em>","Rebuilt the stalled CNV reanalysis; 86% fewer candidates to review"]},
+  {q:"2026 Q2",KR:["<em>재분석 데이터 수집 26배 가속</em>","판정 규칙 자동 테스트 체계 구축","AI 시스템(3ASC) 이관 설계 합의"],EN:["<em>26× faster reanalysis data collection</em>","Automated tests for every classification rule","Agreed the design for taking over the AI system (3ASC)"]},
+  {q:"2026 Q3",KR:["<em>AI 학습 데이터 파이프라인 구축</em>","테스트 커버리지 90% 품질 게이트","서버 서비스 20개를 VM으로 분산 이전"],EN:["<em>Built the AI training-data pipeline</em>","90% test-coverage quality gate","Moved 20 server services onto separate VMs"]}
+];
+const Q = ["24Q4","25Q1","25Q2","25Q3","25Q4","26Q1","26Q2","26Q3"];
+const PR = [
+  {id:"s1",name:{KR:"EVIDENCE 엔진",EN:"EVIDENCE engine"},v:[8,29,52,55,55,78,62,35]},
+  {id:"s2",name:{KR:"3ASC",EN:"3ASC"},v:[0,0,0,2,4,6,11,63]},
+  {id:"s3",name:{KR:"공용 라이브러리",EN:"Shared library"},v:[0,0,6,5,1,1,2,1]}
+];
+const RV = [1,17,34,78,67,108,89,107];
+
+let LANG="KR", FILTER="all";
+try{ LANG=localStorage.getItem("cv-lang")||"KR"; }catch(e){}
+const $=s=>document.querySelector(s);
+const el=(tag,attrs={},text)=>{const e=document.createElement(tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;return e;};
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const NS="http://www.w3.org/2000/svg", sv=(tag,a={})=>{const e=document.createElementNS(NS,tag);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const L=o=>o[LANG];
+const strip=s=>s.replace(/\*\*/g,"");
+
+function applyI18n(){
+  document.documentElement.lang=LANG==="KR"?"ko":"en";
+  document.querySelectorAll("[data-i18n]").forEach(n=>{const v=T[LANG][n.dataset.i18n]; if(v!=null) n.textContent=v;});
+  $("#role").innerHTML=T[LANG].role; // static, trusted string
+  document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===LANG)));
+  document.querySelectorAll(".tablebtn").forEach(b=>b.textContent=b.closest(".panel").classList.contains("tab")?T[LANG].chart:T[LANG].table);
+}
+function renderHero(){
+  const p=$("#pillars"); p.textContent="";
+  PILLARS.forEach(x=>{const d=el("div",{class:"pillar"}), ic=el("div",{class:"ic","aria-hidden":"true"}); ic.innerHTML=ICONS[x.ic];
+    d.append(ic, el("h3",{},x[LANG][0]), el("p",{},x[LANG][1])); p.appendChild(d);});
+  const s=$("#stats"); s.textContent="";
+  STATS.forEach(x=>{const d=el("div",{class:"stat"}), v=el("div",{class:"v"},x.v); if(x.u[LANG]) v.appendChild(el("small",{},x.u[LANG]));
+    d.append(v, el("div",{class:"k"},x.k[LANG])); s.appendChild(d);});
+}
+function renderImpact(){
+  const f=$("#flow"); f.textContent="";
+  FLOW.forEach(x=>{const d=el("div",{class:"step"}); d.append(el("div",{class:"n"},L(x.n)), el("div",{class:"big"},x.big), el("div",{class:"d"},L(x.d))); f.appendChild(d);});
+  const b=$("#ba"); b.textContent="";
+  BA.forEach(x=>{const d=el("div",{class:"bacard"}); d.appendChild(el("div",{class:"t"},L(x.t)));
+    const r=el("div",{class:"row"}); r.append(el("span",{class:"before"},L(x.b)), el("span",{class:"arrow","aria-hidden":"true"},"→"), el("span",{class:"after"},L(x.a)));
+    d.append(r, el("span",{class:"x"},L(x.x))); b.appendChild(d);});
+}
+function renderChips(){
+  const box=$("#chips"); box.textContent="";
+  const mk=(id,label)=>{const b=el("button",{class:"chip","aria-pressed":String(FILTER===id)},label); b.onclick=()=>{FILTER=id;renderChips();applyFilter();}; box.appendChild(b);};
+  mk("all",T[LANG].all); Object.keys(THEMES).forEach(k=>mk(k,THEMES[k][LANG]));
+}
+function applyFilter(){ document.querySelectorAll(".card").forEach(c=>c.classList.toggle("hide",FILTER!=="all"&&!c.dataset.t.split(",").includes(FILTER))); }
+function renderCards(){
+  const box=$("#cards"), open=new Set([...document.querySelectorAll(".card.open")].map(c=>c.dataset.n)); box.textContent="";
+  DATA.items.forEach(it=>{
+    const m=META[it.n], c=el("article",{class:"card"+(it.n<=3?" top3":""),"data-n":it.n,"data-t":m.t.join(",")}); if(open.has(String(it.n))) c.classList.add("open");
+    const id="b"+it.n, btn=el("button",{"aria-expanded":String(c.classList.contains("open")),"aria-controls":id});
+    const mid=el("div"); mid.append(el("div",{class:"ttl"},LANG==="KR"?it.kr:it.en), el("div",{class:"hl"},strip(it[LANG][0].t)));
+    const tags=el("div",{class:"tags"}); m.t.forEach(t=>tags.appendChild(el("span",{class:"tag"},THEMES[t][LANG])));
+    if(it.ongoing) tags.appendChild(el("span",{class:"tag on"},"● "+T[LANG].ongoing)); mid.appendChild(tags);
+    const met=el("div",{class:"metric"}); met.append(el("b",{},m.m.v[LANG]), el("span",{},m.m.k[LANG]));
+    btn.append(el("div",{class:"rank"},String(it.n)), mid, met, el("span",{class:"chev","aria-hidden":"true"},"›"));
+    btn.onclick=()=>{c.classList.toggle("open"); btn.setAttribute("aria-expanded",String(c.classList.contains("open")));};
+    const body=el("div",{class:"body",id}), ul=el("ul");
+    body.appendChild(el("div",{class:"techttl"},(LANG==="KR"?"기술 상세 · ":"Technical detail · ")+(LANG==="KR"?it.tk:it.te)));
+    it[LANG].slice(1).forEach(p=>{const li=el("li",{},strip(p.t)); if(p.d===0) li.className="lead"; else if(p.d>1) li.style.marginLeft=((p.d-1)*18)+"px"; ul.appendChild(li);});
+    body.appendChild(ul); c.append(btn,body); box.appendChild(c);
+  });
+  applyFilter();
+}
+function renderTL(){
+  const box=$("#tl"); box.textContent="";
+  TL.forEach(t=>{const d=el("div",{class:"qc"}); d.appendChild(el("div",{class:"q"},t.q));
+    const ul=el("ul"); t[LANG].forEach(x=>{const li=el("li"); li.innerHTML=x; ul.appendChild(li);}); // static, trusted strings
+    d.appendChild(ul); box.appendChild(d);});
+}
+function renderSkills(){
+  const box=$("#sk"); box.textContent="";
+  DATA.skills.forEach(s=>{const d=el("div",{class:"panel skill"});
+    d.append(el("h3",{},LANG==="KR"?s.kr:s.en), el("div",{class:"en"},LANG==="KR"?s.en:s.kr));
+    const ul=el("ul"); s.items.forEach(x=>ul.appendChild(el("li",{},x))); d.appendChild(ul); box.appendChild(d);});
+}
+const tip=$("#tip");
+function showTip(evt,head,rows){
+  tip.textContent=""; tip.appendChild(el("div",{class:"h"},head));
+  rows.forEach(r=>{const row=el("div",{class:"r"}),s=el("span"); if(r.c){const i=el("i"); i.style.background=r.c; s.appendChild(i);} s.appendChild(document.createTextNode(r.k)); row.append(s,el("b",{},r.v)); tip.appendChild(row);});
+  const rect=evt.target.getBoundingClientRect(), x=evt.clientX??rect.left+20, y=evt.clientY??rect.top;
+  const w=tip.offsetWidth||160; tip.style.left=Math.max(8,Math.min(innerWidth-w-8,x+14))+"px"; tip.style.top=(y-10)+"px"; tip.style.opacity=1;
+}
+const hideTip=()=>{tip.style.opacity=0;};
+function sizeOf(svg,h){const w=Math.max(240,svg.parentElement.clientWidth-32); svg.setAttribute("viewBox",`0 0 ${w} ${h}`); svg.setAttribute("width",w); svg.setAttribute("height",h); return w;}
+function niceMax(v){const p=Math.pow(10,Math.floor(Math.log10(v))); for(const m of [1,1.2,1.5,2,2.5,3,4,5,6,8,10]) if(m*p>=v) return m*p; return 10*p;}
+function roundTop(x,y,w,h,r){r=Math.min(r,h,w/2); return `M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`;}
+function barChart(svgSel,tableSel,series,legendSel){
+  const svg=$(svgSel); svg.textContent=""; const H=220, W=sizeOf(svg,H), pad={l:30,r:6,t:16,b:22};
+  const tot=Q.map((_,i)=>series.reduce((a,s)=>a+s.v[i],0)), max=niceMax(Math.max(...tot)), sy=v=>(H-pad.t-pad.b)*v/max;
+  for(let i=0;i<=4;i++){const y=H-pad.b-(H-pad.t-pad.b)*i/4; svg.appendChild(sv("line",{x1:pad.l,x2:W-pad.r,y1:y,y2:y,stroke:i?css("--grid"):css("--axis")}));
+    const t=sv("text",{x:pad.l-6,y:y+4,"text-anchor":"end"}); t.textContent=Math.round(max*i/4); svg.appendChild(t);}
+  const bw=(W-pad.l-pad.r)/Q.length, inner=Math.min(30,bw*0.6);
+  Q.forEach((q,i)=>{
+    const x=pad.l+bw*i+(bw-inner)/2, g=sv("g",{tabindex:0,role:"img","aria-label":`${q} ${tot[i]}`}); let y=H-pad.b;
+    const vis=series.filter(s=>s.v[i]>0);
+    vis.forEach((s,j)=>{const h=sy(s.v[i]), gap=j>0?2:0; y-=h; const hh=Math.max(0,h-gap);
+      g.appendChild(sv("path",{d:j===vis.length-1?roundTop(x,y,inner,hh,4):`M${x},${y}h${inner}v${hh}h${-inner}Z`,fill:css("--"+s.id)}));});
+    g.appendChild(sv("rect",{x:pad.l+bw*i,y:pad.t,width:bw,height:H-pad.t-pad.b,fill:"transparent"}));
+    const rows=()=>series.length>1?[...series.map(s=>({k:s.name[LANG],v:String(s.v[i]),c:css("--"+s.id)})),{k:T[LANG].total,v:String(tot[i])}]:[{k:series[0].name[LANG],v:String(tot[i]),c:css("--"+series[0].id)}];
+    g.addEventListener("pointermove",e=>{g.style.opacity=.85;showTip(e,q,rows());});
+    g.addEventListener("pointerleave",e=>{g.style.opacity=1;if(e.pointerType!=="touch")hideTip();});
+    g.addEventListener("focus",e=>showTip(e,q,rows())); g.addEventListener("blur",hideTip);
+    svg.appendChild(g);
+    const t=sv("text",{x:pad.l+bw*i+bw/2,y:H-6,"text-anchor":"middle"}); t.textContent=q; svg.appendChild(t);
+  });
+  const pk=tot.indexOf(Math.max(...tot)), lab=sv("text",{class:"val",x:pad.l+bw*pk+bw/2,y:H-pad.b-sy(tot[pk])-5,"text-anchor":"middle"}); lab.textContent=tot[pk]; svg.appendChild(lab);
+  const lg=$(legendSel); lg.textContent=""; if(series.length>1) series.forEach(s=>{const sp=el("span"),i=el("i"); i.style.background=css("--"+s.id); sp.append(i,document.createTextNode(s.name[LANG])); lg.appendChild(sp);});
+  const tb=$(tableSel); tb.textContent=""; const hr=el("tr"); hr.appendChild(el("th",{},T[LANG].quarter)); series.forEach(s=>hr.appendChild(el("th",{},s.name[LANG]))); if(series.length>1) hr.appendChild(el("th",{},T[LANG].total)); tb.appendChild(hr);
+  Q.forEach((q,i)=>{const r=el("tr"); r.appendChild(el("td",{},q)); series.forEach(s=>r.appendChild(el("td",{},String(s.v[i])))); if(series.length>1) r.appendChild(el("td",{},String(tot[i]))); tb.appendChild(r);});
+}
+function drawCharts(){ barChart("#c-pr","#t-pr",PR,"#lg-pr"); barChart("#c-rv","#t-rv",[{id:"s1",name:{KR:T.KR.reviews,EN:T.EN.reviews},v:RV}],"#lg-rv"); }
+function renderAll(){ applyI18n(); renderHero(); renderImpact(); renderChips(); renderCards(); renderTL(); renderSkills(); drawCharts(); }
+
+document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{LANG=b.dataset.lang; try{localStorage.setItem("cv-lang",LANG);}catch(e){} renderAll();});
+document.querySelectorAll(".tablebtn").forEach(b=>b.onclick=()=>{const p=b.closest(".panel"); p.classList.toggle("tab"); b.textContent=p.classList.contains("tab")?T[LANG].chart:T[LANG].table;});
+$("#themeBtn").onclick=()=>{const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark"; document.documentElement.setAttribute("data-theme",next); try{localStorage.setItem("cv-theme",next);}catch(e){} drawCharts();};
+try{const th=localStorage.getItem("cv-theme"); if(th) document.documentElement.setAttribute("data-theme",th);}catch(e){}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",drawCharts);
+document.addEventListener("pointerdown",e=>{if(!e.target.closest("svg")) hideTip();});
+addEventListener("scroll",hideTip,{passive:true});
+let rt; addEventListener("resize",()=>{clearTimeout(rt); rt=setTimeout(drawCharts,120);});
+renderAll();
+</script>
+</body>
+</html>
