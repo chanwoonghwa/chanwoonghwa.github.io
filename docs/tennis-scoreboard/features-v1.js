@@ -17,8 +17,8 @@ return{...s,results,regular,finished,live,queued};
 function mvpLeaders(data){
 if(!data)return [];
 const people=Object.entries(data.stats.people).map(([name,p])=>({
-name,team:p.team,wins:p.w,losses:p.l,diff:p.diff,played:p.w+p.l,
-rate:p.w+p.l?p.w/(p.w+p.l):0
+name,team:p.team,wins:p.w,losses:p.l,diff:p.diff,draws:p.d||0,played:p.w+p.l+(p.d||0),
+rate:p.w+p.l+(p.d||0)?p.w/(p.w+p.l+(p.d||0)):0
 })).filter(p=>p.played>0);
 people.sort((a,b)=>b.wins-a.wins||b.rate-a.rate||b.diff-a.diff||a.name.localeCompare(b.name,"ko"));
 if(!people.length)return [];
@@ -69,7 +69,7 @@ message.textContent="🏆 "+finale.winner+" TEAM 승리 · 누적 게임 "+final
 if(leaders.length){
 const names=leaders.map(x=>safe(x.name)).join(" · ");
 const p=leaders[0];
-mvp.innerHTML='<div class="mvp-highlight"><span class="mvp-icon">🏅</span><div><strong>'+(finale.ready?"오늘의 MVP":"현재 MVP 후보")+' · '+names+'</strong><span>'+p.wins+'승 '+p.losses+'패 · 게임 득실 '+(p.diff>0?"+":"")+p.diff+(leaders.length>1?" · 공동 "+leaders.length+"명":"")+'</span></div></div><p class="mvp-help">MVP 기준: 승리 경기 수 → 승률 → 게임 득실 (동률이면 공동 MVP)</p>';
+mvp.innerHTML='<div class="mvp-highlight"><span class="mvp-icon">🏅</span><div><strong>'+(finale.ready?"오늘의 MVP":"현재 MVP 후보")+' · '+names+'</strong><span>'+p.wins+'승 '+p.draws+'무 '+p.losses+'패 · 게임 득실 '+(p.diff>0?"+":"")+p.diff+(leaders.length>1?" · 공동 "+leaders.length+"명":"")+'</span></div></div><p class="mvp-help">MVP 기준: 승리 경기 수 → 승률 → 게임 득실 (동률이면 공동 MVP)</p>';
 }else{mvp.innerHTML='<p class="mvp-help">경기가 종료되면 MVP 후보를 자동으로 선정합니다.</p>';}
 const confetti=$("dishConfetti");
 if(finale.ready&&!finale.tied&&!confetti.childElementCount){
