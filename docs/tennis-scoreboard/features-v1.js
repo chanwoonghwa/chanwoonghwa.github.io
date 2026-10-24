@@ -33,7 +33,7 @@ return a===b?{ready:true,tied:true,winner:null,loser:null,a,b}:{ready:true,tied:
 function matchLabel(x){const m=x.match;return m.id+"경기 · "+m.type;}
 function sideLabel(x){return x.match.a.join(" / ")+" vs "+x.match.b.join(" / ");}
 function commandCard(x,live){
-if(!x)return '<div class="command-name">모든 경기가 종료됐어요 🎉</div><div class="command-players">정규 경기 결과를 확인하세요.</div>';
+if(!x)return '<div class="command-name">모든 경기가 종료됐어요 🎉</div><div class="command-players">전체 13경기 결과를 확인하세요.</div>';
 const r=x.result;
 const pair=r.a!==undefined&&r.b!==undefined?'<div class="command-score"><span class="yb">'+r.a+'</span> : <span class="ob">'+r.b+'</span></div>':"";
 return '<div class="command-name">'+safe(matchLabel(x))+'</div><div class="command-players">'+safe(sideLabel(x))+'</div>'+pair+'<button class="jump-match" data-jump="'+x.match.id+'">'+(live?"LIVE 경기 보기":"경기로 이동")+' ↗</button>';
