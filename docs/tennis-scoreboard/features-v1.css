@@ -67,3 +67,6 @@ body[data-mood="night"] .command-panel{background:#f8fbff}
 }
 @media(max-width:365px){.command-grid{grid-template-columns:1fr}.phase-actions{justify-content:center}}
 @media(prefers-reduced-motion:reduce){.confetti-spark,.match[data-phase="live"] .result-tag.live{animation:none}}
+
+/* Finished 5:5 draw — neutral distinct from YB/OB wins */
+.result-tag.draw{color:#6b4ea1;background:#f1eaff;border-color:#d9c7f7;font-weight:950}
