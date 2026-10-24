@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0d1421"><meta name="description" content="MZB 설거지빵 테니스 대진표와 스코어보드">
+<meta name="theme-color" content="#e4f5ff"><meta name="description" content="MZB 설거지빵 테니스 대진표와 스코어보드">
 <title>MZB | 테니스 스코어보드</title>
 <style>
 :root{color-scheme:dark;--bg:#0c121e;--panel:#172436;--line:#31455d;--text:#f4f7ff;--muted:#9dafc5;--yb:#8fc4ff;--ob:#ffaca2;--accent:#d5ff89}
@@ -20,9 +20,9 @@ h1{font-size:clamp(29px,5vw,48px);font-weight:900;letter-spacing:-.07em;margin:1
 .bottom{display:grid;grid-template-columns:1.2fr .8fr;gap:15px;margin-top:25px}.panel{padding:18px;background:#162334;border-radius:17px;border:1px solid #30455b}.panel h2{font-size:18px;margin-bottom:12px}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px 7px;border-bottom:1px solid #2b3e53}th{font-size:11px;color:var(--muted);text-align:left}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.chip{display:inline-block;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:800;background:#304863;color:#b4dbff}.chip.ob{background:#553a43;color:#ffbab2}.rules{color:#c6d4e2;font-size:12px}.rules p{margin:8px 0}footer{text-align:center;font-size:11px;color:#7c93a9;margin-top:33px}
 dialog{background:#122033;border:1px solid #456079;color:var(--text);border-radius:20px;padding:20px;width:min(95vw,620px);max-height:90vh;overflow:auto}dialog::backdrop{background:#030911de}dialog h2{font-size:23px}.field{display:block;color:#c8d5e2;font-size:12px;font-weight:850;margin:13px 0 6px}.forminput{background:#0b1828;color:var(--text);border:1px solid #50647b;border-radius:10px;width:100%;padding:10px 11px;font-size:13px}textarea.forminput{min-height:130px;resize:vertical;font-size:12px;font-family:ui-monospace,monospace}.modalbuttons{display:flex;flex-wrap:wrap;gap:8px;margin:11px 0}.sep{height:1px;background:#30455a;margin:20px 0}code{font-size:11px;white-space:pre-wrap;word-break:break-word}.toast{display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:20px;padding:11px 16px;background:var(--accent);color:#182408;border-radius:12px;z-index:10;font-size:13px;font-weight:800;box-shadow:0 8px 35px #0009;max-width:94vw}.toast.err{background:#ffc0b9;color:#562321}
 @media(max-width:720px){main{padding:17px 12px 75px}.card{padding:19px 12px}.scoreboard{gap:5px}.big{font-size:clamp(62px,14vw,100px)}.center{min-width:54px}.grid,.bottom{grid-template-columns:1fr}.metric{padding:12px}.metrics{gap:7px}.metric strong{font-size:24px}.metric label{font-size:10px}.match{padding:14px}.names{font-size:14px}}
-</style></head><body><main>
+</style><link rel="stylesheet" href="./court-theme-v2.css"></head><body><main>
 <div class="top"><div class="kicker">🎾 MZB · TENNIS DAY</div><div class="actions"><span class="status" id="connection">로컬 모드</span><button class="btn" id="settingsBtn">⚙ 실시간 설정</button></div></div>
-<h1>펜션 설거지빵 <span style="color:var(--accent)">스코어보드</span></h1><p class="sub">YB vs OB · 12경기 팀 대항전 + 스페셜 매치</p>
+<h1><span class="headline-hot">펜션 설거지빵</span> <span class="headline-cool">스코어보드</span></h1><p class="sub">YB vs OB · 12경기 팀 대항전 + 스페셜 매치 · 설거지는 진 팀이!</p><div class="court-visual" role="img" aria-label="MZB 테니스 코트의 분홍색, 파란색 코트를 표현한 일러스트"><span class="court-badge">🎾 MZB COURT · PINK × BLUE</span></div>
 <section class="card"><div class="scoreboard">
 <div><div class="name blue">YB TEAM</div><div class="big blue" id="yw">0</div><div class="lead" id="yl"></div></div>
 <div class="center"><div class="vs">VS</div>누적 획득 게임<br><span id="done">정규 0 / 12 경기</span></div>
