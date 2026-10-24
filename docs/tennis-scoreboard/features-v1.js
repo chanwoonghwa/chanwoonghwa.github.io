@@ -2,13 +2,13 @@
 const $=id=>document.getElementById(id);
 const safe=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let latestMvp=[],latestResult=null,currentPoster=null,posterDataUrl="",posterBlob=null;
-const MATCH_COUNT=12;
+const MATCH_COUNT=13;
 
 function getData(){
 if(!window.MZB)return null;
 const s=window.MZB.getSnapshot();
 const results=s.schedule.map(m=>({match:m,result:window.MZB.result(m)}));
-const regular=results.filter(x=>x.match.kind!=="special");
+const regular=results;
 const finished=regular.filter(x=>x.result.played);
 const live=results.filter(x=>x.result.phase==="live");
 const queued=results.filter(x=>x.result.phase==="pending");
@@ -39,12 +39,12 @@ const pair=r.a!==undefined&&r.b!==undefined?'<div class="command-score"><span cl
 return '<div class="command-name">'+safe(matchLabel(x))+'</div><div class="command-players">'+safe(sideLabel(x))+'</div>'+pair+'<button class="jump-match" data-jump="'+x.match.id+'">'+(live?"LIVE 경기 보기":"경기로 이동")+' ↗</button>';
 }
 function renderCommand(data){
-const live=data.live.filter(x=>x.match.kind!=="special");
+const live=data.live;
 const running=live[0]||data.live[0]||null;
 let upcoming;
 if(running){
 upcoming=data.results.find(x=>x.match.id>running.match.id&&x.result.phase==="pending")||data.queued[0];
-}else upcoming=data.queued.find(x=>x.match.kind!=="special")||data.queued[0];
+}else upcoming=data.queued[0];
 $("nowPlaying").innerHTML=running?commandCard(running,true):'<div class="command-name">진행 중인 경기가 없어요</div><div class="command-players">운영자가 LIVE 버튼을 누르면 여기에 표시됩니다.</div>';
 $("nextMatch").innerHTML=upcoming?commandCard(upcoming,false):'<div class="command-name">예정된 경기가 없어요</div>';
 const draws=data.finished.filter(x=>x.result.draw).length;$("matchPhaseSummary").textContent=data.finished.length+" / "+MATCH_COUNT+" 경기 종료"+(draws?" · 무승부 "+draws+"경기":"")+(live.length?" · LIVE "+live.length+"경기":"");
@@ -58,7 +58,7 @@ box.classList.toggle("winner-revealed",finale.ready&&!finale.tied);
 box.classList.toggle("neutral-result",finale.ready&&finale.tied);
 if(!finale.ready){
 title.textContent="설거지 당첨자는 누구? 🧽";
-message.textContent="정규 "+data.finished.length+"경기 완료 · 남은 "+finale.remaining+"경기 종료 후 최종 발표!";
+message.textContent="전체 "+data.finished.length+"경기 완료 · 남은 "+finale.remaining+"경기 종료 후 최종 발표!";
 }else if(finale.tied){
 title.textContent="🤝 누적 게임 동점!";
 message.textContent="YB "+finale.a+" : "+finale.b+" OB · 설거지 담당은 동점 결정전 또는 합의로 정해주세요.";
@@ -157,7 +157,7 @@ centerText(c,"MZB  ·  TENNIS DAY",540,134,36,"#c2e9ff","900");
 centerText(c,"펜션 설거지빵",540,211,66,"#ffffff","900");
 centerText(c,"FINAL SCOREBOARD",540,259,30,"#c0e8ff","800");
 const finale=winnerInfo(d),leaders=mvpLeaders(d);
-const status=finale.ready?(finale.tied?"FINAL · DRAW":"FINAL · "+finale.winner+" WIN"):"LIVE RESULTS · "+d.finished.length+"/12 FINISHED";
+const status=finale.ready?(finale.tied?"FINAL · DRAW":"FINAL · "+finale.winner+" WIN"):"LIVE RESULTS · "+d.finished.length+"/13 FINISHED";
 centerText(c,status,540,343,29,finale.ready?"#db3185":"#246594","900");
 round(c,47,370,986,385,32,"#ffffff");
 round(c,68,391,443,286,25,"#ffe5f0");round(c,569,391,443,286,25,"#dfefff");
@@ -167,10 +167,10 @@ centerText(c,String(d.stats.yg),289,601,142,"#ee2d83","900");
 centerText(c,String(d.stats.og),791,601,142,"#0c7bec","900");
 centerText(c,"VS",540,537,40,"#6f8dad","900");
 centerText(c,"누적 획득 게임",540,723,27,"#486b93","800");
-const drawCount=d.finished.filter(x=>x.result.draw).length;const detail=d.finished.length+" / 12 종료      YB "+d.stats.y+"승 · OB "+d.stats.o+"승"+(drawCount?" · 무 "+drawCount:"");
+const drawCount=d.finished.filter(x=>x.result.draw).length;const detail=d.finished.length+" / 13 종료      YB "+d.stats.y+"승 · OB "+d.stats.o+"승"+(drawCount?" · 무 "+drawCount:"");
 centerText(c,detail,540,821,29,"#315c83","800");
 round(c,47,856,986,153,30,"#fff2f8");
-if(!finale.ready){centerText(c,"🧽 설거지 당첨자는 누구?",540,923,39,"#db2774","900");centerText(c,"모든 정규 경기 종료 후 공개!",540,970,24,"#7c718c","700");}
+if(!finale.ready){centerText(c,"🧽 설거지 당첨자는 누구?",540,923,39,"#db2774","900");centerText(c,"복식 12 + 단식 1경기 종료 후 공개!",540,970,24,"#7c718c","700");}
 else if(finale.tied){centerText(c,"🤝 게임 수 동점!",540,923,44,"#235aa0","900");centerText(c,"설거지 담당은 추가 결정이 필요해요",540,970,23,"#617f9e","700");}
 else{centerText(c,"🧽 "+finale.loser+" TEAM 설거지 당첨!",540,921,44,"#db2774","900");centerText(c,"🏆 "+finale.winner+" TEAM 승리",540,974,31,"#1e669d","850");}
 round(c,47,1033,986,111,26,"#fff7e6");
