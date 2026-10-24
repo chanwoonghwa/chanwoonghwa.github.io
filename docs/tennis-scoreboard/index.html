@@ -16,29 +16,29 @@
   <div class="team-panel ob-panel"><div class="name">OB TEAM</div><div class="tagline">경험은 지지 않는다!</div><div class="big" id="ow">0</div><div class="lead" id="ol"></div></div>
 </div>
 <div class="track" aria-label="획득 게임 비율"><div id="yp" style="width:0%"></div><div id="op" style="width:0%"></div></div>
-<div class="game-caption" id="done">정규 0 / 12 경기</div>
+<div class="game-caption" id="done">전체 0 / 13 경기</div>
 <div class="toolbar"><span class="hint" id="leadText">아직 경기 결과가 없습니다</span><div class="actions"><button class="btn" id="share">↗ 링크 공유</button><button class="btn" id="csv">↓ CSV 다운로드</button></div></div>
 </section>
 <div class="metrics" aria-label="경기 요약">
-<div class="metric"><span class="metric-icon">🏆</span><label>전체 경기</label><strong>12</strong></div>
-<div class="metric"><span class="metric-icon">🎾</span><label>완료 경기</label><strong id="complete">0 / 12</strong></div>
+<div class="metric"><span class="metric-icon">🏆</span><label>전체 경기</label><strong>13</strong></div>
+<div class="metric"><span class="metric-icon">🎾</span><label>완료 경기</label><strong id="complete">0 / 13</strong></div>
 <div class="metric"><span class="metric-icon">🩷</span><label>YB 승리</label><strong id="yg">0</strong></div>
 <div class="metric"><span class="metric-icon">💙</span><label>OB 승리</label><strong id="og">0</strong></div>
 </div>
 <section id="matchCommand" class="command-panel" aria-label="현재 경기 및 다음 경기 안내"><div class="command-header"><strong>🎾 MATCH CONTROL</strong><span class="command-meta" id="matchPhaseSummary">경기 진행 상태</span></div><div class="command-grid"><div class="command-item"><div class="command-label">🔴 NOW PLAYING</div><div id="nowPlaying">아직 진행 중인 경기가 없어요.</div></div><div class="command-item"><div class="command-label">⏭ NEXT UP</div><div id="nextMatch">다음 경기 확인 중</div></div></div></section>
-<section class="dish-panel" id="dishPanel" aria-live="polite"><div class="dish-top"><span class="dish-overline">🧽 DISHWASHING CHALLENGE</span><button class="btn" type="button" id="exportImage">📸 결과 이미지 저장</button></div><h2 id="dishTitle">설거지 당첨자는 누구?</h2><p id="dishMessage">정규 12경기 종료 후 공개됩니다.</p><div id="mvpSummary"></div><div id="dishConfetti" aria-hidden="true"></div></section>
+<section class="dish-panel" id="dishPanel" aria-live="polite"><div class="dish-top"><span class="dish-overline">🧽 DISHWASHING CHALLENGE</span><button class="btn" type="button" id="exportImage">📸 결과 이미지 저장</button></div><h2 id="dishTitle">설거지 당첨자는 누구?</h2><p id="dishMessage">전체 13경기 종료 후 공개됩니다.</p><div id="mvpSummary"></div><div id="dishConfetti" aria-hidden="true"></div></section>
 <div class="notice" id="notice"><strong>로컬 모드</strong> · 점수를 입력하면 자동으로 집계됩니다. 다른 기기에서 실시간 공유하려면 Firebase를 연결하세요.</div>
 <section class="schedule-panel" aria-label="경기 일정">
 <div class="heading"><div><h2><span class="section-icon">📅</span>경기 일정</h2><div class="hint" id="count"></div></div><span class="hint">YB 🩷 · OB 💙</span></div>
-<div class="filters" id="filters"><button class="filter selected" data-filter="all">전체</button><button class="filter" data-filter="pending">미종료</button><button class="filter" data-filter="finished">종료</button><button class="filter" data-filter="mixed">혼복</button><button class="filter" data-filter="special">스페셜</button></div>
+<div class="filters" id="filters"><button class="filter selected" data-filter="all">전체</button><button class="filter" data-filter="pending">미종료</button><button class="filter" data-filter="finished">종료</button><button class="filter" data-filter="mixed">혼복</button><button class="filter" data-filter="special">단식</button></div>
 <div class="grid" id="matches"></div>
 </section>
 <div class="insights">
 <section class="insight-panel"><h2>🏆 팀 순위</h2><div id="teamStandings"></div></section>
 <section class="insight-panel"><h2>⭐ 주요 선수 기록</h2><div id="topPlayers"></div></section>
 </div>
-<div class="bottom"><section class="panel"><h2>📊 개인별 전체 전적</h2><div class="scroll"><table><thead><tr><th>선수</th><th>소속</th><th class="num">승</th><th class="num">무</th><th class="num">패</th><th class="num">게임 득실</th></tr></thead><tbody id="individual"></tbody></table></div><p class="hint">정규 복식 경기만 집계합니다. 복식 승·무·패는 두 선수 모두에게 반영합니다.</p></section>
-<section class="panel"><h2>📋 경기 안내</h2><div class="rules"><p>경기 시간: 15:00–21:00 · 경기당 30분</p><p>경기 구성: 남복 4 · 여복 2 · 혼복 6</p><p>규칙: 노타이, 혼복 노애드 (동성끼리)</p><p>상단 팀 점수는 정규 경기에서 양 팀 점수가 모두 입력된 게임 수의 합계입니다. 5:5는 무승부 종료가 가능하며 양 팀 모두 승수 없이 완료 경기와 선수 개인별 무승부에 반영됩니다. 다른 동점과 미입력 경기는 종료할 수 없습니다.</p><p>스페셜 남단은 정규 집계에서 제외됩니다.</p></div><div class="sep"></div><div class="actions"><button class="btn" id="reset">↺ 점수 초기화</button><button class="btn" id="copySchedule">대진표 복사</button></div></section></div>
+<div class="bottom"><section class="panel"><h2>📊 개인별 전체 전적</h2><div class="scroll"><table><thead><tr><th>선수</th><th>소속</th><th class="num">승</th><th class="num">무</th><th class="num">패</th><th class="num">게임 득실</th></tr></thead><tbody id="individual"></tbody></table></div><p class="hint">복식 12경기와 단식 1경기를 모두 집계합니다. 복식은 두 선수, 단식은 출전 선수 한 명씩 승·무·패를 반영합니다.</p></section>
+<section class="panel"><h2>📋 경기 안내</h2><div class="rules"><p>경기 시간: 15:00–21:00 · 경기당 30분</p><p>경기 구성: 남복 4 · 여복 2 · 혼복 6 · 단식 1</p><p>규칙: 노타이, 혼복 노애드 (동성끼리)</p><p>상단 팀 점수는 복식과 단식을 포함해 양 팀 점수가 모두 입력된 게임 수의 합계입니다. 5:5는 무승부 종료가 가능하며 양 팀 모두 승수 없이 완료 경기와 선수 개인별 무승부에 반영됩니다. 다른 동점과 미입력 경기는 종료할 수 없습니다.</p><p>찬스 vs 이안 단식도 공식 팀 게임·승무패·개인 성적·MVP·설거지 최종 결과에 포함됩니다.</p></div><div class="sep"></div><div class="actions"><button class="btn" id="reset">↺ 점수 초기화</button><button class="btn" id="copySchedule">대진표 복사</button></div></section></div>
 <footer><span class="footer-script">Good Tennis · Good Food · Better Friends!</span>🎾 MZB TENNIS DAY · PINK × BLUE COURT</footer>
 </main>
 <dialog id="configDialog"><div class="top"><h2>실시간 연결 설정</h2><button class="btn" id="closeDialog">✕ 닫기</button></div>
@@ -82,9 +82,25 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden)updateTime
 const safe=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function toast(msg,err=false){let t=$("toast");t.className="toast"+(err?" err":"");t.textContent=msg;t.style.display="block";clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.style.display="none",3800);}
 function result(m){const s=scores[m.id]||{},a=s.a,b=s.b,complete=Number.isInteger(a)&&Number.isInteger(b),tied=complete&&a===b;const phase=s.status||((complete&&!tied)?"finished":((a!==undefined||b!==undefined)?"pending":"pending"));const draw=phase==="finished"&&a===5&&b===5;const played=phase==="finished"&&complete&&(!tied||draw);return{a,b,played,draw,phase,complete,winner:played&&!draw?(a>b?"YB":"OB"):null,tied,started:phase==="live"||a!==undefined||b!==undefined};}
-function stats(){let y=0,o=0,yg=0,og=0,n=0;let people=Object.fromEntries(players.map(([p,t])=>[p,{team:t,w:0,l:0,d:0,diff:0}]));for(let m of schedule){if(m.kind==="special")continue;let r=result(m);if(Number.isInteger(r.a)&&Number.isInteger(r.b)){yg+=r.a;og+=r.b;}if(!r.played)continue;n++;if(r.draw){for(let p of m.a)people[p].d++;for(let p of m.b)people[p].d++;continue;}if(r.winner==="YB")y++;else if(r.winner==="OB")o++;for(let p of m.a){people[p].w+=Number(r.winner==="YB");people[p].l+=Number(r.winner==="OB");people[p].diff+=r.a-r.b;}for(let p of m.b){people[p].w+=Number(r.winner==="OB");people[p].l+=Number(r.winner==="YB");people[p].diff+=r.b-r.a;}}return{y,o,yg,og,n,people};}
+function canonicalPlayerName(name){return String(name).replace(/\s*\([^)]*\)\s*$/,"").trim();}
+function stats(){
+let y=0,o=0,yg=0,og=0,n=0;
+const people=Object.fromEntries(players.map(([p,t])=>[p,{team:t,w:0,l:0,d:0,diff:0}]));
+for(const m of schedule){
+const r=result(m);
+if(Number.isInteger(r.a)&&Number.isInteger(r.b)){yg+=r.a;og+=r.b;}
+if(!r.played)continue;
+n++;
+const aa=m.a.map(canonicalPlayerName),bb=m.b.map(canonicalPlayerName);
+if(r.draw){for(const p of [...aa,...bb])if(people[p])people[p].d++;continue;}
+if(r.winner==="YB")y++;else if(r.winner==="OB")o++;
+for(const p of aa)if(people[p]){people[p].w+=Number(r.winner==="YB");people[p].l+=Number(r.winner==="OB");people[p].diff+=r.a-r.b;}
+for(const p of bb)if(people[p]){people[p].w+=Number(r.winner==="OB");people[p].l+=Number(r.winner==="YB");people[p].diff+=r.b-r.a;}
+}
+return{y,o,yg,og,n,people};
+}
 function editable(){return mode==="local"||(mode==="cloud"&&cloudReady&&!!user);}
-function render(){let s=stats();$("yw").textContent=s.yg;$("ow").textContent=s.og;$("done").textContent="정규 "+s.n+" / 12 경기";$("complete").textContent=s.n+" / 12";$("yg").textContent=s.y;$("og").textContent=s.o;$("yl").textContent=s.yg>s.og?"LEADING":"";$("ol").textContent=s.og>s.yg?"LEADING":"";let totalGames=s.yg+s.og;$("yp").style.width=(totalGames?s.yg/totalGames*100:0)+"%";$("op").style.width=(totalGames?s.og/totalGames*100:0)+"%";
+function render(){let s=stats();$("yw").textContent=s.yg;$("ow").textContent=s.og;$("done").textContent="전체 "+s.n+" / 13 경기";$("complete").textContent=s.n+" / 13";$("yg").textContent=s.y;$("og").textContent=s.o;$("yl").textContent=s.yg>s.og?"LEADING":"";$("ol").textContent=s.og>s.yg?"LEADING":"";let totalGames=s.yg+s.og;$("yp").style.width=(totalGames?s.yg/totalGames*100:0)+"%";$("op").style.width=(totalGames?s.og/totalGames*100:0)+"%";
 $("leadText").textContent=s.yg+s.og===0?"아직 입력된 게임 점수가 없습니다":s.yg===s.og?"게임 합계 동률 · "+s.yg+" : "+s.og:(s.yg>s.og?"YB":"OB")+" "+Math.abs(s.yg-s.og)+"게임 앞섬 · "+s.yg+" : "+s.og;
 let pp=Object.entries(s.people).sort((a,b)=>b[1].w-a[1].w||b[1].diff-a[1].diff||a[0].localeCompare(b[0],"ko"));
 $("individual").innerHTML=pp.map(([name,p])=>'<tr><td><strong>'+safe(name)+'</strong></td><td><span class="chip '+(p.team==="OB"?"ob":"")+'">'+p.team+'</span></td><td class="num">'+p.w+'</td><td class="num">'+p.d+'</td><td class="num">'+p.l+'</td><td class="num">'+(p.diff>0?"+":"")+p.diff+'</td></tr>').join("");
@@ -100,7 +116,7 @@ $("matches").innerHTML=matches.map(m=>{
 const r=result(m);
 const status=r.phase==="live"?'<span class="result-tag live">● LIVE</span>':r.draw?'<span class="result-tag draw">🤝 5:5 무승부</span>':r.winner?'<span class="result-tag '+r.winner.toLowerCase()+'">'+r.winner+' 승리</span>':r.phase==="finished"?'<span class="result-tag live">점수 확인 필요</span>':r.tied?'<span class="result-tag">동점 · 대기</span>':'<span class="result-tag">대기</span>';
 const scoreInput=(side)=>'<input aria-label="'+m.id+'경기 '+(side==="a"?"YB":"OB")+' 점수" class="input" type="number" min="0" max="99" inputmode="numeric" placeholder="–" data-id="'+m.id+'" data-side="'+side+'" value="'+(r[side]===undefined?"":r[side])+'" '+(editable()&&r.phase!=="finished"?"":"disabled")+'>';
-return '<article data-match-id="'+m.id+'" data-phase="'+r.phase+'" class="match '+(m.kind==="special"?"special":"")+'"><div class="matchtop"><span class="match-no">'+m.id+'경기</span><span class="when">'+safe(m.time)+'</span><span class="label '+m.kind+'">'+safe(m.type)+'</span>'+status+'</div><div class="matchbody"><div class="match-side yb '+(r.winner==="YB"?"win":"")+'"><div class="match-team">YB</div><div class="names">'+safe(m.a.join(" / "))+'</div></div><div class="scorepair">'+scoreInput("a")+'<span class="score-sep">:</span>'+scoreInput("b")+'</div><div class="match-side ob '+(r.winner==="OB"?"win":"")+'"><div class="match-team">OB</div><div class="names">'+safe(m.b.join(" / "))+'</div></div></div><div class="matchfoot">'+(m.kind==="special"?"스페셜 남단 · 정규 점수 집계 제외":"")+'</div></article>';
+return '<article data-match-id="'+m.id+'" data-phase="'+r.phase+'" class="match '+(m.kind==="special"?"special":"")+'"><div class="matchtop"><span class="match-no">'+m.id+'경기</span><span class="when">'+safe(m.time)+'</span><span class="label '+m.kind+'">'+safe(m.type)+'</span>'+status+'</div><div class="matchbody"><div class="match-side yb '+(r.winner==="YB"?"win":"")+'"><div class="match-team">YB</div><div class="names">'+safe(m.a.join(" / "))+'</div></div><div class="scorepair">'+scoreInput("a")+'<span class="score-sep">:</span>'+scoreInput("b")+'</div><div class="match-side ob '+(r.winner==="OB"?"win":"")+'"><div class="match-team">OB</div><div class="names">'+safe(m.b.join(" / "))+'</div></div></div><div class="matchfoot">'+(m.kind==="special"?"남자 단식 · 팀/개인 성적 포함":"")+'</div></article>';
 }).join("");window.dispatchEvent(new Event("mzb:render"));}
 function save(){localScores=clean(scores);localStorage.setItem(KEY,JSON.stringify(localScores));}
 async function changeScore(id,side,v){if(!editable())return;const original=clean(scores);const m=schedule.find(m=>m.id===id);if(!m)return;const phase=result(m).phase;let next=clean(scores);next[id]=next[id]||{};if(v==="")delete next[id][side];else{let n=Number(v);if(!Number.isInteger(n)||n<0||n>99){toast("점수는 0부터 99까지의 정수만 입력하세요",true);render();return;}next[id][side]=n;if(phase==="pending")next[id].status="live";}if(Object.keys(next[id]).length===0)delete next[id];
