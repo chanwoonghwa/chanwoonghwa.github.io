@@ -93,7 +93,7 @@ $("notice").innerHTML=mode==="cloud"?(cloudError?'<strong>Firebase 접근 거부
 $("authInfo").textContent=mode==="cloud"?(user?"로그인됨: "+user.email:"로그인하지 않았습니다. 실시간 관전만 가능합니다."):"실시간 연결 후 관리자 로그인이 가능합니다.";
 $("signIn").disabled=mode!=="cloud"||!!user;$("signOut").disabled=mode!=="cloud"||!user;$("upload").disabled=mode!=="cloud"||!user;$("reset").disabled=!editable();$("reset").textContent=mode==="cloud"?"↺ 클라우드 점수 초기화":"↺ 점수 초기화";
 $("teamStandings").innerHTML=[["YB","젊음은 움직인다!",s.y,s.yg],["OB","경험은 지지 않는다!",s.o,s.og]].map(([team,motto,wins,games])=>'<div class="team-rank"><span class="rank-circle '+team.toLowerCase()+'">'+team+'</span><div class="rank-details"><b>'+team+' TEAM</b><span>'+motto+'</span></div><div class="rank-value '+(team==="YB"?"blue":"red")+'">'+wins+'<small>승</small></div></div>').join("");
-$("topPlayers").innerHTML=pp.slice(0,5).map(([name,p],i)=>'<div class="spot-player"><span class="spot-no">'+(i+1)+'</span><span class="spot-name">'+safe(name)+' <small>('+p.team+')</small></span><span class="spot-record '+(p.team==="YB"?"blue":"red")+'">'+p.w+'승 '+p.l+'패</span></div>').join("");
+$("topPlayers").innerHTML=pp.slice(0,5).map(([name,p],i)=>'<div class="spot-player"><span class="spot-no">'+(i+1)+'</span><span class="spot-name">'+safe(name)+' <small>('+p.team+')</small></span><span class="spot-record '+(p.team==="YB"?"blue":"red")+'">'+p.w+'승 '+p.d+'무 '+p.l+'패</span></div>').join("");
 let matches=schedule.filter(m=>filter==="all"||(filter==="mixed"&&m.kind==="mixed")||(filter==="special"&&m.kind==="special")||(filter==="pending"&&result(m).phase!=="finished")||(filter==="finished"&&result(m).played));
 $("count").textContent="표시 "+matches.length+"경기 · 총 13경기";
 $("matches").innerHTML=matches.map(m=>{
