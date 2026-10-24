@@ -47,7 +47,7 @@ upcoming=data.results.find(x=>x.match.id>running.match.id&&x.result.phase==="pen
 }else upcoming=data.queued.find(x=>x.match.kind!=="special")||data.queued[0];
 $("nowPlaying").innerHTML=running?commandCard(running,true):'<div class="command-name">진행 중인 경기가 없어요</div><div class="command-players">운영자가 LIVE 버튼을 누르면 여기에 표시됩니다.</div>';
 $("nextMatch").innerHTML=upcoming?commandCard(upcoming,false):'<div class="command-name">예정된 경기가 없어요</div>';
-$("matchPhaseSummary").textContent=data.finished.length+" / "+MATCH_COUNT+" 경기 종료"+(live.length?" · LIVE "+live.length+"경기":"");
+const draws=data.finished.filter(x=>x.result.draw).length;$("matchPhaseSummary").textContent=data.finished.length+" / "+MATCH_COUNT+" 경기 종료"+(draws?" · 무승부 "+draws+"경기":"")+(live.length?" · LIVE "+live.length+"경기":"");
 }
 function renderDish(data){
 const box=$("dishPanel"),title=$("dishTitle"),message=$("dishMessage"),mvp=$("mvpSummary");
@@ -92,7 +92,7 @@ ctrl.className="phase-controls";
 const phaseButtons=r.phase==="pending"
 ?'<button class="phase-btn live-btn" data-change-phase="live">▶ LIVE 시작</button>'
 :r.phase==="live"
-?'<button class="phase-btn finish-btn" data-change-phase="finished" '+(!r.complete||r.tied?'disabled title="서로 다른 최종 스코어를 입력하세요"':'')+'>✓ 경기 종료</button><button class="phase-btn" data-change-phase="pending">↶ 대기로</button>'
+?'<button class="phase-btn finish-btn" data-change-phase="finished" '+(!r.complete||(r.tied&&!r.draw&&!(r.a===5&&r.b===5))?'disabled title="양 팀 점수를 입력하세요. 5:5는 무승부 종료 가능"':'')+'>✓ 경기 종료</button><button class="phase-btn" data-change-phase="pending">↶ 대기로</button>'
 :'<button class="phase-btn live-btn" data-change-phase="live">↻ 경기 재개</button>';
 const editScore=r.phase==="finished"?'':'<div class="one-tap"><div class="tap-side yb">YB <button class="tap-btn" data-score-side="a" data-delta="-1" aria-label="YB 게임 1 감소">−</button><button class="tap-btn" data-score-side="a" data-delta="1" aria-label="YB 게임 1 증가">+</button></div><div class="tap-side ob">OB <button class="tap-btn" data-score-side="b" data-delta="-1" aria-label="OB 게임 1 감소">−</button><button class="tap-btn" data-score-side="b" data-delta="1" aria-label="OB 게임 1 증가">+</button></div></div>';
 ctrl.innerHTML='<div class="phase-actions">'+phaseButtons+'</div>'+editScore;
@@ -167,7 +167,7 @@ centerText(c,String(d.stats.yg),289,601,142,"#ee2d83","900");
 centerText(c,String(d.stats.og),791,601,142,"#0c7bec","900");
 centerText(c,"VS",540,537,40,"#6f8dad","900");
 centerText(c,"누적 획득 게임",540,723,27,"#486b93","800");
-const detail=d.finished.length+" / 12 경기 종료      YB "+d.stats.y+"승  ·  OB "+d.stats.o+"승";
+const drawCount=d.finished.filter(x=>x.result.draw).length;const detail=d.finished.length+" / 12 종료      YB "+d.stats.y+"승 · OB "+d.stats.o+"승"+(drawCount?" · 무 "+drawCount:"");
 centerText(c,detail,540,821,29,"#315c83","800");
 round(c,47,856,986,153,30,"#fff2f8");
 if(!finale.ready){centerText(c,"🧽 설거지 당첨자는 누구?",540,923,39,"#db2774","900");centerText(c,"모든 정규 경기 종료 후 공개!",540,970,24,"#7c718c","700");}
