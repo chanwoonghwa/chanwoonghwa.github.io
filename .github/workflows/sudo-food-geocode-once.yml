@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/sudo-food-geocode-once.yml
+      - docs/food-finder/geocode_once.py
   workflow_dispatch:
 permissions:
   contents: write
