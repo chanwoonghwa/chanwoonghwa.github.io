@@ -1,0 +1,37 @@
+name: Verify live Sudo Table photo links
+on:
+  push:
+    paths:
+      - .github/workflows/food-finder-live-check.yml
+      - docs/food-finder/index.html
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check GitHub Pages public URL after deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://chanwoonghwa.github.io/food-finder/"
+          for i in $(seq 1 20); do
+            if curl -fsSL --max-time 10 "${URL}?version=photo24-$(date +%s)" -o /tmp/live-index.html; then
+              if grep -Fq 'PHOTO UPDATE v2.4' /tmp/live-index.html && grep -Fq 'id="viewPhotoSources"' /tmp/live-index.html && grep -Fq 'class="photo-source-banner"' /tmp/live-index.html; then
+                echo "LIVE HTML v2.4 visible on public GitHub Pages"; break
+              fi
+            fi
+            echo "Waiting for current Pages release ($i/20)"
+            sleep 8
+          done
+          grep -Fq 'PHOTO UPDATE v2.4' /tmp/live-index.html
+          grep -Fq 'id="viewPhotoSources"' /tmp/live-index.html
+          curl -fsSL --max-time 10 "${URL}restaurant-photos.json?version=photo24" -o /tmp/restaurant-photos.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/restaurant-photos.json'))
+          assert len(x['candidate_sources'])==5, "expected five links"
+          assert len(x['actual_photos'])==0, "do not present unlicensed images"
+          print('LIVE JSON validated: 5 external photo sources, 0 licensed restaurant photos')
+          PY
