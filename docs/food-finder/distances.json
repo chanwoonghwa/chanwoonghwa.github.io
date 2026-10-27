@@ -1,0 +1,450 @@
+{
+  "origin": {
+    "name": "수도전기공업고등학교",
+    "address": "서울 강남구 개포로 410",
+    "lat": 37.4856143,
+    "lon": 127.0635654,
+    "source": "https://findby.co.kr/details/06324-116803122001-st-652b03a68c641f9e388127e9"
+  },
+  "generated_at": "2026-10-27T08:12:43.005058+00:00",
+  "items": [
+    {
+      "id": 1,
+      "latitude": 37.4892391,
+      "longitude": 127.0679694,
+      "straight_distance_km": 0.56,
+      "method": "verified_building",
+      "source": "https://findby.co.kr/details/06329-116803122001-st-652b03a68c641f9e388127e1"
+    },
+    {
+      "id": 2,
+      "latitude": 37.474463,
+      "longitude": 127.04964,
+      "straight_distance_km": 1.75,
+      "method": "verified_building",
+      "source": "https://findby.co.kr/details/06312-116804166111-st-652b03c08c641f9e38816a58"
+    },
+    {
+      "id": 3,
+      "latitude": 37.4851832,
+      "longitude": 127.0358917,
+      "straight_distance_km": 2.44,
+      "method": "verified_building",
+      "source": "https://findby.co.kr/details/06267-116802000003-st-652b04618c641f9e38833b95"
+    },
+    {
+      "id": 4,
+      "latitude": 37.4946061,
+      "longitude": 127.0627349,
+      "straight_distance_km": 1.0,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "대원빌딩, 2947, 남부순환로, 대치1동, 강남구, 서울특별시, 06280, 대한민국"
+    },
+    {
+      "id": 5,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 6,
+      "latitude": 37.4887073,
+      "longitude": 127.030569,
+      "straight_distance_km": 2.93,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "르플리셔, 20, 5층, 강남대로47길, 서초2동, 서초구, 서울특별시, 06728, 대한민국"
+    },
+    {
+      "id": 7,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 8,
+      "latitude": 37.4987328,
+      "longitude": 127.062029,
+      "straight_distance_km": 1.46,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "9, 삼성로58길, 대치동, 대치2동, 강남구, 서울특별시, 06282, 대한민국"
+    },
+    {
+      "id": 9,
+      "latitude": 37.4933484,
+      "longitude": 127.0618811,
+      "straight_distance_km": 0.87,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "2936, 남부순환로, 대치1동, 강남구, 서울특별시, 06291, 대한민국"
+    },
+    {
+      "id": 10,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 11,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 12,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 13,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 14,
+      "latitude": 37.4883645,
+      "longitude": 127.102734,
+      "straight_distance_km": 3.47,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "나성빌딩, 6-5, 광평로51길, 수서동, 강남구, 서울특별시, 06349, 대한민국"
+    },
+    {
+      "id": 15,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 16,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 17,
+      "latitude": 37.4753434,
+      "longitude": 127.0453225,
+      "straight_distance_km": 1.97,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "두부야, 57, 마방로10길, 양재동, 양재2동, 서초구, 서울특별시, 06775, 대한민국"
+    },
+    {
+      "id": 18,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 19,
+      "latitude": 37.5050711,
+      "longitude": 127.0472663,
+      "straight_distance_km": 2.6,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "베르메디, 15, 제이더블유타워 지상3층, 선릉로93길, 역삼1동, 강남구, 서울특별시, 06148, 대한민국"
+    },
+    {
+      "id": 20,
+      "latitude": 37.4853318,
+      "longitude": 127.0343614,
+      "straight_distance_km": 2.58,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "봉구비어 양재역점, 240, 강남대로, 도곡동, 도곡1동, 강남구, 서울특별시, 06267, 대한민국"
+    },
+    {
+      "id": 21,
+      "latitude": 37.5033301,
+      "longitude": 127.0403058,
+      "straight_distance_km": 2.84,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "숙성고기육칠이 (역삼점), 21, 언주로93길, 역삼1동, 강남구, 서울특별시, 06142, 대한민국"
+    },
+    {
+      "id": 22,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 23,
+      "latitude": 37.478264,
+      "longitude": 127.0451315,
+      "straight_distance_km": 1.82,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "주식회사 원조소금구이, 204, 개포로, 재건마을, 개포4동, 강남구, 서울특별시, 06307, 대한민국"
+    },
+    {
+      "id": 24,
+      "latitude": 37.4685227,
+      "longitude": 127.041021,
+      "straight_distance_km": 2.75,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "영등포구석집 양재점, 16, 강남대로10길, 양재동, 양재2동, 서초구, 서울특별시, 06787, 대한민국"
+    },
+    {
+      "id": 25,
+      "latitude": 37.4973952,
+      "longitude": 127.0571596,
+      "straight_distance_km": 1.43,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "426, 도곡로, 대치1동, 강남구, 서울특별시, 06279, 대한민국"
+    },
+    {
+      "id": 26,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 27,
+      "latitude": 37.4707583,
+      "longitude": 127.0389726,
+      "straight_distance_km": 2.73,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "옛날농장, 4, 강남대로16길, 양재동, 양재2동, 서초구, 서울특별시, 06779, 대한민국"
+    },
+    {
+      "id": 28,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 29,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 30,
+      "latitude": 37.4885543,
+      "longitude": 127.1035672,
+      "straight_distance_km": 3.54,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "제주 몬트락 수서직영점, 6-15, 광평로51길, 수서동, 강남구, 서울특별시, 06349, 대한민국"
+    },
+    {
+      "id": 31,
+      "latitude": 37.4878177,
+      "longitude": 127.1018216,
+      "straight_distance_km": 3.38,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "수서벤쳐빌오피스텔, 10, 밤고개로1길, 수서동, 강남구, 서울특별시, 06349, 대한민국"
+    },
+    {
+      "id": 32,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 33,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 34,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 35,
+      "latitude": 37.4684144,
+      "longitude": 127.0407128,
+      "straight_distance_km": 2.78,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "등촌샤브칼국수 양재매헌점, 19, 강남대로10길, 양재동, 양재2동, 서초구, 서울특별시, 06787, 대한민국"
+    },
+    {
+      "id": 36,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 37,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 38,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 39,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 40,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 41,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 42,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 43,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 44,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 45,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 46,
+      "latitude": 37.4684411,
+      "longitude": 127.0425425,
+      "straight_distance_km": 2.66,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "멜라 뷰티, 30, 3층, 강남대로8길, 양재동, 양재2동, 서초구, 서울특별시, 06787, 대한민국"
+    },
+    {
+      "id": 47,
+      "latitude": 37.4844243,
+      "longitude": 127.0388073,
+      "straight_distance_km": 2.19,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "미각담다 다이닝, 2634-8, 남부순환로, 양재1동, 서초구, 서울특별시, 06738, 대한민국"
+    },
+    {
+      "id": 48,
+      "latitude": 37.488926,
+      "longitude": 127.030467,
+      "straight_distance_km": 2.94,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "텐(TEN), 426, 효령로, 서초2동, 서초구, 서울특별시, 06729, 대한민국"
+    },
+    {
+      "id": 49,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 50,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 51,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 52,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 53,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 54,
+      "latitude": 37.4715129,
+      "longitude": 127.0394212,
+      "straight_distance_km": 2.65,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "원조 함경도 순대, 49, 마방로2길, 양재동, 양재2동, 서초구, 서울특별시, 06779, 대한민국"
+    },
+    {
+      "id": 55,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 56,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 57,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 58,
+      "latitude": 37.4853318,
+      "longitude": 127.0343614,
+      "straight_distance_km": 2.58,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "봉구비어 양재역점, 240, 강남대로, 도곡동, 도곡1동, 강남구, 서울특별시, 06267, 대한민국"
+    },
+    {
+      "id": 59,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 60,
+      "straight_distance_km": null,
+      "method": "unresolved",
+      "source": null
+    },
+    {
+      "id": 61,
+      "latitude": 37.483698,
+      "longitude": 127.0361734,
+      "straight_distance_km": 2.43,
+      "method": "osm_nominatim_exact_address",
+      "source": "https://www.openstreetmap.org/copyright",
+      "match": "코네, 25, 남부순환로350길, 양재1동, 서초구, 서울특별시, 06737, 대한민국"
+    }
+  ]
+}
