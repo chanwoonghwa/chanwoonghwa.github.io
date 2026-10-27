@@ -270,6 +270,10 @@ body[data-view=table] #cardGrid{display:grid!important}
 .photo-source-banner a:hover{text-decoration:underline}
 .photo-source-banner small{display:block;margin-top:4px;color:#60775e;font-size:10px;line-height:1.4}
 
+
+.hero-photo-action{display:inline-flex;align-items:center;gap:12px;justify-content:space-between;margin-top:23px;border:1px solid #b8d29f;border-radius:13px;background:#dbf0b5;color:#214b30;padding:13px 16px;font-weight:850;cursor:pointer;font-size:14px;box-shadow:0 6px 19px #0a301a18}
+.hero-photo-action:hover{background:#eff9d9;transform:translateY(-1px)}
+.hero-photo-action span{font-size:21px;line-height:1}
 </style>
 </head>
 <body>
@@ -278,7 +282,7 @@ body[data-view=table] #cardGrid{display:grid!important}
   <div class="hero-main"><div class="hero-tag">✦ SUDO TABLE · PHOTO UPDATE v2.4</div>
   <h1>일요일 저녁,<br><em>어디서 먹지?</em></h1>
   <p class="subtitle">수도공고에서 출발하는 10명 이상 모임의 식당 탐색 가이드.<br>직선거리·주차·단체석을 한눈에 살펴보고 후보를 공유하세요.</p>
-  <div class="hero-chips"><span>◷ 일요일 20–22시</span><span>♧ 식사 중심 61곳</span><span>📷 실제 매장 사진 링크 5곳</span></div></div>
+  <div class="hero-chips"><span>◷ 일요일 20–22시</span><span>♧ 식사 중심 61곳</span><span>📷 실제 매장 사진 링크 5곳</span></div><button class="hero-photo-action" id="viewPhotoSources" type="button">📷 실제 매장 사진 링크 5곳만 보기 <span>↗</span></button></div>
 </header>
 <main class="container">
   <section class="metrics">
@@ -297,7 +301,7 @@ body[data-view=table] #cardGrid{display:grid!important}
       <button type="button" class="quick-chip" data-quick="park" aria-pressed="false">🚗 매장 주차 안내</button>
       <button type="button" class="quick-chip" data-quick="ten" aria-pressed="false">👥 10명 근거 있음</button>
       <button type="button" class="quick-chip" data-quick="open" aria-pressed="false">🌙 20–22시 시간상 충족</button>
-      <button type="button" class="quick-chip" data-quick="near" aria-pressed="false">📍 3km 이내</button>
+      <button type="button" class="quick-chip" data-quick="near" aria-pressed="false">📍 3km 이내</button><button type="button" class="quick-chip" data-quick="photos" aria-pressed="false">📷 실제 매장 사진 링크 있는 곳</button>
     </div>
 
     <div class="carousel-viewport" id="deckViewport" tabindex="0" role="region" aria-label="식당 좌우 스와이프 카드">
@@ -366,6 +370,7 @@ function storageRead(key,fallback){try{return JSON.parse(localStorage.getItem(ke
 let overrides = storageRead(overridesKey,{});
 let favorites = new Set(storageRead(starsKey,[]));
 let favOnly=false;
+let photoSourcesOnly=false;
 const $=s=>document.querySelector(s);
 const els={search:$("#search"),cuisine:$("#cuisine"),parking:$("#parking"),area:$("#area"),capacity:$("#capacity"),sunday:$("#sunday"),sort:$("#sort"),route:$("#routeFilter")};
 function esc(x){return String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
@@ -387,6 +392,7 @@ function filteredRows(){
    if(els.capacity.value && els.capacity.value!==r.capacity_status)return false;
    if(els.sunday.value && !r.sunday_20_22_status.startsWith(els.sunday.value))return false;
    if(favOnly && !favorites.has(r.id))return false;
+   if(photoSourcesOnly && !sourcePhotoLink(r))return false;
    const valid=straightOf(r)!=null;
    if(els.route.value==="measured" && !valid)return false;
    if(els.route.value==="unmeasured" && valid)return false;
@@ -435,7 +441,7 @@ function render(){
 Object.values(els).forEach(el=>el.addEventListener(el===els.search?"input":"change",render));
 $("#resetFilters").addEventListener("click",()=>{
  for (const el of Object.values(els)) el.value="";
- els.sort.value="distance";favOnly=false;render();
+ els.sort.value="distance";favOnly=false;photoSourcesOnly=false;render();
 });
 $("#favoritesOnly").addEventListener("click",()=>{favOnly=!favOnly;render()});
 $("#tbody").addEventListener("click",event=>{
@@ -637,16 +643,18 @@ cardGrid.addEventListener("click",e=>{
 
 function syncQuick(){
  const s={park:els.parking.value==="가능(안내·후기)",ten:els.capacity.value==="10명 근거 있음",
- open:els.sunday.value==="시간상 충족",near:els.route.value==="within3"};
+ open:els.sunday.value==="시간상 충족",near:els.route.value==="within3",photos:photoSourcesOnly};
  document.querySelectorAll("[data-quick]").forEach(b=>b.setAttribute("aria-pressed",String(Boolean(s[b.dataset.quick]))));
 }
 document.querySelectorAll("[data-quick]").forEach(b=>b.addEventListener("click",()=>{
  const type=b.dataset.quick;
+ if(type==="photos"){photoSourcesOnly=!photoSourcesOnly;render();return}
  const pairs={park:[els.parking,"가능(안내·후기)"],ten:[els.capacity,"10명 근거 있음"],
  open:[els.sunday,"시간상 충족"],near:[els.route,"within3"]};
  const pair=pairs[type];pair[0].value=pair[0].value===pair[1]?"":pair[1];render();
 }));
 $("#floatOpen").addEventListener("click",()=>$("#chosenList").scrollIntoView({behavior:"smooth",block:"center"}));
+$("#viewPhotoSources").addEventListener("click",()=>{photoSourcesOnly=true;render();$("#deckSection").scrollIntoView({behavior:"smooth",block:"start"});});
 
 
 /* Swipe deck with snap navigation and keyboard support */
