@@ -6,7 +6,7 @@
     "lon": 127.0635654,
     "source": "https://findby.co.kr/details/06324-116803122001-st-652b03a68c641f9e388127e9"
   },
-  "generated_at": "2026-10-27T08:14:21.925Z",
+  "generated_at": "2026-10-27T08:26:10.404Z",
   "items": [
     {
       "id": 1,
@@ -84,9 +84,11 @@
     },
     {
       "id": 10,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2.03,
+      "method": "verified_address_other_public_source",
+      "source": "https://hra.purpleo.kr/article/5462",
+      "latitude": 37.5019061124691,
+      "longitude": 127.053062997243
     },
     {
       "id": 11,
@@ -223,15 +225,19 @@
     },
     {
       "id": 28,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2.64,
+      "method": "verified_address_other_public_source",
+      "source": "https://jusoga.com/b/1165010200103460000003687/서울특별시-서초구-강남대로8길-36-양재동",
+      "latitude": 37.468466421496,
+      "longitude": 127.04294981151
     },
     {
       "id": 29,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 3.06,
+      "method": "verified_address_other_public_source",
+      "source": "https://jusoga.com/b/1168011500104610037000001/서울특별시-강남구-광평로-234-수서동",
+      "latitude": 37.48561936132,
+      "longitude": 127.09824991748
     },
     {
       "id": 30,
@@ -314,27 +320,35 @@
     },
     {
       "id": 41,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2.77,
+      "method": "verified_address_other_public_source",
+      "source": "https://jusoga.com/b/1165010200103510009004178/서울특별시-서초구-강남대로4길-11-양재동-청호빌",
+      "latitude": 37.466964320345,
+      "longitude": 127.04279392632
     },
     {
       "id": 42,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2.65,
+      "method": "verified_address_other_public_source",
+      "source": "https://jusoga.com/b/1165010200103460006003744/서울특별시-서초구-동산로2길-47-양재동",
+      "latitude": 37.468086179088,
+      "longitude": 127.0432782778
     },
     {
       "id": 43,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2,
+      "method": "verified_address_other_public_source",
+      "source": "https://jusoga.com/b/1165010200102720006002538/서울특별시-서초구-마방로10길-54-1-양재동",
+      "latitude": 37.475274732271,
+      "longitude": 127.04496708647
     },
     {
       "id": 44,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2.03,
+      "method": "verified_address_other_public_source",
+      "source": "https://findby.co.kr/details/06776-116504163169-st-652beff74e0223ae1804968c",
+      "latitude": 37.4759231,
+      "longitude": 127.044007
     },
     {
       "id": 45,
@@ -422,9 +436,11 @@
     },
     {
       "id": 57,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2.83,
+      "method": "verified_address_other_public_source",
+      "source": "https://findby.co.kr/details/06730-116504163020-st-652befc34e0223ae18042dbf",
+      "latitude": 37.4873756,
+      "longitude": 127.0315267
     },
     {
       "id": 58,
@@ -443,9 +459,11 @@
     },
     {
       "id": 60,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2.63,
+      "method": "verified_address_other_public_source",
+      "source": "https://findby.co.kr/details/06754-116503121023-st-652beff84e0223ae180496cd",
+      "latitude": 37.4748504,
+      "longitude": 127.0369662
     },
     {
       "id": 61,
