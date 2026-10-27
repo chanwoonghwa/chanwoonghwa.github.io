@@ -1,0 +1,25 @@
+name: Cache menu reference photos (one-time)
+on:
+  push:
+    paths:
+      - .github/workflows/sudo-food-cache-menu.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache attributed Wikimedia Commons images
+        run: python3 docs/food-finder/cache_menu_photos.py
+      - name: Commit menu photos and retained licensing metadata
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/food-finder/assets/menu/ docs/food-finder/menu-photos.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Cache license-tracked menu reference photos"
+            git push
+          fi
