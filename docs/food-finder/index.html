@@ -262,15 +262,23 @@ body[data-view=table] #cardGrid{display:grid!important}
 .actual-photo-access{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 19px 14px;border-radius:10px;background:#edf4ec;padding:10px 12px;font-size:11px}
 .actual-photo-access a{font-weight:800;color:#245a3e;text-decoration:none}
 .actual-photo-access span{font-size:10px;color:#738b75}
+
+/* Clearly visible source-link update, not a hidden details affordance */
+.photo-source-banner{display:block;background:#e6f0d8;border-bottom:1px solid #d4e4c7;padding:12px 18px 11px;position:relative;z-index:5}
+.photo-source-banner a{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#194b30;font-size:13px;font-weight:850;text-decoration:none}
+.photo-source-banner a span{font-size:18px;line-height:1}
+.photo-source-banner a:hover{text-decoration:underline}
+.photo-source-banner small{display:block;margin-top:4px;color:#60775e;font-size:10px;line-height:1.4}
+
 </style>
 </head>
 <body>
 <header>
   <div class="masthead"><div class="brand"><span class="brand-mark">✳</span><div>수도 테이블<small>SUDO TABLE · DINING GUIDE</small></div></div><span class="mast-meta">SEOUL · GANGNAM / YANGJAE</span></div>
-  <div class="hero-main"><div class="hero-tag">✦ 모임 장소 찾기, 더 간편하게</div>
+  <div class="hero-main"><div class="hero-tag">✦ SUDO TABLE · PHOTO UPDATE v2.4</div>
   <h1>일요일 저녁,<br><em>어디서 먹지?</em></h1>
   <p class="subtitle">수도공고에서 출발하는 10명 이상 모임의 식당 탐색 가이드.<br>직선거리·주차·단체석을 한눈에 살펴보고 후보를 공유하세요.</p>
-  <div class="hero-chips"><span>◷ 일요일 20–22시</span><span>♧ 식사 중심 61곳</span><span>♧ 네이버지도 연결</span></div></div>
+  <div class="hero-chips"><span>◷ 일요일 20–22시</span><span>♧ 식사 중심 61곳</span><span>📷 실제 매장 사진 링크 5곳</span></div></div>
 </header>
 <main class="container">
   <section class="metrics">
@@ -281,7 +289,7 @@ body[data-view=table] #cardGrid{display:grid!important}
   </section>
   <section class="top-deck" id="deckSection" aria-label="식당 카드 스와이프 탐색">
     <div class="deck-heading">
-      <div><span class="deck-kicker">EXPLORE RESTAURANTS</span><h2>한 장씩, 스와이프로 찾기 <span class="deck-swipe">↔</span></h2><p>가까운 식당부터 확인하고 마음에 들면 후보에 담아보세요.</p></div>
+      <div><span class="deck-kicker">EXPLORE RESTAURANTS</span><h2>한 장씩, 스와이프로 찾기 <span class="deck-swipe">↔</span></h2><p>가까운 식당부터 보고 후보에 담아보세요. 📷 표시된 곳은 실제 매장 사진 페이지로 연결됩니다.</p></div>
       <div class="deck-controls"><span id="deckPosition" class="deck-position" aria-live="polite">1 / 61</span><button type="button" id="deckPrev" class="deck-arrow" aria-label="이전 식당" disabled>←</button><button type="button" id="deckNext" class="deck-arrow" aria-label="다음 식당">→</button></div>
     </div>
     <div class="quick-filters" aria-label="빠른 조건 필터">
@@ -549,10 +557,10 @@ function photoHref(url){
  }catch{}
  return "";
 }
-fetch("./restaurant-photos.json",{cache:"no-store"}).then(res=>res.ok?res.json():Promise.reject(Error("no photo registry"))).then(data=>{
+fetch("./restaurant-photos.json?v=20261027-photo24",{cache:"no-store"}).then(res=>res.ok?res.json():Promise.reject(Error("no photo registry"))).then(data=>{
  if(data && data.actual_photos && data.candidate_sources){restaurantGallery=data;render()}
 }).catch(()=>{});
-fetch("./menu-photos.json",{cache:"default"}).then(res=>{
+fetch("./menu-photos.json?v=20261027-photo24",{cache:"no-store"}).then(res=>{
  if(!res.ok)throw new Error("menu photo manifest missing");
  return res.json();
 }).then(data=>{
@@ -586,6 +594,7 @@ function renderCards(rr){
  return '<article class="food-card" data-food-id="'+r.id+'">'+
  '<div class="food-visual '+color+(photo?' has-menu-photo':'')+'">'+(photo && photoHref(photo.src)?'<img class="food-menu-img" src="'+esc(photoHref(photo.src))+'" loading="lazy" decoding="async" alt="'+esc(isActual?r.name+" 실제 매장 음식 사진":photo.label+" 메뉴 참고 사진. 해당 식당 실제 사진 아님")+'">':'')+'<span class="food-type">'+esc(r.cuisine_group)+'</span><span class="food-emoji" aria-hidden="true">'+emoji+'</span>'+(photo?'<span class="photo-kind">'+(isActual?'✓ 해당 매장 실제 사진 · 사용권 확인':'메뉴 참고 사진 · 실제 매장 사진 아님')+'</span>':'')+
  '<button type="button" class="card-heart '+(favorites.has(r.id)?"is-on":"")+'" data-card-star="'+r.id+'" aria-label="'+esc(r.name)+' 즐겨찾기">'+(favorites.has(r.id)?"★":"☆")+'</button></div>'+
+ (sourceLink?'<div class="photo-source-banner"><a href="'+esc(sourceLink.url)+'" target="_blank" rel="noopener noreferrer">📷 이 식당 실제 메뉴 사진 보기 <span>↗</span></a><small>외부 업체·후기 페이지에서 확인 · 사이트에는 참고 사진 표시 중</small></div>':"")+
  '<div class="food-body"><div class="food-titleline"><h3 class="food-name">'+esc(r.name)+'</h3>'+
  '<span class="distance-pill '+(dist==null?"unknown":"")+'">'+(dist==null?"거리 미측정":fmt(dist)+" km")+'</span></div>'+
  '<div class="food-sub">'+esc(r.cuisine_detail)+' · '+esc(r.area)+'</div>'+
@@ -595,7 +604,7 @@ function renderCards(rr){
  '<div class="food-when"><span>일요일 운영 안내</span><b>'+esc(hours)+'</b></div></div>'+
  '<div class="food-foot"><button type="button" class="filled '+(chosen.has(r.id)?"selected":"")+'" data-card-choose="'+r.id+'">'+(chosen.has(r.id)?"✓ 후보 담김":"＋ 후보 담기")+'</button>'+
  '<a href="'+safeURL(r.naver_url)+'" target="_blank" rel="noopener noreferrer">네이버지도 ↗</a></div>'+
- (sourceLink?'<div class="actual-photo-access"><a href="'+esc(sourceLink.url)+'" target="_blank" rel="noopener noreferrer">📷 이 식당의 실제 메뉴·매장 사진 확인 ↗</a><span>외부 사이트 사진 · 사이트 재게시 권한 미확보</span></div>':"")+
+ 
  '<details class="food-details"><summary>주차 · 라스트오더 · 연락처 자세히</summary>'+
  '<p><b>매장 주차</b> · '+esc(r.parking_detail||r.parking_status||"미확인")+'</p>'+
  '<p><b>대체 주차장</b> · '+esc(r.parking_lot_name||"미지정")+(r.parking_naver_url?' <a href="'+safeURL(r.parking_naver_url)+'" target="_blank" rel="noopener noreferrer">위치 확인 ↗</a>':"")+'</p>'+
