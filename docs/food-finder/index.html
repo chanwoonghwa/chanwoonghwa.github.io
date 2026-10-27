@@ -194,6 +194,56 @@ footer{padding-bottom:15px}
  .decision{padding:16px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Swipe-first food discovery, card deck at the top */
+.top-deck{margin-top:18px;padding:25px 0 17px;background:#fff;border:1px solid var(--line);border-radius:23px;box-shadow:0 14px 40px #244a2b0a;overflow:hidden}
+.deck-heading{padding:0 26px;display:flex;align-items:end;justify-content:space-between;gap:16px}
+.deck-kicker{display:block;font-size:10px;letter-spacing:.16em;color:#6c9279;font-weight:850;margin-bottom:8px}
+.deck-heading h2{margin:0;font-size:clamp(20px,2.35vw,28px);line-height:1.24;letter-spacing:-.05em;font-weight:850}
+.deck-heading p{font-size:12px;color:#708077;line-height:1.6;margin:9px 0 0}
+.deck-swipe{font-size:18px;color:#84aa8d;vertical-align:middle}
+.deck-controls{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.deck-position{font-size:12px;font-weight:850;min-width:64px;text-align:center;color:#355941;font-variant-numeric:tabular-nums}
+.deck-arrow{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;cursor:pointer;background:#f1f5ef;border:1px solid #dfebdd;color:#315c43;font-size:19px;font-weight:650}
+.deck-arrow:not(:disabled):hover{background:#dcebdd}
+.deck-arrow:disabled{opacity:.32;cursor:default}
+.top-deck .quick-filters{margin:18px 26px 0;border-top:1px solid #eef1ec;padding-top:15px}
+.carousel-viewport{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:1px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:14px 0 0;padding:0 25px;outline-offset:-2px}
+.carousel-viewport::-webkit-scrollbar{display:none}
+.carousel-viewport:focus-visible{outline:2px solid #75a984}
+#cardGrid{display:grid!important;grid-template-rows:1fr;grid-auto-flow:column;grid-auto-columns:calc((100% - 76px)/3);gap:16px;align-items:stretch;width:100%;padding:6px 1px 20px}
+#cardGrid .food-card{scroll-snap-align:start;scroll-snap-stop:always;height:100%;box-shadow:0 8px 22px #1d4b260e}
+#cardGrid .food-card:hover{transform:none}
+#cardGrid .food-visual{height:112px}
+#cardGrid .food-body{flex:1}
+.deck-progress{height:4px;margin:0 26px;border-radius:20px;background:#eef2e9;overflow:hidden}
+#deckProgressFill{height:100%;width:0;background:#3f8c60;border-radius:20px;transition:width .14s ease}
+.deck-helper{padding:12px 26px 0;display:flex;justify-content:space-between;gap:12px;color:#89988d;font-size:11px}
+.deck-helper a{color:#426e51;text-decoration:none;font-weight:750}
+#cardGrid .empty-cards{width:100%;min-height:160px;display:grid;place-content:center}
+.filters{margin-top:17px}
+.tablewrap,body[data-view=table] .tablewrap{display:block}
+body[data-view=table] #cardGrid{display:grid!important}
+.result-tools .action{font-size:11px}
+@media(max-width:1050px){#cardGrid{grid-auto-columns:calc((100% - 44px)/2)}}
+@media(max-width:690px){
+ .top-deck{padding-top:19px;border-radius:18px;margin-top:12px}
+ .deck-heading{padding:0 16px;align-items:start;gap:7px}
+ .deck-heading h2{font-size:20px}.deck-heading p{font-size:11px}
+ .deck-controls{gap:5px}.deck-position{min-width:45px;font-size:11px}
+ .deck-arrow{width:31px;height:31px;font-size:17px}
+ .top-deck .quick-filters{margin:14px 0 0;padding:13px 16px 0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+ .top-deck .quick-filters::-webkit-scrollbar{display:none}
+ .quick-caption{flex:0 0 auto}.quick-chip{flex:0 0 auto}
+ .carousel-viewport{padding:0 16px;margin-top:9px}
+ #cardGrid{grid-auto-columns:87%;gap:12px;padding:5px 1px 15px}
+ #cardGrid .food-visual{height:100px}
+ #cardGrid .food-card{border-radius:18px}
+ .deck-progress{margin:0 16px}
+ .deck-helper{padding:11px 16px 0}
+ .deck-helper span{font-size:10px}
+}
+
 </style>
 </head>
 <body>
@@ -211,12 +261,11 @@ footer{padding-bottom:15px}
     <div class="metric"><span>주차 가능 안내</span><strong id="metricParked">27</strong></div>
     <div class="metric"><span>직선거리 확보</span><strong id="metricRoute">0</strong></div>
   </section>
-  <section class="filters" aria-label="식당 검색 필터">
-    <div class="filterheading"><strong>조건으로 검색</strong><div class="actions">
-      <button class="action" id="favoritesOnly" type="button">☆ 즐겨찾기만</button><button class="action primary" id="randomPick" type="button">🎲 랜덤 추천</button>
-      <button class="action" id="resetFilters" type="button">필터 초기화</button>
-      <button class="action primary" id="exportCsv" type="button">필터 결과 CSV</button>
-    </div></div>
+  <section class="top-deck" id="deckSection" aria-label="식당 카드 스와이프 탐색">
+    <div class="deck-heading">
+      <div><span class="deck-kicker">EXPLORE RESTAURANTS</span><h2>한 장씩, 스와이프로 찾기 <span class="deck-swipe">↔</span></h2><p>가까운 식당부터 확인하고 마음에 들면 후보에 담아보세요.</p></div>
+      <div class="deck-controls"><span id="deckPosition" class="deck-position" aria-live="polite">1 / 61</span><button type="button" id="deckPrev" class="deck-arrow" aria-label="이전 식당" disabled>←</button><button type="button" id="deckNext" class="deck-arrow" aria-label="다음 식당">→</button></div>
+    </div>
     <div class="quick-filters" aria-label="빠른 조건 필터">
       <span class="quick-caption">QUICK FILTER</span>
       <button type="button" class="quick-chip" data-quick="park" aria-pressed="false">🚗 매장 주차 안내</button>
@@ -224,6 +273,20 @@ footer{padding-bottom:15px}
       <button type="button" class="quick-chip" data-quick="open" aria-pressed="false">🌙 20–22시 시간상 충족</button>
       <button type="button" class="quick-chip" data-quick="near" aria-pressed="false">📍 3km 이내</button>
     </div>
+
+    <div class="carousel-viewport" id="deckViewport" tabindex="0" role="region" aria-label="식당 좌우 스와이프 카드">
+      <section id="cardGrid" class="card-grid" aria-label="식당 카드 목록"></section>
+    </div>
+    <div class="deck-progress" aria-hidden="true"><div id="deckProgressFill"></div></div>
+    <div class="deck-helper"><span>← 좌우로 밀어 다음 식당 보기</span><a href="#filterSection">상세 조건 설정 ↓</a></div>
+  </section>
+
+  <section class="filters" id="filterSection" aria-label="식당 검색 필터">
+    <div class="filterheading"><strong>조건으로 검색</strong><div class="actions">
+      <button class="action" id="favoritesOnly" type="button">☆ 즐겨찾기만</button><button class="action primary" id="randomPick" type="button">🎲 랜덤 추천</button>
+      <button class="action" id="resetFilters" type="button">필터 초기화</button>
+      <button class="action primary" id="exportCsv" type="button">필터 결과 CSV</button>
+    </div></div>
     <div class="filtergrid">
       <div class="field"><label for="search">식당명 · 주소 · 메뉴 검색</label><input id="search" placeholder="예: 주먹고기, 순대국, 양재시민의숲" autocomplete="off"></div>
       <div class="field"><label for="cuisine">음식 종류</label><select id="cuisine"><option value="">전체 음식</option></select></div>
@@ -242,11 +305,10 @@ footer{padding-bottom:15px}
     <div id="chosenList" class="decision-cards"></div>
     <div id="discovery" class="discovery" hidden></div>
   </section>
-  <div class="results-bar">
-    <strong>식당 목록 <span id="countLabel">61곳</span></strong>
-    <div class="result-tools"><span class="hint">측정 가능 좌표만 거리 표기 · 직선거리 기준</span><div class="view-switch" role="group" aria-label="목록 보기 방식"><button type="button" data-view-mode="card" aria-pressed="true">▦ 카드</button><button type="button" data-view-mode="table" aria-pressed="false">☷ 표</button></div></div>
+  <div class="results-bar" id="allResults">
+    <strong>전체 식당 목록 <span id="countLabel">61곳</span></strong>
+    <div class="result-tools"><span class="hint">필터·거리 정렬이 적용된 상세 비교표</span><button type="button" class="action" id="backToDeck">↑ 카드로 돌아가기</button></div>
   </div>
-  <section id="cardGrid" class="card-grid" aria-label="식당 카드 목록"></section>
   <section class="tablewrap" aria-label="필터링된 식당 목록">
     <table><thead><tr><th>식당</th><th>음식 · 권역</th><th>일요일 영업</th><th>10인 · 주차</th><th>대체 주차장</th><th>직선거리</th><th>지도/연락</th></tr></thead>
     <tbody id="tbody"></tbody></table>
@@ -435,13 +497,6 @@ $("#randomPick").addEventListener("click",()=>{
 
 /* Card discovery and shortcuts */
 const cardGrid=$("#cardGrid");
-const viewStore="sudo_table_view_v1";
-let displayMode="card";
-try { displayMode=localStorage.getItem(viewStore)==="table"?"table":"card" } catch {}
-function syncDisplayMode(){
- document.body.dataset.view=displayMode;
- document.querySelectorAll("[data-view-mode]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.viewMode===displayMode)));
-}
 function foodPresentation(r){
  const group=r.cuisine_group||"",detail=r.cuisine_detail||"";
  if(/닭|치킨/.test(group+detail))return ["🍗","c-chicken"];
@@ -461,7 +516,7 @@ function cardStatus(r){
  return [parking,pc,group,gc,hours,hc];
 }
 function renderCards(rr){
- if(!rr.length){cardGrid.innerHTML='<div class="empty-cards"><b>조건에 맞는 식당이 없어요.</b><p>주차·거리·음식 필터를 완화해 보세요.</p></div>';return}
+ if(!rr.length){cardGrid.innerHTML='<div class="empty-cards"><b>조건에 맞는 식당이 없어요.</b><p>주차·거리·음식 필터를 완화해 보세요.</p></div>';afterCardsRender(rr);return}
  cardGrid.innerHTML=rr.map(r=>{
  const [emoji,color]=foodPresentation(r),status=cardStatus(r),dist=straightOf(r);
  const hours=String(r.sunday_hours||"미확인");
@@ -487,6 +542,7 @@ function renderCards(rr){
  '<p><b>예약 주의</b> · '+esc(r.reservation_caution||"방문 전 문의")+'</p>'+
  '<p><button class="cellbtn" type="button" data-card-note="'+r.id+'">예약 확인 메모 복사</button></p></details></article>'
  }).join("");
+ afterCardsRender(rr);
 }
 cardGrid.addEventListener("click",e=>{
  const star=e.target.closest("[data-card-star]");
@@ -496,9 +552,7 @@ cardGrid.addEventListener("click",e=>{
  const note=e.target.closest("[data-card-note]");
  if(note){copyNote(Number(note.dataset.cardNote));return}
 });
-document.querySelectorAll("[data-view-mode]").forEach(b=>b.addEventListener("click",()=>{
- displayMode=b.dataset.viewMode;try{localStorage.setItem(viewStore,displayMode)}catch{}syncDisplayMode();
-}));
+
 function syncQuick(){
  const s={park:els.parking.value==="가능(안내·후기)",ten:els.capacity.value==="10명 근거 있음",
  open:els.sunday.value==="시간상 충족",near:els.route.value==="within3"};
@@ -511,7 +565,62 @@ document.querySelectorAll("[data-quick]").forEach(b=>b.addEventListener("click",
  const pair=pairs[type];pair[0].value=pair[0].value===pair[1]?"":pair[1];render();
 }));
 $("#floatOpen").addEventListener("click",()=>$("#chosenList").scrollIntoView({behavior:"smooth",block:"center"}));
-syncDisplayMode();
+
+
+/* Swipe deck with snap navigation and keyboard support */
+const deckViewport=$("#deckViewport"), deckPrev=$("#deckPrev"), deckNext=$("#deckNext");
+let deckIds=[], deckActive=0, lastDeckSignature="";
+function deckStep(){
+ const cards=cardGrid.querySelectorAll(".food-card");
+ if(cards.length>1)return cards[1].offsetLeft-cards[0].offsetLeft;
+ return cards[0]?cards[0].getBoundingClientRect().width:1;
+}
+function paintDeck(){
+ const n=deckIds.length;
+ deckActive=Math.max(0,Math.min(deckActive,Math.max(0,n-1)));
+ $("#deckPosition").textContent=n?(deckActive+1)+" / "+n:"0 / 0";
+ deckPrev.disabled=deckActive<=0;
+ deckNext.disabled=deckActive>=n-1;
+ $("#deckProgressFill").style.width=n?((deckActive+1)/n*100)+"%":"0%";
+}
+function gotoDeck(index,behavior="smooth"){
+ if(!deckIds.length){deckActive=0;paintDeck();return}
+ deckActive=Math.max(0,Math.min(index,deckIds.length-1));
+ const cards=cardGrid.querySelectorAll(".food-card");
+ const first=cards[0],target=cards[deckActive];
+ if(first&&target)deckViewport.scrollTo({left:target.offsetLeft-first.offsetLeft,behavior});
+ paintDeck();
+}
+function afterCardsRender(rr){
+ const signature=rr.map(r=>r.id).join(",");
+ const oldId=deckIds[deckActive];
+ deckIds=rr.map(r=>r.id);
+ if(signature!==lastDeckSignature)deckActive=0;
+ else if(oldId!=null){const i=deckIds.indexOf(oldId);deckActive=i>=0?i:0}
+ lastDeckSignature=signature;
+ paintDeck();
+ requestAnimationFrame(()=>gotoDeck(deckActive,"auto"));
+}
+let deckScrollScheduled=false;
+deckViewport.addEventListener("scroll",()=>{
+ if(deckScrollScheduled)return;
+ deckScrollScheduled=true;
+ requestAnimationFrame(()=>{
+   deckScrollScheduled=false;
+   if(!deckIds.length)return;
+   deckActive=Math.max(0,Math.min(Math.round(deckViewport.scrollLeft/Math.max(1,deckStep())),deckIds.length-1));
+   paintDeck();
+ });
+},{passive:true});
+deckPrev.addEventListener("click",()=>gotoDeck(deckActive-1));
+deckNext.addEventListener("click",()=>gotoDeck(deckActive+1));
+deckViewport.addEventListener("keydown",e=>{
+ if(e.target.closest("button,a,input,select,textarea,summary"))return;
+ if(e.key==="ArrowRight"){e.preventDefault();gotoDeck(deckActive+1)}
+ if(e.key==="ArrowLeft"){e.preventDefault();gotoDeck(deckActive-1)}
+});
+window.addEventListener("resize",()=>{if(deckIds.length)requestAnimationFrame(()=>gotoDeck(deckActive,"auto"))});
+$("#backToDeck").addEventListener("click",()=>$("#deckSection").scrollIntoView({behavior:"smooth",block:"start"}));
 
 render();
 </script>
