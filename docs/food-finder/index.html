@@ -102,7 +102,7 @@
       <div class="field"><label for="capacity">10인 수용</label><select id="capacity"><option value="">전체</option><option value="10명 근거 있음">10명 수용 근거 있음</option><option value="10명 미확인">10명 미확인</option></select></div>
       <div class="field"><label for="sunday">일요일 20–22시</label><select id="sunday"><option value="">전체 후보</option><option value="시간상 충족">시간상 충족 안내</option><option value="조건부">조건부 / 확인 필요</option></select></div>
       <div class="field"><label for="sort">정렬</label><select id="sort"><option value="id">기존 목록순</option><option value="distance">직선거리 가까운 순</option><option value="name">이름 가나다순</option><option value="cuisine">음식 종류별</option><option value="area">권역별</option></select></div>
-      <div class="field"><label for="routeFilter">거리 데이터</label><select id="routeFilter"><option value="">전체</option><option value="measured">좌표 확인됨</option><option value="unmeasured">좌표 미확인</option></select></div>
+      <div class="field"><label for="routeFilter">거리 데이터</label><select id="routeFilter"><option value="">전체</option><option value="measured">좌표 확인됨</option><option value="unmeasured">좌표 미확인</option><option value="within3">직선 3km 이내 (좌표 확인)</option><option value="within5">직선 5km 이내 (좌표 확인)</option></select></div>
     </div>
   </section>
   <section class="decision" aria-label="모임 후보 비교">
@@ -168,6 +168,8 @@ function filteredRows(){
    const valid=straightOf(r)!=null;
    if(els.route.value==="measured" && !valid)return false;
    if(els.route.value==="unmeasured" && valid)return false;
+   if(els.route.value==="within3" && (straightOf(r)==null || straightOf(r)>3))return false;
+   if(els.route.value==="within5" && (straightOf(r)==null || straightOf(r)>5))return false;
    return true;
  });
  const s=els.sort.value;
