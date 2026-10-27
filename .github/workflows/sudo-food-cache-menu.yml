@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - .github/workflows/sudo-food-cache-menu.yml
+      # Re-run for a newly curated menu category (양갈비)
   workflow_dispatch:
 permissions:
   contents: write
