@@ -200,6 +200,17 @@
       "src": "./assets/menu/yukhoe.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
+    },
+    "yanggalbi": {
+      "file": "Yang-galbi.jpg",
+      "label": "양갈비",
+      "author": "chomjong",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Yang-galbi.jpg",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Yang-galbi.jpg?width=840",
+      "kind": "menu_reference",
+      "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     }
   },
   "assignments": {
@@ -211,6 +222,8 @@
     "6": "galbi2",
     "7": "galbi",
     "8": "samgyeopsal2",
+    "9": "yanggalbi",
+    "10": "yanggalbi",
     "11": "samgyeopsal",
     "12": "gopchang",
     "13": "galbi",
