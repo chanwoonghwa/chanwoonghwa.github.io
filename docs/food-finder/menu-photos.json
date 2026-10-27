@@ -10,7 +10,7 @@
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Dak-galbi.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Dak-galbi.jpg?width=840",
+      "src": "./assets/menu/dakgalbi.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -21,7 +21,7 @@
       "license": "CC BY-SA 2.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Korean_cuisine-One_whole_chicken-Dakhanmari-01.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Korean_cuisine-One_whole_chicken-Dakhanmari-01.jpg?width=840",
+      "src": "./assets/menu/dakhanmari.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -32,7 +32,7 @@
       "license": "CC BY-SA 2.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Korean_beef_short_ribs.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Korean_beef_short_ribs.jpg?width=840",
+      "src": "./assets/menu/galbi.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -43,7 +43,7 @@
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Korean.cuisine-Galbi-01.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Korean.cuisine-Galbi-01.jpg?width=840",
+      "src": "./assets/menu/galbi2.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -54,7 +54,7 @@
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Samgyeopsal-gui.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Samgyeopsal-gui.jpg?width=840",
+      "src": "./assets/menu/samgyeopsal.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -65,7 +65,7 @@
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Samgyeopsal_table.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Samgyeopsal_table.jpg?width=840",
+      "src": "./assets/menu/samgyeopsal2.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -76,7 +76,7 @@
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Yang-kkochi.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Yang-kkochi.jpg?width=840",
+      "src": "./assets/menu/lamb.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -87,7 +87,7 @@
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Grilled_beef_innards_1.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Grilled_beef_innards_1.jpg?width=840",
+      "src": "./assets/menu/gopchang.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -98,7 +98,7 @@
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Korean_Food_Jokbal%2C_pork_feet.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Korean_Food_Jokbal%2C_pork_feet.jpg?width=840",
+      "src": "./assets/menu/jokbal.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -109,7 +109,7 @@
       "license": "CC BY-SA 2.0 KR",
       "license_url": "https://creativecommons.org/licenses/by-sa/2.0/kr/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Sundae-guk.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Sundae-guk.jpg?width=840",
+      "src": "./assets/menu/sundae.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -120,7 +120,7 @@
       "license": "CC BY 3.0",
       "license_url": "https://creativecommons.org/licenses/by/3.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Korean_Sundae_Soup.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Korean_Sundae_Soup.jpg?width=840",
+      "src": "./assets/menu/sundae2.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -131,7 +131,7 @@
       "license": "CC BY-SA 2.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Korean_stew-Kimchi_jjigae-01.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Korean_stew-Kimchi_jjigae-01.jpg?width=840",
+      "src": "./assets/menu/kimchi.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -142,7 +142,7 @@
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Korean.food-Gamjatang-01.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Korean.food-Gamjatang-01.jpg?width=840",
+      "src": "./assets/menu/gamjatang.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -153,7 +153,7 @@
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Bulgogi_in_Seoul.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Bulgogi_in_Seoul.jpg?width=840",
+      "src": "./assets/menu/bulgogi.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -164,7 +164,7 @@
       "license": "CC BY-SA 3.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Shabu_shabu.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Shabu_shabu.jpg?width=840",
+      "src": "./assets/menu/shabu.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -175,7 +175,7 @@
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Korean_Yangnyeom_chicken.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Korean_Yangnyeom_chicken.jpg?width=840",
+      "src": "./assets/menu/friedchicken.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -186,7 +186,7 @@
       "license": "CC BY-SA 2.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Tuna_Sashimi_(6737806107).jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Tuna_Sashimi_(6737806107).jpg?width=840",
+      "src": "./assets/menu/tuna.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     },
@@ -197,7 +197,7 @@
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Yukhoe.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Yukhoe.jpg?width=840",
+      "src": "./assets/menu/yukhoe.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     }
