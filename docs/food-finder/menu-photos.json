@@ -208,7 +208,7 @@
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "source_page": "https://commons.wikimedia.org/wiki/File:Yang-galbi.jpg",
-      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Yang-galbi.jpg?width=840",
+      "src": "./assets/menu/yanggalbi.jpg",
       "kind": "menu_reference",
       "display_note": "음식 종류 참고 사진 · 해당 매장 메뉴 사진 아님"
     }
