@@ -21,5 +21,7 @@ jobs:
           git add docs/food-finder/assets/menu/ docs/food-finder/menu-photos.json
           if ! git diff --cached --quiet; then
             git commit -m "Cache license-tracked menu reference photos"
+            git fetch origin main
+            git rebase origin/main
             git push
           fi
