@@ -9,7 +9,7 @@ import json, math, os, re, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parent
 INPUT=ROOT/"restaurants.json"
 OUTPUT=ROOT/"distances.json"
 ORIGIN={"name":"수도전기공업고등학교","address":"서울 강남구 개포로 410","lat":37.4856143,"lon":127.0635654,
