@@ -6,7 +6,7 @@
     "lon": 127.0635654,
     "source": "https://findby.co.kr/details/06324-116803122001-st-652b03a68c641f9e388127e9"
   },
-  "generated_at": "2026-10-27T08:26:10.404Z",
+  "generated_at": "2026-10-27T08:27:38.167Z",
   "items": [
     {
       "id": 1,
@@ -92,9 +92,11 @@
     },
     {
       "id": 11,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 1.68,
+      "method": "verified_address_other_public_source",
+      "source": "https://smi.purpleo.kr/article/39471",
+      "latitude": 37.4984280058779,
+      "longitude": 127.05355811989
     },
     {
       "id": 12,
@@ -106,9 +108,11 @@
     },
     {
       "id": 13,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 1.93,
+      "method": "verified_address_other_public_source",
+      "source": "https://jusoga.com/b/1168010600109090016000001/서울특별시-강남구-역삼로64길-5-대치동-럭스빌",
+      "latitude": 37.500760631967,
+      "longitude": 127.05290202518
     },
     {
       "id": 14,
@@ -129,9 +133,11 @@
     },
     {
       "id": 16,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2.78,
+      "method": "verified_address_other_public_source",
+      "source": "https://xnx.purpleo.kr/article/5834",
+      "latitude": 37.4682583081203,
+      "longitude": 127.040841997121
     },
     {
       "id": 17,
