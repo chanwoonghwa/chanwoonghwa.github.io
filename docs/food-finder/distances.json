@@ -6,7 +6,7 @@
     "lon": 127.0635654,
     "source": "https://findby.co.kr/details/06324-116803122001-st-652b03a68c641f9e388127e9"
   },
-  "generated_at": "2026-10-27T08:12:43.005058+00:00",
+  "generated_at": "2026-10-27T08:14:21.925Z",
   "items": [
     {
       "id": 1,
@@ -36,7 +36,7 @@
       "id": 4,
       "latitude": 37.4946061,
       "longitude": 127.0627349,
-      "straight_distance_km": 1.0,
+      "straight_distance_km": 1,
       "method": "osm_nominatim_exact_address",
       "source": "https://www.openstreetmap.org/copyright",
       "match": "대원빌딩, 2947, 남부순환로, 대치1동, 강남구, 서울특별시, 06280, 대한민국"
@@ -58,9 +58,11 @@
     },
     {
       "id": 7,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 1.58,
+      "method": "verified_building",
+      "source": "https://findby.co.kr/details/06206-116804166484-st-652b042d8c641f9e3882b75a",
+      "latitude": 37.4976696,
+      "longitude": 127.0541262
     },
     {
       "id": 8,
@@ -94,9 +96,11 @@
     },
     {
       "id": 12,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 1.69,
+      "method": "verified_building",
+      "source": "https://findby.co.kr/details/06205-116804166486-st-652b042d8c641f9e3882b757",
+      "latitude": 37.4982025,
+      "longitude": 127.0528672
     },
     {
       "id": 13,
@@ -115,9 +119,11 @@
     },
     {
       "id": 15,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2.71,
+      "method": "verified_building",
+      "source": "https://findby.co.kr/details/06779-116504163170-st-652bf0094e0223ae1804b746",
+      "latitude": 37.4705901,
+      "longitude": 127.0393353
     },
     {
       "id": 16,
@@ -259,9 +265,11 @@
     },
     {
       "id": 34,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 0.56,
+      "method": "verified_building",
+      "source": "https://findby.co.kr/details/06329-116804166068-st-652b03a68c641f9e38812897",
+      "latitude": 37.4889844,
+      "longitude": 127.0682703
     },
     {
       "id": 35,
@@ -298,9 +306,11 @@
     },
     {
       "id": 40,
-      "straight_distance_km": null,
-      "method": "unresolved",
-      "source": null
+      "straight_distance_km": 2.79,
+      "method": "verified_building",
+      "source": "https://findby.co.kr/details/06787-116504163031-st-652bf0094e0223ae1804b78e",
+      "latitude": 37.4673039,
+      "longitude": 127.041905
     },
     {
       "id": 41,
@@ -446,5 +456,6 @@
       "source": "https://www.openstreetmap.org/copyright",
       "match": "코네, 25, 남부순환로350길, 양재1동, 서초구, 서울특별시, 06737, 대한민국"
     }
-  ]
+  ],
+  "methodology": "Verified address/building coordinates, great-circle Haversine distance, source per item; unresolved remain null"
 }
