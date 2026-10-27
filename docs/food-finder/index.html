@@ -518,6 +518,7 @@ function menuPhoto(r){
  return id ? (menuGallery.images[id]||null):null;
 }
 function photoHref(url){
+ if(typeof url==="string" && /^\.\/assets\/menu\/[a-z0-9_-]+\.jpg$/.test(url))return url;
  try {
   const x=new URL(url);
   if(x.protocol==="https:" && (x.hostname==="commons.wikimedia.org" || x.hostname==="upload.wikimedia.org"))return x.href;
