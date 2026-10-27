@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "updated_at_kst": "2026-10-27T18:46:00+09:00",
+  "policy": "restaurant_actual is shown only after photographer/rights-holder permission is documented; do not copy online photos without authorization.",
+  "actual_photos": {},
+  "candidate_sources": {
+    "2": {
+      "restaurant": "원조닭한마리",
+      "source_label": "당근 업체 프로필 · 메뉴 사진과 방문 후기",
+      "url": "https://www.daangn.com/kr/local-profile/%EC%9B%90%EC%A1%B0%EB%8B%AD%ED%95%9C%EB%A7%88%EB%A6%AC-vxxcwuiab7yy/",
+      "photo_present": true,
+      "reuse_permission": "unknown",
+      "source_type": "third_party_business_profile"
+    },
+    "6": {
+      "restaurant": "우대포 양재점",
+      "source_label": "테이블링 · 우대포 양재점 메뉴 사진",
+      "url": "https://www.tabling.co.kr/restaurant/10497",
+      "photo_present": true,
+      "reuse_permission": "unknown",
+      "source_type": "third_party_business_profile"
+    },
+    "8": {
+      "restaurant": "하남돼지집 대치은마점",
+      "source_label": "다이닝코드 · 대치동 하남돼지집 메뉴 사진",
+      "url": "https://www.diningcode.com/profile.php?rid=goWYSQziUAzp",
+      "photo_present": true,
+      "reuse_permission": "unknown",
+      "source_type": "third_party_review"
+    },
+    "14": {
+      "restaurant": "세광양대창 수서점",
+      "source_label": "테이블링 · 세광 양대창 수서점 메뉴 사진",
+      "url": "https://www.tabling.co.kr/place/677cd3a766de5f06988bf344",
+      "photo_present": true,
+      "reuse_permission": "unknown",
+      "source_type": "third_party_business_profile"
+    },
+    "34": {
+      "restaurant": "장군주먹고기",
+      "source_label": "다이닝코드 · 장군주먹고기 대표 사진",
+      "url": "https://www.diningcode.com/profile.php?rid=JJiCPIiCW6zK",
+      "photo_present": true,
+      "reuse_permission": "unknown",
+      "source_type": "third_party_review"
+    }
+  },
+  "actual_photo_spec": {
+    "path_pattern": "./assets/restaurant/{id}/{name}.jpg",
+    "mandatory_fields": [
+      "src",
+      "author",
+      "license",
+      "license_url",
+      "source_page",
+      "permission_evidence",
+      "restaurant_name",
+      "approved_at",
+      "approved_by",
+      "kind"
+    ],
+    "kind": "restaurant_actual",
+    "permissible_license_examples": [
+      "CC0",
+      "CC BY 4.0",
+      "CC BY-SA 4.0",
+      "permission_granted_for_this_website"
+    ],
+    "allow_external_src": false,
+    "notice": "실제 매장 제공 사진 · 제공자 및 이용 조건 명시"
+  }
+}
