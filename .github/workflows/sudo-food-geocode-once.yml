@@ -1,0 +1,25 @@
+name: Sudo food finder one-off geocoding
+on:
+  push:
+    paths:
+      - .github/workflows/sudo-food-geocode-once.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  geocode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: One-time exact-address geocoding (single thread, throttled)
+        run: python3 docs/food-finder/geocode_once.py
+      - name: Commit cached coordinates and distances
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/food-finder/distances.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Store one-time validated straight-line distances"
+            git push
+          fi
