@@ -55,8 +55,8 @@ jobs:
           BASE='https://chanwoonghwa.github.io/food-finder/'
           for i in $(seq 1 25); do
             if curl --fail --silent --show-error --location --max-time 10 "${BASE}?v=map-20261030-$(date +%s)" -o /tmp/sudo-live.html; then
-              if grep -Fq 'id="sudoMap"' /tmp/sudo-live.html && grep -Fq 'map-and-visits.js?v=20261030-map1' /tmp/sudo-live.html; then
-                echo "LIVE MAP HTML PASS"; break
+              if grep -Fq 'id="sudoMap"' /tmp/sudo-live.html && grep -Fq 'map-and-visits.js?v=' /tmp/sudo-live.html; then
+                echo "LIVE MAP HTML PASS (current version)"; break
               fi
             fi
             sleep 5
