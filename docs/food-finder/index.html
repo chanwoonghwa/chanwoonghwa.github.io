@@ -351,6 +351,14 @@ header .subtitle{font-size:13px}
  .sudo-map-section{border-radius:18px}
 }
 
+
+.visit-bulk-dialog{width:min(530px,calc(100vw - 28px));max-height:90vh;overflow-y:auto}
+.visit-bulk-dialog textarea{display:block;width:100%;font:500 12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;border:1px solid #d7e5d5;border-radius:10px;padding:12px;background:#fff;color:#244e35;resize:vertical;min-height:128px}
+.bulk-visit-preview{margin-top:13px;display:grid;gap:7px}
+.bulk-visit-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;background:#f2f7ef;border-radius:9px;padding:9px 11px;font-size:12px;line-height:1.35;color:#325642}
+.bulk-visit-row span:last-child{font-size:11px;white-space:nowrap;color:#507a58}
+.bulk-visit-preview .bulk-error{border:1px solid #f1cebf;background:#fff4ec;color:#b44a30;border-radius:8px;padding:10px;font-size:12px}
+.visit-bulk-dialog .visit-dialog-actions{position:sticky;bottom:-25px;padding:13px 0;background:#fff}
 </style>
 </head>
 <body>
@@ -372,9 +380,20 @@ header .subtitle{font-size:13px}
     <div class="sudo-map-footer"><div id="mapQuickNames" class="map-quick-names" aria-label="가까운 식당 위치 바로가기"></div><span>OpenStreetMap 지도 · 실제 차량거리 아닌 직선거리</span></div>
     <div class="shared-visit-bar">
       <div class="shared-visit-info"><span class="shared-icon">◷</span><div><b>마지막 방문일 · 모임 공유 기록</b><span id="visitDbStatus" aria-live="polite">공유 DB 연결 확인 중…</span></div></div>
-      <div class="shared-visit-actions"><button id="visitLogin" type="button" hidden>Google 로그인</button><button id="visitUidCopy" type="button" hidden>내 UID 복사</button><button id="visitManage" type="button" hidden>＋ 방문 기록 추가</button><button id="visitLogout" type="button" hidden>로그아웃</button><a href="https://github.com/chanwoonghwa/chanwoonghwa.github.io/blob/main/docs/food-finder/FIREBASE_VISITS_SETUP.md" target="_blank" rel="noopener noreferrer">DB 연결 안내 ↗</a></div>
+      <div class="shared-visit-actions"><button id="visitLogin" type="button" hidden>Google 로그인</button><button id="visitUidCopy" type="button" hidden>내 UID 복사</button><button id="visitManage" type="button" hidden>＋ 방문 기록 추가</button><button id="visitBulkOpen" type="button" hidden>📅 여러 방문 일괄 등록</button><button id="visitLogout" type="button" hidden>로그아웃</button><a href="https://github.com/chanwoonghwa/chanwoonghwa.github.io/blob/main/docs/food-finder/FIREBASE_VISITS_SETUP.md" target="_blank" rel="noopener noreferrer">DB 연결 안내 ↗</a></div>
     </div>
   </section>
+  <dialog id="visitBulkDialog" class="visit-dialog visit-bulk-dialog" aria-label="모임 방문 기록 일괄 등록">
+    <form id="visitBulkForm">
+      <h2>모임 방문 기록 일괄 등록</h2>
+      <p>모임 관리자(owner)가 여러 날짜를 한 번에 Firestore에 등록할 수 있어. 아래는 <b>식당 ID, 방문 날짜</b> 형식이야. 내용 확인 후 저장 버튼을 눌러야 실제 DB에 반영돼.</p>
+      <label for="visitBulkInput">식당 ID, YYYY-MM-DD (한 줄에 한 건)</label>
+      <textarea id="visitBulkInput" rows="6" placeholder="34,2026-10-25&#10;35,2026-10-18" spellcheck="false"></textarea>
+      <div class="bulk-visit-preview" id="visitBulkPreview" aria-live="polite">입력된 기록이 없습니다.</div>
+      <small id="visitBulkStatus" aria-live="polite">DB를 읽은 뒤 기존 기록은 중복 저장하지 않아.</small>
+      <div class="visit-dialog-actions"><button type="button" id="visitBulkClose">닫기</button><button type="submit" id="visitBulkSave" disabled>공유 DB에 일괄 저장</button></div>
+    </form>
+  </dialog>
   <dialog id="visitDialog" class="visit-dialog" aria-label="모임 방문 기록 등록">
     <form id="visitForm"><h2>모임 방문 기록 추가</h2><p>모임 전체가 공유하는 Firestore에 저장돼. 개인 브라우저에는 방문 날짜를 남기지 않아.</p>
       <label for="visitRestaurant">방문 식당</label><select id="visitRestaurant" required></select>
@@ -817,5 +836,5 @@ window.SudoFoodApi={all,coordinates,filteredRows,straightOf,esc,safeURL,gotoDeck
 render();
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./map-and-visits.js?v=20261030-roles2"></script>
+<script src="./map-and-visits.js?v=20261030-bulk3"></script>
 </body></html>
