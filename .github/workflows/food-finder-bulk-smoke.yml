@@ -1,0 +1,58 @@
+name: Verify live Sudo Table owner bulk visits UI
+on:
+  push:
+    paths:
+      - .github/workflows/food-finder-bulk-smoke.yml
+      - docs/food-finder/index.html
+      - docs/food-finder/map-and-visits.js
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bulk-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate code, visit idempotency and no public history seed
+        run: |
+          set -euo pipefail
+          node --check docs/food-finder/map-and-visits.js
+          python3 - <<'PY'
+          import re, pathlib
+          h=pathlib.Path('docs/food-finder/index.html').read_text()
+          js=pathlib.Path('docs/food-finder/map-and-visits.js').read_text()
+          assert 'id="visitBulkOpen"' in h and 'id="visitBulkDialog"' in h
+          assert 'id="visitBulkInput"' in h and 'id="visitBulkSave"' in h
+          assert 'map-and-visits.js?v=20261030-bulk3' in h
+          assert 'state.role==="owner"' in js
+          assert 'await fn.getDoc(ref)' in js and 'await fn.setDoc(ref' in js
+          assert 'state.visitPairs.has(item.key)' in js
+          assert 'window.history.replaceState' in js
+          assert 'localStorage.setItem' not in js
+          # These user-submitted private visit dates must not be hardcoded into public app files:
+          for iso in ['2026-10-25','2026-10-18','2026-10-11','2026-09-20']:
+              assert iso not in js and iso not in h
+          m=re.findall(r'<script>\s*"use strict";([\s\S]+?)</script>',h)
+          assert m
+          pathlib.Path('/tmp/sudo-inline.js').write_text('"use strict";'+m[-1])
+          print('PASS: owner-only bulk importer, idempotency and no public visit seed')
+          PY
+          node --check /tmp/sudo-inline.js
+      - name: Verify deployment at the actual public URL
+        run: |
+          set -euo pipefail
+          BASE='https://chanwoonghwa.github.io/food-finder/'
+          for i in $(seq 1 40); do
+            if curl -fsSL --max-time 12 "${BASE}?release=bulk3-$(date +%s)" -o /tmp/live.html &&
+               grep -Fq 'id="visitBulkOpen"' /tmp/live.html &&
+               grep -Fq 'map-and-visits.js?v=20261030-bulk3' /tmp/live.html; then
+              echo 'PUBLIC HTML HAS BULK IMPORT UI'; break
+            fi
+            sleep 5
+          done
+          grep -Fq 'id="visitBulkOpen"' /tmp/live.html
+          curl -fsSL --max-time 12 "${BASE}map-and-visits.js?v=20261030-bulk3" -o /tmp/live.js
+          grep -Fq 'parseBulkLines' /tmp/live.js
+          grep -Fq 'await fn.setDoc(ref' /tmp/live.js
+          echo 'LIVE BULK VISITS UI VERIFIED'
