@@ -372,7 +372,7 @@ header .subtitle{font-size:13px}
     <div class="sudo-map-footer"><div id="mapQuickNames" class="map-quick-names" aria-label="가까운 식당 위치 바로가기"></div><span>OpenStreetMap 지도 · 실제 차량거리 아닌 직선거리</span></div>
     <div class="shared-visit-bar">
       <div class="shared-visit-info"><span class="shared-icon">◷</span><div><b>마지막 방문일 · 모임 공유 기록</b><span id="visitDbStatus" aria-live="polite">공유 DB 연결 확인 중…</span></div></div>
-      <div class="shared-visit-actions"><button id="visitLogin" type="button" hidden>Google 로그인</button><button id="visitManage" type="button" hidden>＋ 방문 기록 추가</button><button id="visitLogout" type="button" hidden>로그아웃</button><a href="https://github.com/chanwoonghwa/chanwoonghwa.github.io/blob/main/docs/food-finder/FIREBASE_VISITS_SETUP.md" target="_blank" rel="noopener noreferrer">DB 연결 안내 ↗</a></div>
+      <div class="shared-visit-actions"><button id="visitLogin" type="button" hidden>Google 로그인</button><button id="visitUidCopy" type="button" hidden>내 UID 복사</button><button id="visitManage" type="button" hidden>＋ 방문 기록 추가</button><button id="visitLogout" type="button" hidden>로그아웃</button><a href="https://github.com/chanwoonghwa/chanwoonghwa.github.io/blob/main/docs/food-finder/FIREBASE_VISITS_SETUP.md" target="_blank" rel="noopener noreferrer">DB 연결 안내 ↗</a></div>
     </div>
   </section>
   <dialog id="visitDialog" class="visit-dialog" aria-label="모임 방문 기록 등록">
@@ -817,5 +817,5 @@ window.SudoFoodApi={all,coordinates,filteredRows,straightOf,esc,safeURL,gotoDeck
 render();
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./map-and-visits.js?v=20261030-map1"></script>
+<script src="./map-and-visits.js?v=20261030-roles2"></script>
 </body></html>
