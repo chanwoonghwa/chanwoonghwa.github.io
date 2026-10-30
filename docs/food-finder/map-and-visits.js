@@ -13,7 +13,7 @@ const statusEl=$("#visitDbStatus");
 const origin={lat:37.4856143,lon:127.0635654};
 const state={
  map:null,layer:null,originMarker:null,pointMarkers:new Map(),visibleSig:"",
- lastVisits:new Map(),visitCount:new Map(),phase:"unconfigured",auth:null,firestore:null,user:null,role:null,config:null,unsub:null,authEpoch:0,
+ lastVisits:new Map(),visitCount:new Map(),visitPairs:new Set(),phase:"unconfigured",auth:null,firestore:null,user:null,role:null,config:null,unsub:null,authEpoch:0,
  lastRenderSummary:""
 };
 function textVisit(r){
@@ -33,6 +33,7 @@ function syncAuthUI(){
  $("#visitLogout").hidden=!loggedIn;
  $("#visitManage").hidden=!canEdit;
  const uid=$("#visitUidCopy");if(uid)uid.hidden=!loggedIn;
+ const bulk=$("#visitBulkOpen");if(bulk)bulk.hidden=!(loggedIn&&state.phase==="ready"&&state.role==="owner");
 }
 async function copyUid(){
  if(!state.user)return;
@@ -190,6 +191,98 @@ $("#visitForm")?.addEventListener("submit",async (e)=>{
   $("#visitFormStatus").textContent="저장 실패: "+String(err?.code||err?.message||"권한 확인 필요");
  }finally{btn.disabled=false}
 });
+
+// Shared Firestore bulk entry. Any prefill received in a URL fragment is
+// immediately removed from the URL and kept in memory only (never in localStorage).
+function readPendingImportFragment(){
+ const raw=new URLSearchParams(window.location.hash.replace(/^#/,"")).get("visits");
+ if(!raw || raw.length>1500)return "";
+ const tokens=raw.split(",").map(v=>v.trim()).filter(Boolean);
+ if(!tokens.length || tokens.length>30 || !tokens.every(v=>/^[0-9]{1,3}:[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(v)))return "";
+ window.history.replaceState(window.history.state,"",window.location.pathname+window.location.search);
+ return tokens.map(v=>v.replace(":",",")).join("\n");
+}
+let pendingBulkText=readPendingImportFragment(),importDialogAutoShown=false;
+function parseBulkLines(text){
+ const lines=String(text).split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+ if(!lines.length)return {items:[],errors:[]};
+ if(lines.length>30)return {items:[],errors:["한 번에 최대 30건까지 등록할 수 있습니다."]};
+ const items=[],errors=[],seen=new Set();
+ for(let i=0;i<lines.length;i++){
+  const match=lines[i].match(/^(\d{1,3})\s*[,|]\s*(\d{4}-\d{2}-\d{2})$/);
+  if(!match){errors.push((i+1)+"행: 형식은 34,2026-10-25 입니다.");continue}
+  const id=Number(match[1]),date=match[2],r=api.all.find(x=>x.id===id);
+  if(!r){errors.push((i+1)+"행: 식당 번호를 확인하세요.");continue}
+  if(!visitDateOnly({visited_at:date})||date>todayKST()){errors.push((i+1)+"행: 날짜가 잘못됐거나 미래 날짜입니다.");continue}
+  const key=id+":"+date;
+  if(seen.has(key)){errors.push((i+1)+"행: 같은 식당·날짜가 중복되었습니다.");continue}
+  seen.add(key);items.push({id,date,r,key});
+ }
+ return {items,errors};
+}
+function updateBulkPreview(){
+ const preview=$("#visitBulkPreview"),btn=$("#visitBulkSave");
+ if(!preview||!btn)return;
+ const {items,errors}=parseBulkLines($("#visitBulkInput").value);
+ preview.innerHTML=items.map((x)=>{
+  const existing=state.visitPairs.has(x.key);
+  return '<div class="bulk-visit-row"><span>'+api.esc(x.r.name)+'</span><span>'+api.esc(x.date)+(existing?' · 이미 등록됨':' · 새 기록')+'</span></div>';
+ }).join("")+errors.map(x=>'<div class="bulk-error">'+api.esc(x)+'</div>').join("");
+ if(!items.length&&!errors.length)preview.textContent="등록할 식당과 날짜를 입력하세요.";
+ btn.disabled=state.role!=="owner"||state.phase!=="ready"||errors.length>0||items.length===0||!items.some(x=>!state.visitPairs.has(x.key));
+ const status=$("#visitBulkStatus");
+ if(status)status.textContent=errors.length?errors.length+"건의 입력 오류를 수정하세요.":items.length+"건 확인 · 기존 기록은 건너뛰며 새 기록만 등록합니다.";
+}
+function showBulkDialog(){
+ if(state.phase!=="ready"||state.role!=="owner"){setStatus("일괄 등록은 모임 관리자(owner)만 할 수 있습니다.");return}
+ const dialog=$("#visitBulkDialog"),inp=$("#visitBulkInput");
+ if(!dialog||!inp)return;
+ if(pendingBulkText){inp.value=pendingBulkText;pendingBulkText=""}
+ updateBulkPreview();
+ if(!dialog.open)dialog.showModal();
+}
+function maybePromptVisitImport(){
+ if(importDialogAutoShown||!pendingBulkText||state.phase!=="ready"||state.role!=="owner")return;
+ importDialogAutoShown=true;
+ showBulkDialog();
+}
+$("#visitBulkOpen")?.addEventListener("click",showBulkDialog);
+$("#visitBulkClose")?.addEventListener("click",()=>$("#visitBulkDialog").close());
+$("#visitBulkInput")?.addEventListener("input",updateBulkPreview);
+$("#visitBulkForm")?.addEventListener("submit",async(e)=>{
+ e.preventDefault();
+ if(state.phase!=="ready"||state.role!=="owner"||!state.user||!state.firestore)return;
+ const {items,errors}=parseBulkLines($("#visitBulkInput").value);
+ if(errors.length||!items.length){updateBulkPreview();return}
+ const button=$("#visitBulkSave"),status=$("#visitBulkStatus");
+ button.disabled=true;
+ const {db,fn,groupId}=state.firestore;
+ let added=0,skipped=0,failed=0;
+ for(const item of items){
+  if(state.visitPairs.has(item.key)){skipped++;continue}
+  const ref=fn.doc(db,"groups",groupId,"visits","v-"+item.date.replaceAll("-","")+"-r"+item.id);
+  try{
+   // Stable document IDs + Firestore create-only rules make retries idempotent.
+   if((await fn.getDoc(ref)).exists()){skipped++;continue}
+   await fn.setDoc(ref,{
+    restaurant_id:item.id,visited_at:item.date,
+    created_by:state.user.uid,created_at:fn.serverTimestamp()
+   });
+   state.visitPairs.add(item.key);added++;
+  }catch(err){
+   failed++;
+   status.textContent=item.r.name+" ("+item.date+") 저장 실패: "+String(err?.code||err?.message||"권한 확인 필요");
+  }
+ }
+ updateBulkPreview();
+ if(!failed){
+  $("#visitBulkDialog").close();
+  setStatus("방문 기록 등록 결과: "+added+"건 저장 · "+skipped+"건 기존 기록이라 건너뜀. 모든 멤버에게 동기화됩니다.");
+ }else{
+  status.textContent=added+"건 저장 · "+skipped+"건 건너뜀 · "+failed+"건 실패. 실패 건은 재시도할 수 있습니다.";
+ }
+});
+
 async function startSharedVisits(){
  setStatus("공유 방문 DB 설정 확인 중…");
  let config;
@@ -220,7 +313,7 @@ async function startSharedVisits(){
     const epoch=++state.authEpoch;
     state.user=user||null;state.role=null;
     if(state.unsub){state.unsub();state.unsub=null}
-    state.lastVisits.clear();state.visitCount.clear();
+    state.lastVisits.clear();state.visitCount.clear();state.visitPairs.clear();
     if(!user){
       state.phase="auth";setStatus("공유 방문 이력 · Google 로그인 필요");
       syncAuthUI();refreshVisited();return;
@@ -248,10 +341,11 @@ async function startSharedVisits(){
     const visits=fn.collection(db,"groups",groupId,"visits");
     state.unsub=fn.onSnapshot(visits,snapshot=>{
       if(epoch!==state.authEpoch)return;
-      state.lastVisits.clear();state.visitCount.clear();
+      state.lastVisits.clear();state.visitCount.clear();state.visitPairs.clear();
       snapshot.forEach(doc=>{
         const row=doc.data(),date=visitDateOnly(row),id=Number(row.restaurant_id);
         if(!date||!Number.isInteger(id)||id<1||id>api.all.length)return;
+        state.visitPairs.add(id+":"+date);
         const old=state.lastVisits.get(id);
         if(!old||date>old)state.lastVisits.set(id,date);
         state.visitCount.set(id,(state.visitCount.get(id)||0)+1);
@@ -259,6 +353,7 @@ async function startSharedVisits(){
       state.phase="ready";
       setStatus("공유 방문 기록 연결됨 · "+snapshot.size+"건 · "+role+" 권한");
       syncAuthUI();refreshVisited();
+      maybePromptVisitImport();
     },err=>{
       if(epoch!==state.authEpoch)return;
       state.phase="error";
