@@ -9,7 +9,7 @@
 - [x] Google 로그인, 사용자 UID 복사, viewer/editor/owner 권한 구분
 - [x] Firestore 접근 규칙 및 Firebase CLI 설정 파일 준비
 - [ ] **Firebase 프로젝트 생성 (계정 소유자 작업)**
-- [ ] **웹 앱 등록 및 클라이언트 구성 확인 (계정 소유자 작업)**
+- [x] **웹 앱 등록 및 클라이언트 구성값 GitHub Pages 연동 완료**
 - [ ] **Google 로그인 활성화 및 Authorized domains 추가 (계정 소유자 작업)**
 - [ ] **Firestore (default) 생성 및 Security Rules 배포 (계정 소유자 작업)**
 - [ ] **최초 owner 멤버 등록 (계정 소유자 작업)**
@@ -32,6 +32,8 @@
 3. Firebase Hosting 설정은 체크하지 않습니다. 사이트는 이미 GitHub Pages로 호스팅 중입니다
 4. **앱 등록** → `firebaseConfig` 객체의 `apiKey`, `authDomain`, `projectId`, `appId`를 확인합니다.
 5. **비밀키가 아닙니다:** 웹 앱의 `firebaseConfig`는 브라우저에서 사용하는 공개 클라이언트 설정입니다. 다만 서비스 계정 JSON, private key, OAuth client secret 등은 업로드하거나 채팅에 전송하지 마세요.
+
+**상태(2026-10-30):** 사용자가 제공한 웹 앱 설정을 `shared-visits-config.json`에 반영했고 `enabled: true`로 전환했습니다. **아직 Authentication의 Google 공급자와 Firestore 규칙 설정은 콘솔 작업이 필요합니다.** 이때까지 사이트에서 로그인이나 기록이 완전히 작동하지 않는 것은 정상입니다.
 
 ## Step 3. Google 로그인
 
