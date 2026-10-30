@@ -34,8 +34,11 @@ jobs:
           assert 'data-visit-label' in html
           assert 'window.SudoFoodApi=' in html
           data=json.loads((root/'distances.json').read_text())
+          catalog=json.loads((root/'restaurants.json').read_text())
+          valid_ids={r['id'] for r in catalog['restaurants']}
+          assert all(x['id'] in valid_ids for x in data['items']), 'unrecognized restaurant id'
           n=sum(x.get('latitude') is not None and x.get('longitude') is not None for x in data['items'])
-          assert n==42,f'expected 42 pins, got {n}'
+          assert n>0,'no geocoded map pins'
           config=json.loads((root/'shared-visits-config.json').read_text())
           assert isinstance(config.get('enabled'), bool)
           if config['enabled']:
@@ -43,7 +46,7 @@ jobs:
           js=(root/'map-and-visits.js').read_text()
           assert 'localStorage.setItem' not in js and 'localStorage.getItem' not in js
           assert 'onSnapshot' in js and 'addDoc' in js and 'sudoMap' in js
-          print('LOCAL CHECK PASS: map top, 42 coordinates, shared DB optional, no browser visit storage')
+          print(f'LOCAL CHECK PASS: map top, {n} coordinates, shared DB optional, no browser visit storage')
           PY
           node --check /tmp/sudo-food-inline.js
       - name: Verify GitHub Pages actually serves the latest map release

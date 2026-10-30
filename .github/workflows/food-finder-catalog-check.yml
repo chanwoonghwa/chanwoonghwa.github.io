@@ -1,0 +1,58 @@
+name: Validate Sudo Table catalog contract
+on:
+  push:
+    paths:
+      - docs/food-finder/index.html
+      - docs/food-finder/restaurants.json
+      - docs/food-finder/map-and-visits.js
+      - docs/food-finder/distances.json
+      - docs/food-finder/visits-firestore.rules
+      - docs/food-finder/scripts/sync_catalog.py
+      - .github/workflows/food-finder-catalog-check.yml
+  pull_request:
+    paths:
+      - docs/food-finder/**
+      - .github/workflows/food-finder-catalog-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify canonical catalog, unique IDs and generated HTML data
+        run: python3 docs/food-finder/scripts/sync_catalog.py --check
+      - name: Validate JS syntax and catalog compatibility
+        run: |
+          set -euo pipefail
+          node --check docs/food-finder/map-and-visits.js
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          import re
+
+          root = Path("docs/food-finder")
+          html = (root / "index.html").read_text(encoding="utf-8")
+          matches = re.findall(r'<script>\s*"use strict";([\s\S]*?)</script>', html)
+          assert len(matches) == 1, "main application script missing or duplicated"
+          Path("/tmp/sudo-catalog-inline.js").write_text('"use strict";' + matches[0], encoding="utf-8")
+
+          catalog = json.loads((root / "restaurants.json").read_text(encoding="utf-8"))
+          ids = {row["id"] for row in catalog["restaurants"]}
+          coords = json.loads((root / "distances.json").read_text(encoding="utf-8"))["items"]
+          assert all(item["id"] in ids for item in coords), "distance records reference unknown restaurant IDs"
+          assert len({item["id"] for item in coords}) == len(coords), "duplicate distance records"
+          resolved = [r for r in coords if r.get("latitude") is not None and r.get("longitude") is not None]
+          assert resolved, "no mapped restaurants"
+          assert all(37.0 <= float(r["latitude"]) <= 38.0 and 126.0 <= float(r["longitude"]) <= 128.0 for r in resolved)
+          for marker in ('id="sudoMap"', 'id="rouletteSection"', 'id="deckSection"', 'id="cardGrid"', 'id="visitBulkOpen"'):
+              assert marker in html, f"core UI element missing: {marker}"
+          assert "validRestaurantIds.has(id)" in html, "shared links must validate IDs by catalog membership"
+          assert "api.all.some(r=>r.id===id)" in (root / "map-and-visits.js").read_text(encoding="utf-8")
+          rules = (root / "visits-firestore.rules").read_text(encoding="utf-8")
+          assert "isEditor(groupId)" in rules and "restaurant_id <= 61" not in rules
+          print(f"PASS: {len(ids)} catalog restaurants, {len(coords)} distance entries, {len(resolved)} geocoded.")
+          PY
+          node --check /tmp/sudo-catalog-inline.js

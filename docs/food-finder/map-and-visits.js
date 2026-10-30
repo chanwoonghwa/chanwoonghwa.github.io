@@ -176,7 +176,7 @@ $("#visitForm")?.addEventListener("submit",async (e)=>{
  e.preventDefault();
  if(!state.user||!state.firestore||state.phase!=="ready"||!["owner","editor"].includes(state.role))return;
  const id=Number($("#visitRestaurant").value),date=$("#visitDate").value;
- if(!Number.isInteger(id)||id<1||id>api.all.length||!visitDateOnly({visited_at:date})||date>todayKST()){
+ if(!Number.isInteger(id)||!api.all.some(r=>r.id===id)||!visitDateOnly({visited_at:date})||date>todayKST()){
   $("#visitFormStatus").textContent="식당과 방문 날짜를 확인해 주세요.";return;
  }
  const btn=$("#visitSave");btn.disabled=true;$("#visitFormStatus").textContent="공유 DB에 저장 중…";

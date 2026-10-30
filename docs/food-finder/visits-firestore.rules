@@ -22,7 +22,9 @@ service cloud.firestore {
         && request.resource.data.keys().hasAll(['restaurant_id', 'visited_at', 'created_by', 'created_at'])
         && request.resource.data.restaurant_id is int
         && request.resource.data.restaurant_id >= 1
-        && request.resource.data.restaurant_id <= 61
+        // Stable positive IDs allow future curated restaurants without changing rules.
+        // Editor authorization is enforced above; clients validate IDs against the catalog.
+        && request.resource.data.restaurant_id <= 999999
         && request.resource.data.visited_at is string
         && request.resource.data.visited_at.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
         && request.resource.data.created_by == request.auth.uid

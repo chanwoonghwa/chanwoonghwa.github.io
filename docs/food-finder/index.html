@@ -377,7 +377,7 @@ header .subtitle{font-size:13px}
   <div class="hero-main"><div class="hero-tag">✦ 모임 장소 찾기, 더 간편하게</div>
   <h1>일요일 저녁,<br><em>어디서 먹지?</em></h1>
   <p class="subtitle">수도공고에서 출발하는 10명 이상 모임의 식당 탐색 가이드.<br>직선거리·주차·단체석을 한눈에 살펴보고 후보를 공유하세요.</p>
-  <div class="hero-chips"><span>◷ 일요일 20–22시</span><span>♧ 식사 후보 71곳 · 신규 10곳</span><span>♧ 네이버지도 연결</span></div></div>
+  <div class="hero-chips"><span>◷ 일요일 20–22시</span><span id="heroCatalogCount">♧ 식당 정보 불러오는 중</span><span>♧ 네이버지도 연결</span></div></div>
 </header>
 <main class="container">
   <section class="sudo-map-section" id="mapSection" aria-label="수도공고 주변 식당 위치 지도">
@@ -430,7 +430,7 @@ header .subtitle{font-size:13px}
   <section class="top-deck" id="deckSection" aria-label="식당 카드 스와이프 탐색">
     <div class="deck-heading">
       <div><span class="deck-kicker">EXPLORE RESTAURANTS</span><h2>한 장씩, 스와이프로 찾기 <span class="deck-swipe">↔</span></h2><p>가까운 식당부터 살펴보고 마음에 드는 곳은 후보에 담아보세요.</p></div>
-      <div class="deck-controls"><span id="deckPosition" class="deck-position" aria-live="polite">1 / 71</span><button type="button" id="deckPrev" class="deck-arrow" aria-label="이전 식당" disabled>←</button><button type="button" id="deckNext" class="deck-arrow" aria-label="다음 식당">→</button></div>
+      <div class="deck-controls"><span id="deckPosition" class="deck-position" aria-live="polite">0 / 0</span><button type="button" id="deckPrev" class="deck-arrow" aria-label="이전 식당" disabled>←</button><button type="button" id="deckNext" class="deck-arrow" aria-label="다음 식당">→</button></div>
     </div>
     <div class="quick-filters" aria-label="빠른 조건 필터">
       <span class="quick-caption">QUICK FILTER</span>
@@ -490,7 +490,10 @@ const seed = JSON.parse(document.querySelector("#restaurant-data").textContent);
 const all = seed.restaurants;
 const overridesKey = "sudo_food_routes_v2";
 const starsKey = "sudo_food_favorites_v1";
-const chosen=new Set((new URLSearchParams(location.search).get("compare")||"").split(",").map(Number).filter(x=>Number.isInteger(x)&&x>0&&x<=all.length).slice(0,5));
+const validRestaurantIds=new Set(all.map(r=>r.id));
+const recentAddition=seed.meta?.added_20261030;
+const recentAddedIds=new Set(all.filter(r=>recentAddition&&r.id>recentAddition.original_count&&r.id<=recentAddition.original_count+recentAddition.count).map(r=>r.id));
+const chosen=new Set((new URLSearchParams(location.search).get("compare")||"").split(",").map(Number).filter(id=>validRestaurantIds.has(id)).slice(0,5));
 const coordinates={
   1:{straight_distance_km:0.56,method:"verified_building"},
   2:{straight_distance_km:1.75,method:"verified_building"},
@@ -552,6 +555,7 @@ function render(){
  const rr=filteredRows();
  renderCards(rr);syncQuick();
  $("#metricTotal").textContent=all.length;
+ $("#heroCatalogCount").textContent="♧ 식사 후보 "+all.length+"곳"+(recentAddedIds.size?" · 최근 추가 "+recentAddedIds.size+"곳":"");
  $("#metricShown").textContent=rr.length;
  $("#metricParked").textContent=all.filter(r=>r.parking_status.startsWith("가능")).length;
  $("#metricRoute").textContent=all.filter(r=>straightOf(r)!=null).length;
@@ -563,7 +567,7 @@ function render(){
   const dist=straightOf(r);
   const status=r.sunday_20_22_status.startsWith("시간상")?"yes":"maybe";
   return `<tr>
-  <td><div class="name"><button class="star ${favorites.has(r.id)?"selected":""}" data-star="${r.id}" aria-label="즐겨찾기" title="즐겨찾기">${favorites.has(r.id)?"★":"☆"}</button>${esc(r.name)}${r.id>61?' <span class="new-restaurant-badge">NEW</span>':""}</div><span class="mini">${esc(r.address)}</span><button class="pickbtn ${chosen.has(r.id)?"picked":""}" data-select="${r.id}" type="button">${chosen.has(r.id)?"✓ 후보에 담음":"＋ 후보 담기"}</button></td>
+  <td><div class="name"><button class="star ${favorites.has(r.id)?"selected":""}" data-star="${r.id}" aria-label="즐겨찾기" title="즐겨찾기">${favorites.has(r.id)?"★":"☆"}</button>${esc(r.name)}${recentAddedIds.has(r.id)?' <span class="new-restaurant-badge">NEW</span>':""}</div><span class="mini">${esc(r.address)}</span><button class="pickbtn ${chosen.has(r.id)?"picked":""}" data-select="${r.id}" type="button">${chosen.has(r.id)?"✓ 후보에 담음":"＋ 후보 담기"}</button></td>
   <td><strong>${esc(r.cuisine_group)}</strong><span class="mini">${esc(r.cuisine_detail)}</span><span class="mini">${esc(r.area)}</span></td>
   <td>${esc(r.sunday_hours)}<span class="mini">라스트오더: ${esc(r.last_order||"미확인")}</span><span class="chip ${status}">${status==="yes"?"시간상 충족":"조건 확인"}</span></td>
   <td><span class="chip ${r.capacity_status==="10명 근거 있음"?"yes":"maybe"}">${esc(r.capacity_status)}</span><span class="mini">${esc(r.capacity_evidence)}</span><div style="margin-top:7px"><span class="chip ${classForParking(r.parking_status)}">${esc(r.parking_status)}</span></div><span class="mini">${esc(r.parking_raw)}</span><button class="pickbtn" type="button" data-brief="${r.id}">예약 확인 메모</button></td>
@@ -686,7 +690,7 @@ function renderCards(rr){
  return '<article class="food-card" data-food-id="'+r.id+'">'+
  '<div class="food-visual '+color+'"><span class="food-type">'+esc(r.cuisine_group)+'</span><span class="food-emoji" aria-hidden="true">'+emoji+'</span>'+ 
  '<button type="button" class="card-heart '+(favorites.has(r.id)?"is-on":"")+'" data-card-star="'+r.id+'" aria-label="'+esc(r.name)+' 즐겨찾기">'+(favorites.has(r.id)?"★":"☆")+'</button></div>'+
- '<div class="food-body"><div class="food-titleline"><h3 class="food-name">'+esc(r.name)+(r.id>61?' <span class="new-restaurant-badge">NEW</span>':"")+'</h3>'+
+ '<div class="food-body"><div class="food-titleline"><h3 class="food-name">'+esc(r.name)+(recentAddedIds.has(r.id)?' <span class="new-restaurant-badge">NEW</span>':"")+'</h3>'+
  '<span class="distance-pill '+(dist==null?"unknown":"")+'">'+(dist==null?"거리 미측정":fmt(dist)+" km")+'</span></div>'+
  '<div class="food-sub">'+esc(r.cuisine_detail)+' · '+esc(r.area)+'</div>'+ 
  '<span class="food-visit-label" data-visit-label="'+r.id+'">◷ 공유 방문 DB 미연결</span>'+
