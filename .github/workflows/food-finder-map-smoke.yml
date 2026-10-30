@@ -1,0 +1,66 @@
+name: Verify live Sudo Table map and visit DB contract
+on:
+  push:
+    paths:
+      - .github/workflows/food-finder-map-smoke.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate static app and team visit contract
+        run: |
+          set -euo pipefail
+          node --check docs/food-finder/map-and-visits.js
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,re
+          root=Path('docs/food-finder')
+          html=(root/'index.html').read_text()
+          m=re.findall(r'<script>\s*"use strict";([\s\S]+?)</script>',html)
+          assert m,'main inline script not found'
+          Path('/tmp/sudo-food-inline.js').write_text('"use strict";'+m[-1])
+          assert html.count('id="sudoMap"')==1
+          assert 'map-and-visits.js?v=20261030-map1' in html
+          assert html.index('id="mapSection"') < html.index('id="deckSection"')
+          assert 'data-visit-label' in html
+          assert 'window.SudoFoodApi=' in html
+          data=json.loads((root/'distances.json').read_text())
+          n=sum(x.get('latitude') is not None and x.get('longitude') is not None for x in data['items'])
+          assert n==42,f'expected 42 pins, got {n}'
+          config=json.loads((root/'shared-visits-config.json').read_text())
+          assert config['enabled'] is False and config['firebaseConfig'] is None
+          js=(root/'map-and-visits.js').read_text()
+          assert 'localStorage' not in js
+          assert 'onSnapshot' in js and 'addDoc' in js and 'sudoMap' in js
+          print('LOCAL CHECK PASS: map top, 42 coordinates, shared DB optional, no browser visit storage')
+          PY
+          node --check /tmp/sudo-food-inline.js
+      - name: Verify GitHub Pages actually serves the latest map release
+        run: |
+          set -euo pipefail
+          BASE='https://chanwoonghwa.github.io/food-finder/'
+          for i in $(seq 1 25); do
+            if curl --fail --silent --show-error --location --max-time 10 "${BASE}?v=map-20261030-$(date +%s)" -o /tmp/sudo-live.html; then
+              if grep -Fq 'id="sudoMap"' /tmp/sudo-live.html && grep -Fq 'map-and-visits.js?v=20261030-map1' /tmp/sudo-live.html; then
+                echo "LIVE MAP HTML PASS"; break
+              fi
+            fi
+            sleep 5
+          done
+          grep -Fq 'id="sudoMap"' /tmp/sudo-live.html
+          curl --fail --silent --show-error --location --max-time 12 "${BASE}map-and-visits.js?v=map-20261030" -o /tmp/sudo-map.js
+          grep -Fq 'shared-visits-config.json' /tmp/sudo-map.js
+          grep -Fq 'const map=L.map' /tmp/sudo-map.js
+          curl --fail --silent --show-error --location --max-time 12 "${BASE}shared-visits-config.json?v=map-20261030" -o /tmp/sudo-visit.json
+          python3 - <<'PY'
+          import json
+          cfg=json.load(open('/tmp/sudo-visit.json'))
+          assert cfg['enabled'] is False
+          assert cfg['firebaseConfig'] is None
+          print('LIVE MAP+DB-CONTRACT PASS: public HTML, map code and disabled-by-default shared DB config all reachable')
+          PY
