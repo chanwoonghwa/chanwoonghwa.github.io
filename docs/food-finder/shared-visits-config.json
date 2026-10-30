@@ -2,6 +2,8 @@
   "enabled": false,
   "provider": "firebase-firestore",
   "groupId": "sudo-table",
-  "firebaseConfig": null,
-  "notice": "No visits are persisted in the browser. Enable and configure a real Firebase project to share visit dates."
+  "firebaseConfig": {
+    "projectId": "sudo-table"
+  },
+  "notice": "Firebase project ID recorded; web app apiKey/authDomain/appId not yet supplied. Shared visits remain disabled."
 }
