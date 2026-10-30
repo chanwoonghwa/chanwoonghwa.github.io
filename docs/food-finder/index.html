@@ -247,7 +247,6 @@ body[data-view=table] #cardGrid{display:grid!important}
 
 
 .new-restaurant-badge{display:inline-flex;vertical-align:middle;padding:3px 6px;border-radius:5px;background:#cdeec8;color:#2b633f;font-size:9px;font-weight:900;line-height:1.2;letter-spacing:.06em;white-space:nowrap}
-.quick-chip[data-quick="nonbbq"][aria-pressed="true"],.quick-chip[data-quick="new"][aria-pressed="true"]{background:#2d6848;color:#fff;border-color:#2d6848}
 /* Map-first exploration, backed by coordinate-verified venues only */
 header{padding-bottom:66px}
 .masthead{margin-bottom:25px}
@@ -381,7 +380,7 @@ header .subtitle{font-size:13px}
   </section>
   <section class="top-deck" id="deckSection" aria-label="식당 카드 스와이프 탐색">
     <div class="deck-heading">
-      <div><span class="deck-kicker">EXPLORE RESTAURANTS</span><h2>한 장씩, 스와이프로 찾기 <span class="deck-swipe">↔</span></h2><p>고깃집이 너무 많다면 🍜 구이 제외로 골라보세요. 10곳의 새 메뉴도 추가했어.</p></div>
+      <div><span class="deck-kicker">EXPLORE RESTAURANTS</span><h2>한 장씩, 스와이프로 찾기 <span class="deck-swipe">↔</span></h2><p>가까운 식당부터 살펴보고 마음에 드는 곳은 후보에 담아보세요.</p></div>
       <div class="deck-controls"><span id="deckPosition" class="deck-position" aria-live="polite">1 / 71</span><button type="button" id="deckPrev" class="deck-arrow" aria-label="이전 식당" disabled>←</button><button type="button" id="deckNext" class="deck-arrow" aria-label="다음 식당">→</button></div>
     </div>
     <div class="quick-filters" aria-label="빠른 조건 필터">
@@ -390,8 +389,6 @@ header .subtitle{font-size:13px}
       <button type="button" class="quick-chip" data-quick="ten" aria-pressed="false">👥 10명 근거 있음</button>
       <button type="button" class="quick-chip" data-quick="open" aria-pressed="false">🌙 20–22시 시간상 충족</button>
       <button type="button" class="quick-chip" data-quick="near" aria-pressed="false">📍 3km 이내</button>
-      <button type="button" class="quick-chip" data-quick="nonbbq" aria-pressed="false">🍜 고깃집·구이 제외</button>
-      <button type="button" class="quick-chip" data-quick="new" aria-pressed="false">✨ 신규 10곳만</button>
     </div>
 
     <div class="carousel-viewport" id="deckViewport" tabindex="0" role="region" aria-label="식당 좌우 스와이프 카드">
@@ -460,9 +457,6 @@ function storageRead(key,fallback){try{return JSON.parse(localStorage.getItem(ke
 let overrides = storageRead(overridesKey,{});
 let favorites = new Set(storageRead(starsKey,[]));
 let favOnly=false;
-let nonBBQOnly=false;
-let newOnly=false;
-const DIRECT_GRILL_TYPES=new Set(["고기·구이","양고기","곱창·대창","족발·보쌈"]);
 const $=s=>document.querySelector(s);
 const els={search:$("#search"),cuisine:$("#cuisine"),parking:$("#parking"),area:$("#area"),capacity:$("#capacity"),sunday:$("#sunday"),sort:$("#sort"),route:$("#routeFilter")};
 function esc(x){return String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
@@ -484,8 +478,6 @@ function filteredRows(){
    if(els.capacity.value && els.capacity.value!==r.capacity_status)return false;
    if(els.sunday.value && !r.sunday_20_22_status.startsWith(els.sunday.value))return false;
    if(favOnly && !favorites.has(r.id))return false;
-   if(nonBBQOnly && DIRECT_GRILL_TYPES.has(r.cuisine_group))return false;
-   if(newOnly && r.id<=61)return false;
    const valid=straightOf(r)!=null;
    if(els.route.value==="measured" && !valid)return false;
    if(els.route.value==="unmeasured" && valid)return false;
@@ -536,7 +528,7 @@ function render(){
 Object.values(els).forEach(el=>el.addEventListener(el===els.search?"input":"change",render));
 $("#resetFilters").addEventListener("click",()=>{
  for (const el of Object.values(els)) el.value="";
- els.sort.value="distance";favOnly=false;nonBBQOnly=false;newOnly=false;render();
+ els.sort.value="distance";favOnly=false;render();
 });
 $("#favoritesOnly").addEventListener("click",()=>{favOnly=!favOnly;render()});
 $("#tbody").addEventListener("click",event=>{
@@ -684,13 +676,11 @@ cardGrid.addEventListener("click",e=>{
 
 function syncQuick(){
  const s={park:els.parking.value==="가능(안내·후기)",ten:els.capacity.value==="10명 근거 있음",
- open:els.sunday.value==="시간상 충족",near:els.route.value==="within3",nonbbq:nonBBQOnly,new:newOnly};
+ open:els.sunday.value==="시간상 충족",near:els.route.value==="within3"};
  document.querySelectorAll("[data-quick]").forEach(b=>b.setAttribute("aria-pressed",String(Boolean(s[b.dataset.quick]))));
 }
 document.querySelectorAll("[data-quick]").forEach(b=>b.addEventListener("click",()=>{
  const type=b.dataset.quick;
- if(type==="nonbbq"){nonBBQOnly=!nonBBQOnly;render();return}
- if(type==="new"){newOnly=!newOnly;render();return}
  const pairs={park:[els.parking,"가능(안내·후기)"],ten:[els.capacity,"10명 근거 있음"],
  open:[els.sunday,"시간상 충족"],near:[els.route,"within3"]};
  const pair=pairs[type];pair[0].value=pair[0].value===pair[1]?"":pair[1];render();
