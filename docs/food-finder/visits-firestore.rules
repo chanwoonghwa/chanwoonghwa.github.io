@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function memberPath(groupId) {
+      return /databases/$(database)/documents/groups/$(groupId)/members/$(request.auth.uid);
+    }
+    function isMember(groupId) {
+      return request.auth != null && exists(memberPath(groupId));
+    }
+    function isEditor(groupId) {
+      return isMember(groupId) && get(memberPath(groupId)).data.role in ['owner', 'editor'];
+    }
+    match /groups/{groupId}/members/{uid} {
+      // Members can see only their own role, managed by the project admin in the Firebase console.
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+    match /groups/{groupId}/visits/{visitId} {
+      allow read: if isMember(groupId);
+      allow create: if isEditor(groupId)
+        && request.resource.data.keys().hasOnly(['restaurant_id', 'visited_at', 'created_by', 'created_at'])
+        && request.resource.data.keys().hasAll(['restaurant_id', 'visited_at', 'created_by', 'created_at'])
+        && request.resource.data.restaurant_id is int
+        && request.resource.data.restaurant_id >= 1
+        && request.resource.data.restaurant_id <= 61
+        && request.resource.data.visited_at is string
+        && request.resource.data.visited_at.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && request.resource.data.created_by == request.auth.uid
+        && request.resource.data.created_at == request.time;
+      allow update, delete: if false;
+    }
+  }
+}
