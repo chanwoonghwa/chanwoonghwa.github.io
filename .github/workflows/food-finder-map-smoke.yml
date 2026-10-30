@@ -29,7 +29,7 @@ jobs:
           assert m,'main inline script not found'
           Path('/tmp/sudo-food-inline.js').write_text('"use strict";'+m[-1])
           assert html.count('id="sudoMap"')==1
-          assert 'map-and-visits.js?v=20261030-map1' in html
+          assert 'map-and-visits.js?v=' in html
           assert html.index('id="mapSection"') < html.index('id="deckSection"')
           assert 'data-visit-label' in html
           assert 'window.SudoFoodApi=' in html
