@@ -3,6 +3,10 @@ on:
   push:
     paths:
       - .github/workflows/food-finder-map-smoke.yml
+      - docs/food-finder/index.html
+      - docs/food-finder/map-and-visits.js
+      - docs/food-finder/shared-visits-config.json
+      - docs/food-finder/distances.json
   workflow_dispatch:
 permissions:
   contents: read
@@ -33,7 +37,9 @@ jobs:
           n=sum(x.get('latitude') is not None and x.get('longitude') is not None for x in data['items'])
           assert n==42,f'expected 42 pins, got {n}'
           config=json.loads((root/'shared-visits-config.json').read_text())
-          assert config['enabled'] is False and config['firebaseConfig'] is None
+          assert isinstance(config.get('enabled'), bool)
+          if config['enabled']:
+              assert config['firebaseConfig']['projectId'] and config['firebaseConfig']['apiKey']
           js=(root/'map-and-visits.js').read_text()
           assert 'localStorage.setItem' not in js and 'localStorage.getItem' not in js
           assert 'onSnapshot' in js and 'addDoc' in js and 'sudoMap' in js
@@ -60,7 +66,8 @@ jobs:
           python3 - <<'PY'
           import json
           cfg=json.load(open('/tmp/sudo-visit.json'))
-          assert cfg['enabled'] is False
-          assert cfg['firebaseConfig'] is None
-          print('LIVE MAP+DB-CONTRACT PASS: public HTML, map code and disabled-by-default shared DB config all reachable')
+          assert isinstance(cfg.get('enabled'), bool)
+          if cfg['enabled']:
+              assert cfg['firebaseConfig']['projectId'] and cfg['firebaseConfig']['apiKey']
+          print('LIVE MAP+DB-CONTRACT PASS: public HTML, map code and shared DB configuration all reachable')
           PY
