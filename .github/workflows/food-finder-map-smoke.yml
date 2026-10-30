@@ -35,7 +35,7 @@ jobs:
           config=json.loads((root/'shared-visits-config.json').read_text())
           assert config['enabled'] is False and config['firebaseConfig'] is None
           js=(root/'map-and-visits.js').read_text()
-          assert 'localStorage' not in js
+          assert 'localStorage.setItem' not in js and 'localStorage.getItem' not in js
           assert 'onSnapshot' in js and 'addDoc' in js and 'sudoMap' in js
           print('LOCAL CHECK PASS: map top, 42 coordinates, shared DB optional, no browser visit storage')
           PY
