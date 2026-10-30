@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#173e30">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <title>수도 테이블 | 일요일 단체 식사 탐색</title>
 <style>
   :root {color-scheme:light;--ink:#162d36;--muted:#65757d;--teal:#176a70;--teal2:#0f5358;--wash:#f6f8f7;--line:#dce5e6;--accent:#eaf6f3;--warn:#8a5b07}
@@ -274,6 +275,82 @@ body[data-view=table] #cardGrid{display:grid!important}
 .hero-photo-action{display:inline-flex;align-items:center;gap:12px;justify-content:space-between;margin-top:23px;border:1px solid #b8d29f;border-radius:13px;background:#dbf0b5;color:#214b30;padding:13px 16px;font-weight:850;cursor:pointer;font-size:14px;box-shadow:0 6px 19px #0a301a18}
 .hero-photo-action:hover{background:#eff9d9;transform:translateY(-1px)}
 .hero-photo-action span{font-size:21px;line-height:1}
+
+/* Map-first exploration, backed by coordinate-verified venues only */
+header{padding-bottom:66px}
+.masthead{margin-bottom:25px}
+header h1{font-size:clamp(32px,4vw,49px);margin:12px 0 10px}
+header .subtitle{font-size:13px}
+.hero-chips{margin-top:12px}
+.hero-photo-action{margin-top:12px}
+.container{margin-top:-35px}
+.sudo-map-section{background:#fff;border:1px solid #e1e9df;border-radius:23px;overflow:hidden;box-shadow:0 16px 45px #122e1b18;position:relative;z-index:3}
+.sudo-map-head{padding:21px 24px 14px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.sudo-map-head h2{font-size:clamp(21px,2.5vw,28px);line-height:1.25;letter-spacing:-.045em;margin:0}
+.sudo-map-head h2 span{color:#76a17e}
+.sudo-map-head p{font-size:12px;color:#748276;margin:7px 0 0;line-height:1.55}
+.map-head-meta{text-align:right;flex-shrink:0}
+.map-head-meta strong{display:block;font-size:14px;color:#29583e}
+.map-head-meta small{display:block;font-size:11px;color:#87968b;margin-top:5px}
+.sudo-map-tools{padding:0 24px 13px;display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.map-legend{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#62796a;font-weight:700}
+.legend-pin{display:inline-block;width:10px;height:10px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #b8c7b8}
+.legend-pin.green{background:#26845c}.legend-pin.yellow{background:#e2a150}.legend-pin.orange{background:#ba6550}
+.legend-school{color:#193e2d;font-weight:950}
+.sudo-map-tools button{background:#f3f6f0;color:#365b44;border:1px solid #e0e9dd;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:750;cursor:pointer}
+#sudoMap{height:410px;width:100%;background:#e6ece3;color:#516c56;display:grid;place-content:center;font-size:12px}
+#sudoMap.leaflet-container{display:block}
+.sudo-school-marker{border-radius:50%;border:3px solid #fff;background:#234e36;box-shadow:0 2px 10px #1b342778;display:grid;place-content:center;font-size:20px;color:#e5f3b5;font-weight:900}
+.sudo-map-popup{font-family:inherit;min-width:175px;line-height:1.45}
+.sudo-map-popup b{display:block;font-size:15px;color:#193f2a;margin-bottom:5px}
+.sudo-map-popup span{display:block;font-size:12px;color:#6c7d70;margin-top:5px}
+.sudo-map-popup .visit-stamp{color:#21714c;font-weight:750;border-radius:7px;background:#eef7e9;padding:7px 9px;margin:9px 0}
+.sudo-map-actions{display:flex;align-items:center;gap:10px;margin-top:11px}
+.sudo-map-actions a,.sudo-map-actions button{font-size:11px;font-weight:800;color:#236c48;text-decoration:none;border:1px solid #d9e7d8;border-radius:7px;padding:6px 8px;background:#f8fbf6;cursor:pointer}
+.sudo-map-footer{padding:11px 24px;display:flex;align-items:center;justify-content:space-between;gap:15px;color:#829285;font-size:10px}
+.map-quick-names{display:flex;flex-wrap:wrap;gap:6px}
+.map-quick-names button{border:1px solid #dfe9da;border-radius:100px;background:#f8fbf5;color:#3b6a4c;font-size:11px;padding:6px 10px;font-weight:780;cursor:pointer}
+.map-quick-names button:hover{background:#dcebdc}
+.shared-visit-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;background:#f1f7ef;border-top:1px solid #e5ece1}
+.shared-visit-info{display:flex;gap:10px;align-items:center}
+.shared-visit-info .shared-icon{width:35px;height:35px;background:#e1edde;border-radius:11px;display:grid;place-items:center;font-size:22px;color:#235f44}
+.shared-visit-info b{display:block;font-size:12px;color:#2b553a}
+.shared-visit-info span:last-child{display:block;font-size:11px;color:#69816c;margin-top:4px}
+.shared-visit-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.shared-visit-actions button,.shared-visit-actions a{font:inherit;font-size:11px;font-weight:790;text-decoration:none;border:1px solid #d5e4d3;border-radius:9px;padding:9px 11px;background:#fff;color:#285b3c;cursor:pointer}
+.shared-visit-actions button[hidden]{display:none}
+.shared-visit-actions #visitManage{background:#245e44;border-color:#245e44;color:white}
+.visit-dialog{border:0;border-radius:17px;box-shadow:0 26px 75px #132f2550;width:min(420px,calc(100vw - 30px));padding:25px}
+.visit-dialog::backdrop{background:#142b2399}
+.visit-dialog h2{margin:0 0 10px;font-size:20px}
+.visit-dialog p{font-size:12px;line-height:1.6;color:#6d7b71;margin-bottom:18px}
+.visit-dialog label{display:block;font-size:12px;color:#50685a;font-weight:800;margin:12px 0 5px}
+.visit-dialog input,.visit-dialog select{padding:12px;border-radius:9px;border:1px solid #d7e5d5;width:100%;font:inherit}
+.visit-dialog small{display:block;font-size:12px;color:#587b5e;margin-top:12px}
+.visit-dialog-actions{display:flex;justify-content:end;gap:8px;margin-top:20px}
+.visit-dialog-actions button{border:1px solid #d2e0ce;border-radius:10px;padding:10px 14px;background:#f4f8f1;font:inherit;font-size:12px;font-weight:800}
+.visit-dialog-actions button[type=submit]{background:#245e44;color:white}
+.visit-dialog-actions button:disabled{opacity:.55}
+.food-visit-label{display:block;margin:11px 0 0;padding:9px 11px;border-radius:9px;background:#f2f7ee;color:#477654;font-size:11px;font-weight:780}
+.table-visit-label{font-size:11px;font-weight:780;color:#3d784f}
+.sudo-map-section+.metrics{margin-top:16px}
+@media(max-width:690px){
+ header{padding-bottom:67px}
+ .masthead{margin-bottom:21px}
+ header h1{font-size:33px}
+ .sudo-map-head{padding:18px 15px 10px;align-items:start}
+ .sudo-map-head h2{font-size:21px}.sudo-map-head p{font-size:11px}
+ .map-head-meta strong{font-size:11px}.map-head-meta small{font-size:10px}
+ .sudo-map-tools{padding:0 15px 11px;gap:9px}
+ #sudoMap{height:345px}
+ .sudo-map-footer{padding:10px 15px;flex-direction:column;align-items:flex-start;gap:7px}
+ .map-quick-names{flex-wrap:nowrap;max-width:100%;overflow-x:auto}
+ .map-quick-names button{white-space:nowrap}
+ .shared-visit-bar{padding:14px 15px;flex-direction:column;align-items:stretch}
+ .shared-visit-actions{justify-content:flex-start}
+ .sudo-map-section{border-radius:18px}
+}
+
 </style>
 </head>
 <body>
@@ -285,6 +362,27 @@ body[data-view=table] #cardGrid{display:grid!important}
   <div class="hero-chips"><span>◷ 일요일 20–22시</span><span>♧ 식사 중심 61곳</span><span>📷 실제 매장 사진 링크 5곳</span></div><button class="hero-photo-action" id="viewPhotoSources" type="button">📷 실제 매장 사진 링크 5곳만 보기 <span>↗</span></button></div>
 </header>
 <main class="container">
+  <section class="sudo-map-section" id="mapSection" aria-label="수도공고 주변 식당 위치 지도">
+    <div class="sudo-map-head">
+      <div><span class="deck-kicker">MAP FIRST · SUDO TABLE</span><h2>우리 모임, 어디서 먹을까? <span>⌖</span></h2><p>수도공고를 중심으로 좌표가 확인된 식당을 지도에 표시했어. 점을 누르면 가게 이름·거리·공유 방문 기록을 볼 수 있어.</p></div>
+      <div class="map-head-meta"><strong id="mapPinCount">위치 데이터 준비 중</strong><small id="mapMissingCount">주소 좌표 검증 중</small></div>
+    </div>
+    <div class="sudo-map-tools"><span class="map-legend"><i class="legend-pin green"></i> 주차 가능 안내</span><span class="map-legend"><i class="legend-pin yellow"></i> 주차 확인 필요</span><span class="map-legend"><i class="legend-pin orange"></i> 주차 불가 안내</span><span class="map-legend"><i class="legend-school">★</i> 수도공고</span><button id="mapReset" type="button">⌖ 출발지로</button><button id="mapLocateList" type="button">전체 목록 ↓</button></div>
+    <div id="sudoMap" role="application" aria-label="식당 핀이 있는 지도">지도를 불러오는 중…</div>
+    <div class="sudo-map-footer"><div id="mapQuickNames" class="map-quick-names" aria-label="가까운 식당 위치 바로가기"></div><span>OpenStreetMap 지도 · 실제 차량거리 아닌 직선거리</span></div>
+    <div class="shared-visit-bar">
+      <div class="shared-visit-info"><span class="shared-icon">◷</span><div><b>마지막 방문일 · 모임 공유 기록</b><span id="visitDbStatus" aria-live="polite">공유 DB 연결 확인 중…</span></div></div>
+      <div class="shared-visit-actions"><button id="visitLogin" type="button" hidden>Google 로그인</button><button id="visitManage" type="button" hidden>＋ 방문 기록 추가</button><button id="visitLogout" type="button" hidden>로그아웃</button><a href="https://github.com/chanwoonghwa/chanwoonghwa.github.io/blob/main/docs/food-finder/FIREBASE_VISITS_SETUP.md" target="_blank" rel="noopener noreferrer">DB 연결 안내 ↗</a></div>
+    </div>
+  </section>
+  <dialog id="visitDialog" class="visit-dialog" aria-label="모임 방문 기록 등록">
+    <form id="visitForm"><h2>모임 방문 기록 추가</h2><p>모임 전체가 공유하는 Firestore에 저장돼. 개인 브라우저에는 방문 날짜를 남기지 않아.</p>
+      <label for="visitRestaurant">방문 식당</label><select id="visitRestaurant" required></select>
+      <label for="visitDate">방문 날짜</label><input type="date" id="visitDate" required>
+      <small id="visitFormStatus" aria-live="polite"></small>
+      <div class="visit-dialog-actions"><button type="button" id="visitDialogClose">취소</button><button type="submit" id="visitSave">공유 DB에 기록</button></div>
+    </form>
+  </dialog>
   <section class="metrics">
     <div class="metric"><span>등록 식당</span><strong id="metricTotal">61</strong></div>
     <div class="metric"><span>현재 검색 결과</span><strong id="metricShown">61</strong></div>
@@ -340,7 +438,7 @@ body[data-view=table] #cardGrid{display:grid!important}
     <div class="result-tools"><span class="hint">필터·거리 정렬이 적용된 상세 비교표</span><button type="button" class="action" id="backToDeck">↑ 카드로 돌아가기</button></div>
   </div>
   <section class="tablewrap" aria-label="필터링된 식당 목록">
-    <table><thead><tr><th>식당</th><th>음식 · 권역</th><th>일요일 영업</th><th>10인 · 주차</th><th>대체 주차장</th><th>직선거리</th><th>지도/연락</th></tr></thead>
+    <table><thead><tr><th>식당</th><th>음식 · 권역</th><th>일요일 영업</th><th>10인 · 주차</th><th>대체 주차장</th><th>직선거리</th><th>최근 방문</th><th>지도/연락</th></tr></thead>
     <tbody id="tbody"></tbody></table>
   </section>
   <div id="floatBoard" class="floating-board" hidden><div><b id="floatCount">후보 0곳</b><small>고른 식당끼리 비교하고 링크 공유</small></div><button id="floatOpen" type="button">후보 비교하기 ↑</button></div>
@@ -422,8 +520,9 @@ function render(){
  $("#metricParked").textContent=all.filter(r=>r.parking_status.startsWith("가능")).length;
  $("#metricRoute").textContent=all.filter(r=>straightOf(r)!=null).length;
  $("#countLabel").textContent=rr.length+"곳";renderChosen();
+ document.dispatchEvent(new Event("sudo:render"));
  $("#favoritesOnly").textContent=favOnly?"★ 즐겨찾기만 보기 중":"☆ 즐겨찾기만";
- if(rr.length===0){$("#tbody").innerHTML='<tr><td colspan="7" class="empty">해당 조건의 식당이 없습니다. 필터를 바꿔보세요.</td></tr>';return;}
+ if(rr.length===0){$("#tbody").innerHTML='<tr><td colspan="8" class="empty">해당 조건의 식당이 없습니다. 필터를 바꿔보세요.</td></tr>';return;}
  $("#tbody").innerHTML=rr.map(r=>{
   const dist=straightOf(r);
   const status=r.sunday_20_22_status.startsWith("시간상")?"yes":"maybe";
@@ -434,6 +533,7 @@ function render(){
   <td><span class="chip ${r.capacity_status==="10명 근거 있음"?"yes":"maybe"}">${esc(r.capacity_status)}</span><span class="mini">${esc(r.capacity_evidence)}</span><div style="margin-top:7px"><span class="chip ${classForParking(r.parking_status)}">${esc(r.parking_status)}</span></div><span class="mini">${esc(r.parking_raw)}</span><button class="pickbtn" type="button" data-brief="${r.id}">예약 확인 메모</button></td>
   <td>${esc(r.parking_lot_name||"미지정")}<span class="mini">${esc(r.parking_lot_price||"")}</span>${r.parking_naver_url?`<span class="mini"><a href="${safeURL(r.parking_naver_url)}" target="_blank" rel="noopener noreferrer">주차장 네이버지도</a></span>`:""}</td>
   <td><span class="dist">${dist==null?"미측정":fmt(dist)+" km"}</span><span class="mini">${dist==null?"좌표 미확인":"건물 기준 직선거리"}</span></td>
+  <td class="table-visit-label"><span data-visit-label="${r.id}">공유 방문 DB 미연결</span></td>
   <td><a href="${safeURL(r.naver_url)}" target="_blank" rel="noopener noreferrer">네이버지도 ↗</a><span class="mini">${esc(r.phone||"번호 미확인")}</span><span class="mini">${esc(r.verification_status)}</span></td>
   </tr>`;
  }).join("");
@@ -603,7 +703,8 @@ function renderCards(rr){
  (sourceLink?'<div class="photo-source-banner"><a href="'+esc(sourceLink.url)+'" target="_blank" rel="noopener noreferrer">📷 이 식당 실제 메뉴 사진 보기 <span>↗</span></a><small>외부 업체·후기 페이지에서 확인 · 사이트에는 참고 사진 표시 중</small></div>':"")+
  '<div class="food-body"><div class="food-titleline"><h3 class="food-name">'+esc(r.name)+'</h3>'+
  '<span class="distance-pill '+(dist==null?"unknown":"")+'">'+(dist==null?"거리 미측정":fmt(dist)+" km")+'</span></div>'+
- '<div class="food-sub">'+esc(r.cuisine_detail)+' · '+esc(r.area)+'</div>'+
+ '<div class="food-sub">'+esc(r.cuisine_detail)+' · '+esc(r.area)+'</div>'+ 
+ '<span class="food-visit-label" data-visit-label="'+r.id+'">◷ 공유 방문 DB 미연결</span>'+
  '<div class="food-labels"><span class="status-chip '+status[1]+'">🚗 '+esc(status[0])+'</span>'+
  '<span class="status-chip '+status[3]+'">👥 '+esc(status[2])+'</span>'+
  '<span class="status-chip '+status[5]+'">◷ '+esc(status[4])+'</span></div>'+
@@ -712,6 +813,9 @@ deckViewport.addEventListener("keydown",e=>{
 window.addEventListener("resize",()=>{if(deckIds.length)requestAnimationFrame(()=>gotoDeck(deckActive,"auto"))});
 $("#backToDeck").addEventListener("click",()=>$("#deckSection").scrollIntoView({behavior:"smooth",block:"start"}));
 
+window.SudoFoodApi={all,coordinates,filteredRows,straightOf,esc,safeURL,gotoDeck,render};
 render();
 </script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="./map-and-visits.js?v=20261030-map1"></script>
 </body></html>
