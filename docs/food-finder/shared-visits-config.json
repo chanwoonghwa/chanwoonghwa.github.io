@@ -1,0 +1,7 @@
+{
+  "enabled": false,
+  "provider": "firebase-firestore",
+  "groupId": "sudo-table",
+  "firebaseConfig": null,
+  "notice": "No visits are persisted in the browser. Enable and configure a real Firebase project to share visit dates."
+}
