@@ -1,9 +1,14 @@
 {
-  "enabled": false,
+  "enabled": true,
   "provider": "firebase-firestore",
   "groupId": "sudo-table",
   "firebaseConfig": {
-    "projectId": "sudo-table"
+    "apiKey": "AIzaSyAB9NR0SLoHoXlJmPY_PjhKeD7UHd_D3J0",
+    "authDomain": "sudo-table.firebaseapp.com",
+    "projectId": "sudo-table",
+    "storageBucket": "sudo-table.firebasestorage.app",
+    "messagingSenderId": "1054320948615",
+    "appId": "1:1054320948615:web:0e2f67427f51d5c8d04f22"
   },
-  "notice": "Firebase project ID recorded; web app apiKey/authDomain/appId not yet supplied. Shared visits remain disabled."
+  "notice": "Shared visits require Google Sign-in, Authorized Domains, Cloud Firestore (default) with member-restricted security rules, and manual initial owner membership. No data is stored locally by the visit module."
 }
