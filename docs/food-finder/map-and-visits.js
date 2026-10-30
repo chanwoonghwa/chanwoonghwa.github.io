@@ -210,7 +210,7 @@ function parseBulkLines(text){
  const items=[],errors=[],seen=new Set();
  for(let i=0;i<lines.length;i++){
   const match=lines[i].match(/^(\d{1,3})\s*[,|]\s*(\d{4}-\d{2}-\d{2})$/);
-  if(!match){errors.push((i+1)+"행: 형식은 34,2026-10-25 입니다.");continue}
+  if(!match){errors.push((i+1)+"행: 형식은 34,2026-04-13 입니다.");continue}
   const id=Number(match[1]),date=match[2],r=api.all.find(x=>x.id===id);
   if(!r){errors.push((i+1)+"행: 식당 번호를 확인하세요.");continue}
   if(!visitDateOnly({visited_at:date})||date>todayKST()){errors.push((i+1)+"행: 날짜가 잘못됐거나 미래 날짜입니다.");continue}
