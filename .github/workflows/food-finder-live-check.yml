@@ -1,37 +1,46 @@
-name: Verify live Sudo Table photo links
+name: Verify Sudo Table clean photo-free UI
 on:
   push:
     paths:
       - .github/workflows/food-finder-live-check.yml
       - docs/food-finder/index.html
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  live:
+  smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 6
     steps:
-      - name: Check GitHub Pages public URL after deployment
-        shell: bash
+      - uses: actions/checkout@v4
+      - name: Check no outdated photo UI and preserve core features
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          html=Path('docs/food-finder/index.html').read_text()
+          banned=['menu-photos.json','restaurant-photos.json','photo-source-banner','has-menu-photo','data-quick="photos"','viewPhotoSources','PHOTO UPDATE','사진 등록 제안']
+          assert not [x for x in banned if x in html], "photo feature still active"
+          for marker in ['id="sudoMap"','id="deckSection"','id="cardGrid"','id="visitManage"','id="visitBulkOpen"']:
+              assert marker in html, f"core feature missing: {marker}"
+          print('SOURCE: no photo UI; map, carousel and shared visits remain')
+          PY
+      - name: Verify released GitHub Pages HTML
         run: |
           set -euo pipefail
           URL="https://chanwoonghwa.github.io/food-finder/"
-          for i in $(seq 1 20); do
-            if curl -fsSL --max-time 10 "${URL}?version=photo24-$(date +%s)" -o /tmp/live-index.html; then
-              if grep -Fq 'PHOTO UPDATE v2.4' /tmp/live-index.html && grep -Fq 'id="viewPhotoSources"' /tmp/live-index.html && grep -Fq 'class="photo-source-banner"' /tmp/live-index.html; then
-                echo "LIVE HTML v2.4 visible on public GitHub Pages"; break
+          for i in $(seq 1 35); do
+            if curl -fsSL --max-time 12 "${URL}?v=no-photo-$(date +%s)" -o /tmp/food-live.html; then
+              if grep -Fq 'id="visitBulkOpen"' /tmp/food-live.html &&
+                 ! grep -Fq 'photo-source-banner' /tmp/food-live.html &&
+                 ! grep -Fq 'menu-photos.json' /tmp/food-live.html; then
+                echo 'LIVE CLEAN UI verified'; break
               fi
             fi
-            echo "Waiting for current Pages release ($i/20)"
-            sleep 8
+            sleep 5
           done
-          grep -Fq 'PHOTO UPDATE v2.4' /tmp/live-index.html
-          grep -Fq 'id="viewPhotoSources"' /tmp/live-index.html
-          curl -fsSL --max-time 10 "${URL}restaurant-photos.json?version=photo24" -o /tmp/restaurant-photos.json
-          python3 - <<'PY'
-          import json
-          x=json.load(open('/tmp/restaurant-photos.json'))
-          assert len(x['candidate_sources'])==5, "expected five links"
-          assert len(x['actual_photos'])==0, "do not present unlicensed images"
-          print('LIVE JSON validated: 5 external photo sources, 0 licensed restaurant photos')
-          PY
+          grep -Fq 'id="sudoMap"' /tmp/food-live.html
+          grep -Fq 'id="visitBulkOpen"' /tmp/food-live.html
+          ! grep -Fq 'photo-source-banner' /tmp/food-live.html
+          ! grep -Fq 'menu-photos.json' /tmp/food-live.html
+          echo 'PUBLIC PAGES: photo feature removed and map/visits preserved'
