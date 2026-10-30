@@ -388,7 +388,7 @@ header .subtitle{font-size:13px}
       <h2>모임 방문 기록 일괄 등록</h2>
       <p>모임 관리자(owner)가 여러 날짜를 한 번에 Firestore에 등록할 수 있어. 아래는 <b>식당 ID, 방문 날짜</b> 형식이야. 내용 확인 후 저장 버튼을 눌러야 실제 DB에 반영돼.</p>
       <label for="visitBulkInput">식당 ID, YYYY-MM-DD (한 줄에 한 건)</label>
-      <textarea id="visitBulkInput" rows="6" placeholder="34,2026-10-25&#10;35,2026-10-18" spellcheck="false"></textarea>
+      <textarea id="visitBulkInput" rows="6" placeholder="34,2026-04-13&#10;35,2026-04-06" spellcheck="false"></textarea>
       <div class="bulk-visit-preview" id="visitBulkPreview" aria-live="polite">입력된 기록이 없습니다.</div>
       <small id="visitBulkStatus" aria-live="polite">DB를 읽은 뒤 기존 기록은 중복 저장하지 않아.</small>
       <div class="visit-dialog-actions"><button type="button" id="visitBulkClose">닫기</button><button type="submit" id="visitBulkSave" disabled>공유 DB에 일괄 저장</button></div>
