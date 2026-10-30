@@ -13,18 +13,34 @@ const statusEl=$("#visitDbStatus");
 const origin={lat:37.4856143,lon:127.0635654};
 const state={
  map:null,layer:null,originMarker:null,pointMarkers:new Map(),visibleSig:"",
- lastVisits:new Map(),visitCount:new Map(),phase:"unconfigured",auth:null,firestore:null,user:null,config:null,unsub:null,
+ lastVisits:new Map(),visitCount:new Map(),phase:"unconfigured",auth:null,firestore:null,user:null,role:null,config:null,unsub:null,authEpoch:0,
  lastRenderSummary:""
 };
 function textVisit(r){
  const iso=state.lastVisits.get(Number(r.id));
  if(state.phase==="unconfigured")return "공유 방문 DB 미연결";
  if(state.phase==="auth")return "공유 방문 DB 로그인 필요";
+ if(state.phase==="no_access")return "모임 접근 권한 등록 필요";
  if(state.phase==="connecting")return "방문 기록 불러오는 중";
  if(state.phase==="error")return "공유 DB 확인 필요";
  return iso?("마지막 방문 "+iso.replaceAll("-",".")+" · 총 "+(state.visitCount.get(Number(r.id))||0)+"회"):"공유 방문 이력 없음";
 }
 function setStatus(txt){if(statusEl)statusEl.textContent=txt}
+function syncAuthUI(){
+ const loggedIn=Boolean(state.user);
+ const canEdit=loggedIn&&state.phase==="ready"&&["owner","editor"].includes(state.role);
+ $("#visitLogin").hidden=!state.auth||loggedIn;
+ $("#visitLogout").hidden=!loggedIn;
+ $("#visitManage").hidden=!canEdit;
+ const uid=$("#visitUidCopy");if(uid)uid.hidden=!loggedIn;
+}
+async function copyUid(){
+ if(!state.user)return;
+ const uid=state.user.uid;
+ try{await navigator.clipboard.writeText(uid);setStatus("UID가 복사됐습니다. Firebase 관리자에게 멤버 등록을 요청하세요.")}
+ catch{window.prompt("Firebase Console에서 그룹 멤버 문서 ID로 등록할 UID",uid)}
+}
+$("#visitUidCopy")?.addEventListener("click",copyUid);
 function visitDateOnly(data){
  const x=data?.visited_at;
  if(typeof x!=="string"||!/^\d{4}-\d{2}-\d{2}$/.test(x))return null;
@@ -144,7 +160,7 @@ $("#visitLogin")?.addEventListener("click",async ()=>{
 });
 $("#visitLogout")?.addEventListener("click",async ()=>{if(state.auth)await state.auth.signOut(state.auth.auth)});
 $("#visitManage")?.addEventListener("click",()=>{
- if(state.phase!=="ready"||!state.user){setStatus("방문 기록을 쓰려면 Firebase 로그인이 필요합니다.");return}
+ if(state.phase!=="ready"||!state.user||!["owner","editor"].includes(state.role)){setStatus("방문 기록 추가는 owner/editor만 가능합니다.");return}
  const dialog=$("#visitDialog");
  const select=$("#visitRestaurant");
  select.innerHTML=api.all.map(r=>'<option value="'+r.id+'">'+api.esc(r.name)+'</option>').join("");
@@ -157,7 +173,7 @@ $("#visitManage")?.addEventListener("click",()=>{
 $("#visitDialogClose")?.addEventListener("click",()=>$("#visitDialog").close());
 $("#visitForm")?.addEventListener("submit",async (e)=>{
  e.preventDefault();
- if(!state.user||!state.firestore||state.phase!=="ready")return;
+ if(!state.user||!state.firestore||state.phase!=="ready"||!["owner","editor"].includes(state.role))return;
  const id=Number($("#visitRestaurant").value),date=$("#visitDate").value;
  if(!Number.isInteger(id)||id<1||id>api.all.length||!visitDateOnly({visited_at:date})||date>todayKST()){
   $("#visitFormStatus").textContent="식당과 방문 날짜를 확인해 주세요.";return;
@@ -200,17 +216,38 @@ async function startSharedVisits(){
   state.auth={auth:authentication,signInWithPopup:auth.signInWithPopup,provider:new auth.GoogleAuthProvider(),signOut:auth.signOut};
   state.firestore={db,fn,groupId};
   $("#visitLogin").hidden=false;
-  auth.onAuthStateChanged(authentication,user=>{
-    state.user=user||null;
-    $("#visitLogin").hidden=Boolean(user);
-    $("#visitLogout").hidden=!user;
-    $("#visitManage").hidden=!user;
+  auth.onAuthStateChanged(authentication,async user=>{
+    const epoch=++state.authEpoch;
+    state.user=user||null;state.role=null;
     if(state.unsub){state.unsub();state.unsub=null}
     state.lastVisits.clear();state.visitCount.clear();
-    if(!user){state.phase="auth";setStatus("공유 방문 이력 · Google 로그인 필요");refreshVisited();return}
-    state.phase="connecting";setStatus("공유 방문 이력 동기화 중…");refreshVisited();
+    if(!user){
+      state.phase="auth";setStatus("공유 방문 이력 · Google 로그인 필요");
+      syncAuthUI();refreshVisited();return;
+    }
+    state.phase="connecting";setStatus("모임 멤버 권한 확인 중…");
+    syncAuthUI();refreshVisited();
+    let membership;
+    try{membership=await fn.getDoc(fn.doc(db,"groups",groupId,"members",user.uid))}
+    catch(err){
+      if(epoch!==state.authEpoch)return;
+      state.phase="error";
+      setStatus("멤버 권한 조회 실패: "+String(err?.code||err?.message||"Firebase 규칙 확인 필요"));
+      syncAuthUI();refreshVisited();return;
+    }
+    if(epoch!==state.authEpoch)return;
+    const role=membership.exists()?membership.data().role:null;
+    if(!["owner","editor","viewer"].includes(role)){
+      state.phase="no_access";
+      setStatus("로그인 완료 · 모임 멤버 미등록. '내 UID 복사' 후 관리자가 등록해야 합니다.");
+      syncAuthUI();refreshVisited();return;
+    }
+    state.role=role;
+    state.phase="connecting";setStatus("공유 방문 이력 동기화 중… ("+role+")");
+    syncAuthUI();refreshVisited();
     const visits=fn.collection(db,"groups",groupId,"visits");
     state.unsub=fn.onSnapshot(visits,snapshot=>{
+      if(epoch!==state.authEpoch)return;
       state.lastVisits.clear();state.visitCount.clear();
       snapshot.forEach(doc=>{
         const row=doc.data(),date=visitDateOnly(row),id=Number(row.restaurant_id);
@@ -220,9 +257,14 @@ async function startSharedVisits(){
         state.visitCount.set(id,(state.visitCount.get(id)||0)+1);
       });
       state.phase="ready";
-      setStatus("공유 방문 기록 연결됨 · "+snapshot.size+"건 · "+user.email);
-      refreshVisited();
-    },err=>{state.phase="error";setStatus("Firestore 읽기 권한 또는 네트워크 확인: "+String(err?.code||"error"));refreshVisited()});
+      setStatus("공유 방문 기록 연결됨 · "+snapshot.size+"건 · "+role+" 권한");
+      syncAuthUI();refreshVisited();
+    },err=>{
+      if(epoch!==state.authEpoch)return;
+      state.phase="error";
+      setStatus("방문 기록 읽기 실패: "+String(err?.code||"권한 또는 네트워크 확인 필요"));
+      syncAuthUI();refreshVisited();
+    });
   },err=>{state.phase="error";setStatus("Firebase 인증 상태 확인 필요: "+String(err?.code||"error"))});
  }catch(err){state.phase="error";setStatus("Firebase 초기화 실패: "+String(err?.message||err))}
 }
