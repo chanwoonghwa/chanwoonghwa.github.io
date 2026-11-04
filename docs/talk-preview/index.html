@@ -1,274 +1,56 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f8f7f3">
-<meta name="description" content="화찬웅의 바시인의 밤 진로 강연 — 3장면 웹 프레젠테이션 시안">
-<title>대학원부터 면접까지 — 화찬웅의 진로 썰</title>
-<style>
-:root{--bg:#f8f7f3;--ink:#1d2030;--muted:#797c82;--violet:#755ac7;--line:#e5e2da;--warm:#eae6da;--green:#27896e}
+<!doctype html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#1b2341"/><title>바이오를 공부한 내가 엔지니어가 되기까지 | 화찬웅</title><meta name="description" content="고려대 바시인의 밤 진로 강연 웹 프레젠테이션"/><style>
+:root{--ink:#1b2341;--muted:#60697b;--accent:#7760c9;--soft:#f4f0ff;--line:#e3e3ec;--paper:#fffefa}
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;background:var(--bg);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;color:var(--ink)}
-button{font:inherit;color:inherit}
-a{color:inherit}
-body{overflow:hidden}
-.app{width:100%;height:100dvh;min-height:480px;position:relative;overflow:hidden;isolation:isolate}
-.app:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#d6d1c5 0.65px,transparent 0.65px);background-size:23px 23px;opacity:.18;z-index:-1;pointer-events:none}
-header{height:90px;padding:0 clamp(24px,5.1vw,88px);display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;z-index:4}
-.brand{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:850;letter-spacing:-.04em;white-space:nowrap}
-.brand .mark{width:27px;height:27px;display:inline-flex;justify-content:center;align-items:center;border:2px solid var(--ink);border-radius:50%;font-weight:900;font-size:13px;transform:rotate(-9deg)}
-.topright{display:flex;align-items:center;gap:22px;font-size:12px;letter-spacing:.075em;font-weight:750;color:#8d8b87}
-.topright .trial{color:var(--violet);font-weight:900}
-.line{height:1px;background:var(--line);margin:0 clamp(24px,5.1vw,88px)}
-main{height:calc(100% - 167px);position:relative}
-.slide{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr);align-items:center;padding:0 clamp(24px,7.2vw,120px);gap:clamp(15px,3vw,62px);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .36s ease,transform .36s ease,visibility .36s;pointer-events:none}
-.slide.active{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
-.copy{position:relative;z-index:2;padding-bottom:3.2vh}
-.eyebrow{font-size:clamp(11px,1vw,14px);letter-spacing:.13em;color:var(--violet);font-weight:900;text-transform:uppercase;margin-bottom:24px}
-.eyebrow span{color:#999;font-weight:600;margin-left:9px;letter-spacing:.05em}
-h1{font-size:clamp(45px,5.55vw,92px);line-height:1.22;letter-spacing:-.075em;font-weight:860;margin:0;word-break:keep-all}
-h1 .em{color:var(--violet)}
-h1 .accent{display:inline-block;position:relative;white-space:nowrap}
-h1 .accent:after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:7px;border-radius:100%;background:#efcc74;transform:rotate(-1deg);opacity:.8}
-.lead{font-weight:580;font-size:clamp(16px,1.48vw,23px);line-height:1.75;letter-spacing:-.035em;color:#575c61;margin-top:32px;word-break:keep-all}
-.lead strong{font-weight:830;color:var(--ink)}
-.note{font-size:12px;color:#999;margin-top:15px;letter-spacing:-.01em}
-.visual{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;height:min(57vh,600px)}
-.painted{position:absolute;width:min(42vw,510px);height:min(42vw,510px);border-radius:50%;background:#eeebe3;top:50%;left:50%;transform:translate(-50%,-49%)}
-.painted:before{content:"";position:absolute;border:1px dashed #d6d0c1;border-radius:50%;inset:21px}
-.visual img{position:relative;z-index:2;display:block;max-width:100%;width:min(38vw,465px);max-height:95%;object-fit:contain;filter:drop-shadow(0px 14px 9px rgba(50,40,25,.055))}
-.visual img.failed{display:none}
-.fallback{display:none;position:relative;z-index:2;font-size:clamp(100px,17vw,240px);filter:grayscale(.16);text-shadow:0 10px 20px #c9c5ba55}
-.visual img.failed+.fallback{display:block}
-.scribble{position:absolute;z-index:3;font-size:14px;font-weight:800;color:#8a8a8a;transform:rotate(-8deg);white-space:nowrap}
-.scribble.one{left:3%;bottom:13%}
-.scribble.two{right:2%;top:10%;transform:rotate(8deg)}
-.float-tag{position:absolute;z-index:3;font-size:clamp(12px,1.1vw,16px);font-weight:800;background:#fffef9;border:1px solid #dad6cb;padding:10px 15px;border-radius:16px;box-shadow:3px 5px 0 #ebe7de;white-space:nowrap;transform:rotate(-4deg)}
-.tag1{left:2%;top:18%}
-.tag2{right:0%;bottom:14%;transform:rotate(5deg)}
-.slide[data-scene="2"] .painted{background:#e5edeb}
-.slide[data-scene="2"] .eyebrow{color:#36897e}
-.slide[data-scene="3"] .painted{background:#eee9f7}
-.slide[data-scene="3"] .eyebrow{color:#8760ae}
-.slide[data-scene="3"] .visual img{width:min(43vw,540px)}
-.deadline{position:absolute;right:4%;top:0;font-size:12px;font-family:ui-monospace,Menlo,monospace;color:#a8a6a1;letter-spacing:.1em}
-.code{position:absolute;bottom:0;right:6%;z-index:4;background:#20212c;color:#e7e5f8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:clamp(11px,1.1vw,15px);padding:15px 20px;border-radius:13px;box-shadow:0 11px 26px #1d203021;transform:rotate(3deg)}
-.code span{color:#ee9a91}
-.reveal-hint{display:inline-flex;align-items:center;gap:8px;margin-top:25px;padding:12px 16px;border-radius:100px;background:#1d2030;color:white;font-size:14px;font-weight:760;border:0;cursor:pointer}
-.reveal-hint:hover{background:var(--violet)}
-.mail{position:absolute;z-index:7;width:min(410px,95%);background:white;border:1px solid #dedbd2;border-radius:13px;box-shadow:0 20px 50px #20203423;padding:24px;transform:rotate(3deg);opacity:0;pointer-events:none;transition:opacity .38s,transform .38s}
-.mail .dotbar{display:flex;gap:6px;margin:-4px 0 21px}
-.mail .dotbar i{width:8px;height:8px;border-radius:50%;background:#ddd;display:block}
-.mail .subject{font-size:13px;font-weight:820;color:#777;padding-bottom:9px;border-bottom:1px solid #eee}
-.mail .msg{font-size:27px;font-weight:880;letter-spacing:-.06em;line-height:1.35;margin:22px 0 14px;color:#216e59}
-.mail .caption{font-size:11px;color:#999}
-body.revealed .interview-default{display:none}
-body:not(.revealed) .interview-success{display:none}
-body.revealed .slide[data-scene="3"] .visual img,body.revealed .slide[data-scene="3"] .visual .fallback{opacity:.15;filter:grayscale(1)}
-body.revealed .code{display:none}
-body.revealed .mail{opacity:1;transform:rotate(-2deg);pointer-events:auto}
-footer{height:76px;padding:0 clamp(24px,5.1vw,88px);display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:4}
-.progress{display:flex;align-items:center;gap:12px;font-size:12px;color:#888;font-weight:790;white-space:nowrap}
-.progress strong{color:var(--ink);font-size:14px}
-.progress-track{width:136px;height:3px;background:#dedad1;border-radius:3px;overflow:hidden}
-.progress-fill{height:100%;width:33.333%;background:var(--violet);transition:width .32s}
-.ctrls{display:flex;align-items:center;gap:8px}
-.ctrl{border:1px solid #dad6cd;background:transparent;min-width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;border-radius:100px;cursor:pointer;font-size:18px}
-.ctrl:hover{background:#eae6de;border-color:#bbb5a9}
-.ctrl:disabled{opacity:.3;cursor:not-allowed;background:transparent}
-.ctrl.textctrl{font-size:12px;letter-spacing:-.02em;padding:0 16px;font-weight:850;width:auto}
-.shortcut{font-size:12px;color:#9a9690;display:flex;align-items:center;gap:8px}
-.shortcut kbd{padding:3px 6px;border:1px solid #e0dcd4;border-radius:5px;background:#fffdfa;font-size:11px}
-.notesPanel{position:absolute;bottom:78px;right:clamp(24px,5vw,84px);z-index:15;width:min(460px,calc(100% - 48px));max-height:min(52vh,450px);overflow:auto;background:#212330;color:white;border-radius:18px;padding:28px;box-shadow:0 20px 80px #0004;display:none}
-body.notes-open .notesPanel{display:block}
-.notesPanel h2{font-size:13px;color:#cfc0fd;letter-spacing:.14em;margin:0 0 12px}
-.notesPanel p{line-height:1.85;color:#f2f0fa;font-size:15px;margin:0;white-space:pre-line}
-.notesPanel .sub{font-size:12px;color:#9da0b5;margin-top:18px}
-.notesPanel button{position:absolute;top:12px;right:12px;color:white;border:0;background:transparent;cursor:pointer;font-size:24px}
-.overlay{position:absolute;inset:0;background:#1c1c28aa;z-index:30;display:none;place-items:center;padding:20px}
-body.help-open .overlay{display:grid}
-.help{background:var(--bg);padding:32px;border-radius:18px;max-width:420px;width:100%;box-shadow:0 20px 60px #0003}
-.help h2{margin:0 0 18px;font-size:22px}
-.help dl{display:grid;grid-template-columns:130px 1fr;gap:14px 12px;font-size:14px;margin-bottom:24px}
-.help dt{font-weight:830}.help dd{margin:0;color:#777}
-.help button{border:0;border-radius:100px;background:#1d2030;color:white;padding:11px 20px;font-weight:800;cursor:pointer}
-:focus-visible{outline:3px solid #8c65e3;outline-offset:4px}
-@media(max-width:850px){
- header{height:70px}.topright{gap:8px}.topright .muted{display:none}
- .app{min-height:520px}
- main{height:calc(100% - 136px)}
- .slide{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-content:center;padding:0 7vw;gap:4px}
- .copy{padding:10px 0 0}
- .eyebrow{font-size:11px;margin-bottom:12px}
- h1{font-size:clamp(34px,7vw,68px);line-height:1.25}
- .lead{font-size:clamp(14px,2.5vw,19px);margin-top:15px}
- .visual{height:min(38vh,360px)}
- .painted{width:min(65vw,340px);height:min(65vw,340px)}
- .visual img{width:min(53vw,300px)}
- .slide[data-scene="3"] .visual img{width:min(64vw,360px)}
- .float-tag{font-size:11px;padding:7px 10px}
- .tag1{left:10%;top:0}.tag2{right:9%;bottom:5%}
- .scribble{font-size:11px}
- .mail{padding:17px;width:min(320px,85%)}.mail .msg{font-size:22px}
- footer{height:66px}.shortcut{display:none}.progress-track{width:65px}
- .deadline{display:none}
- .code{right:4%;bottom:0;font-size:10px;padding:10px}
-}
-@media(max-width:400px){h1{font-size:32px}.lead{font-size:14px}.brand{font-size:12px}.topright{font-size:10px}.ctrl.textctrl{padding:0 12px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
-@media print{body{overflow:visible}.app{height:auto;overflow:visible}.slide{position:relative;opacity:1;visibility:visible;transform:none;min-height:720px;page-break-after:always}.notesPanel,header,footer,.overlay{display:none!important}}
-</style>
-</head>
-<body>
-<div class="app" role="application" aria-label="화찬웅 진로강연 웹 프레젠테이션">
-<header>
-  <div class="brand"><span class="mark">C</span> 바시인의 밤 <span style="font-weight:450;color:#888">/ 화찬웅</span></div>
-  <div class="topright"><span class="trial">ROUGH CUT 01</span><span class="muted">3 SCENES ONLY</span><a href="https://www.irasutoya.com/" target="_blank" rel="noopener noreferrer" style="font-size:10px;color:#a4a19b;text-decoration:none" title="일러스트 출처: いらすとや">ILLUST: いらすとや</a></div>
-</header>
-<div class="line"></div>
-<main id="stage">
-  <section class="slide active" data-scene="1" aria-label="첫 번째 장면 대학원 진학">
-    <div class="copy">
-      <div class="eyebrow">01 / WHY GRAD SCHOOL <span>학부 시절</span></div>
-      <h1>교수가 되고 싶었고,<br>군대는 가기 싫었고,<br><span class="em">코딩은 재밌었다.</span></h1>
-      <p class="lead">유전학도 재밌고, 생물통계학도 재밌고.<br><strong>“이거 좀 더 해보고 싶은데?”</strong></p>
-    </div>
-    <div class="visual">
-      <div class="painted"></div>
-      <img loading="eager" referrerpolicy="no-referrer" alt="책을 들고 있는 대학생의 단순한 일러스트" src="https://1.bp.blogspot.com/-v1UeNBXOYNc/XRHH7YuSiCI/AAAAAAABTYM/EytRBM5JxK0w0gvp7R8gWnXhooeQDgPxQCLcBGAs/s800/ryuugakusei_daigaku_asia_.png">
-      <div class="fallback" aria-hidden="true">🎒</div>
-      <span class="float-tag tag1">👨‍🏫 교수의 꿈</span><span class="float-tag tag2">🧬 유전학 · 생물통계학</span>
-      <span class="scribble one">※ 진학 이유는 하나가 아니었음</span>
-    </div>
-  </section>
-  <section class="slide" data-scene="2" aria-label="두 번째 장면 대학원의 현실">
-    <div class="copy">
-      <div class="eyebrow">02 / REALITY CHECK <span>대학원 생활</span></div>
-      <h1>그런데 대학원은<br><span class="em">생각보다</span><br>쉽지 않았다.</h1>
-      <p class="lead">연구 주제, 수업, 일정 관리, 반나절짜리 버그.<br><strong>그리고 놀고도 싶었음.</strong></p>
-      <p class="note">그때는 지금처럼 ChatGPT가 없던 시절입니다.</p>
-    </div>
-    <div class="visual">
-      <div class="painted"></div>
-      <img loading="lazy" referrerpolicy="no-referrer" alt="노트북과 서류 앞에서 땀을 흘리는 연구자 일러스트" src="https://4.bp.blogspot.com/-lmHccQngtWw/WKbKjNveHfI/AAAAAAABB1k/i4gHYT5GA70W9GE_N2q_SOi-gyi18JzUQCLcB/s800/isogashii_hakui_man.png">
-      <div class="fallback" aria-hidden="true">💻</div>
-      <span class="float-tag tag1">버그 1개 발견</span><span class="float-tag tag2">구글링 6시간째…</span>
-      <span class="scribble two">Error: why?</span>
-      <span class="scribble one">이상과 현실의 차이</span>
-    </div>
-  </section>
-  <section class="slide" data-scene="3" aria-label="세 번째 장면 취업 면접과 합격">
-    <div class="copy">
-      <div class="eyebrow">03 / THE INTERVIEW <span>쓰리빌리언 지원</span></div>
-      <div class="interview-default">
-        <h1>면접장에서<br>파일 여는 코드가<br><span class="em">기억이 안 났다.</span></h1>
-        <p class="lead">코딩테스트 2주 벼락치기.<br><strong>집에 돌아와서는 떨어진 줄 알았다.</strong></p>
-        <button id="reveal" class="reveal-hint" type="button" aria-label="면접 결과 확인">그런데 결과는? <span aria-hidden="true">→</span></button>
-      </div>
-      <div class="interview-success">
-        <h1>근데,<br><span class="em">합격 메일이</span><br>왔다.</h1>
-        <p class="lead">그날의 면접이 전부가 아니었던 걸까.<br><strong>기뻤고, 믿기지 않았다.</strong></p>
-      </div>
-    </div>
-    <div class="visual">
-      <div class="painted"></div>
-      <img loading="lazy" referrerpolicy="no-referrer" alt="면접관 두 사람 앞에 앉아 있는 지원자 일러스트" src="https://1.bp.blogspot.com/-z9bBy1bptSg/Va9cZmXj_3I/AAAAAAAAv-I/poUVcIiqC1M/s800/syukatsu_mensetsu_man.png">
-      <div class="fallback" aria-hidden="true">💼</div>
-      <div class="code interview-default"><span>SyntaxError</span><br>with open( ... ?</div>
-      <div class="mail" aria-label="합격 메일을 재구성한 카드">
-        <div class="dotbar"><i></i><i></i><i></i></div>
-        <div class="subject">채용 결과 안내</div>
-        <div class="msg">최종 합격을<br>축하드립니다! 🎉</div>
-        <div class="caption">* 실제 메일 화면이 아닌 연출용 재구성입니다.</div>
-      </div>
-      <span class="scribble one interview-default">이때는 정말 끝난 줄 알았다</span>
-    </div>
-  </section>
-</main>
-<div class="line"></div>
-<footer>
-  <div class="progress"><strong id="progressLabel">01</strong><span>/ 03</span><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span id="chapterName">대학원 진학</span></div>
-  <div class="shortcut"><kbd>←</kbd><kbd>→</kbd> 넘기기 <span style="margin-left:8px"></span><kbd>N</kbd> 노트 <span style="margin-left:8px"></span><kbd>F</kbd> 전체화면</div>
-  <div class="ctrls">
-    <button class="ctrl textctrl" id="notesBtn" title="발표자 노트 (N)" aria-label="발표자 노트 열기">노트</button>
-    <button class="ctrl" id="prev" title="이전 장면" aria-label="이전 장면">←</button>
-    <button class="ctrl" id="next" title="다음 장면" aria-label="다음 장면">→</button>
-    <button class="ctrl textctrl" id="full" title="전체화면 (F)" aria-label="전체화면">⛶</button>
-  </div>
-</footer>
-<aside class="notesPanel" id="notes" aria-live="polite">
-  <button aria-label="발표자 노트 닫기" id="notesClose" type="button">×</button>
-  <h2>발표자 노트 / <span id="notesTitle">대학원 진학</span></h2>
-  <p id="notesText"></p>
-  <div class="sub">화면에는 표시되지 않는 메모가 아니라, N을 눌렀을 때만 열리는 간단한 발표 연습용 패널입니다.</div>
-</aside>
-<div class="overlay" id="help">
-  <div class="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
-    <h2 id="helpTitle">키보드 안내</h2>
-    <dl><dt>← / → / Space</dt><dd>이전·다음 장면</dd><dt>Enter</dt><dd>면접 결과 공개</dd><dt>N</dt><dd>발표자 메모</dd><dt>F</dt><dd>전체화면 토글</dd><dt>?</dt><dd>이 창 열기</dd></dl>
-    <button id="helpClose" type="button">닫기</button>
-  </div>
-</div>
-</div>
-<script>
-(function(){
-  "use strict";
-  var current=0, revealed=false, slides=Array.from(document.querySelectorAll(".slide"));
-  var names=["대학원 진학","대학원의 현실","취업 면접"];
-  var notes=[
-    "교수가 되고 싶었고, 전문연구요원도 고려했습니다.\n유전학 수업이 정말 재밌었고 생물통계학에서는 구글링하고 코딩하면서 분석하는 재미를 느꼈습니다.\n정답이 있는 진로 선택이 아니라, 여러 이유가 겹쳐서 더 해보고 싶다는 생각으로 대학원에 갔다는 이야기입니다.",
-    "대학원에 들어가니 스스로 연구 문제를 찾고, 학업과 연구를 병행하면서 일정을 관리해야 했습니다.\n버그가 나면 구글을 하루 종일 뒤지고 시행착오를 반복했습니다. 꾸준히 한다는 게 제일 어려웠습니다.\n연구 성과와 별개로 개인적인 어려움도 겪었고 결국 박사과정을 중단했습니다. 구체적인 사정은 굳이 설명하지 않아도 됩니다.",
-    "석사 전문연구요원 채용을 알아보다가 대학원 때부터 알고 있던 희귀질환 진단 기업 쓰리빌리언에 지원했습니다.\n코딩테스트가 있어서 알고리즘 공부를 2주간 몰아서 했습니다. 직무 면접 때는 너무 긴장해서 파일 여는 코드가 생각나지 않았고, 다음 면접도 거의 기억나지 않았습니다.\n집에 돌아와 떨어진 줄 알고 울적하게 지냈는데 합격 메일을 받았습니다. 마지막에 → 또는 결과 버튼을 눌러 메일을 공개하세요."
-  ];
-  var $=function(id){return document.getElementById(id)};
-  function paint(){
-    slides.forEach(function(s,i){s.classList.toggle("active",i===current);s.setAttribute("aria-hidden",i===current?"false":"true")});
-    document.body.classList.toggle("revealed",revealed);
-    $("progressLabel").textContent=String(current+1).padStart(2,"0");
-    $("progressFill").style.width=(((current+1)/3)*100)+"%";
-    $("chapterName").textContent=names[current];
-    $("prev").disabled=current===0;
-    $("next").disabled=current===2&&revealed;
-    $("notesTitle").textContent=names[current];
-    $("notesText").textContent=notes[current];
-    document.title=names[current]+" | 화찬웅의 진로 썰";
-  }
-  function next(){if(current===2){if(!revealed){revealed=true;paint()}return}current++;paint()}
-  function prev(){if(current===2&&revealed){revealed=false;paint();return}if(current>0){current--;paint()}}
-  function showResult(){current=2;revealed=true;paint()}
-  function toggleNotes(){document.body.classList.toggle("notes-open");if(document.body.classList.contains("help-open"))document.body.classList.remove("help-open")}
-  function toggleFull(){if(!document.fullscreenElement){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen().catch(function(){})}else{document.exitFullscreen&&document.exitFullscreen().catch(function(){})}}
-  $("next").addEventListener("click",next);
-  $("prev").addEventListener("click",prev);
-  $("reveal").addEventListener("click",showResult);
-  $("notesBtn").addEventListener("click",toggleNotes);
-  $("notesClose").addEventListener("click",function(){document.body.classList.remove("notes-open")});
-  $("full").addEventListener("click",toggleFull);
-  $("helpClose").addEventListener("click",function(){document.body.classList.remove("help-open")});
-  $("help").addEventListener("click",function(e){if(e.target===$("help"))document.body.classList.remove("help-open")});
-  slides.forEach(function(slide){var img=slide.querySelector("img");if(img){img.addEventListener("error",function(){img.classList.add("failed")})}});
-  document.addEventListener("keydown",function(e){
-    if(e.altKey||e.ctrlKey||e.metaKey)return;
-    var tag=(e.target.tagName||"").toLowerCase();
-    if(tag==="input"||tag==="textarea"||tag==="select")return;
-    if(e.key==="Escape"){document.body.classList.remove("help-open");document.body.classList.remove("notes-open");return}
-    if(document.body.classList.contains("help-open"))return;
-    if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){e.preventDefault();next()}
-    else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();prev()}
-    else if(e.key==="Enter"&&current===2&&!revealed){e.preventDefault();showResult()}
-    else if(e.key.toLowerCase()==="n"){toggleNotes()}
-    else if(e.key.toLowerCase()==="f"){toggleFull()}
-    else if(e.key==="?"){document.body.classList.add("help-open")}
-    else if(e.key==="Home"){current=0;revealed=false;paint()}
-    else if(e.key==="End"){current=2;revealed=false;paint()}
-  });
-  var touchX=null;
-  $("stage").addEventListener("touchstart",function(e){if(e.touches.length===1)touchX=e.touches[0].clientX},{passive:true});
-  $("stage").addEventListener("touchend",function(e){if(touchX===null)return;var dx=e.changedTouches[0].clientX-touchX;touchX=null;if(Math.abs(dx)>65){if(dx<0)next();else prev()}},{passive:true});
-  var hash=location.hash.match(/scene-(\d+)/);if(hash){current=Math.max(0,Math.min(2,Number(hash[1])-1))}
-  paint();
-})();
-</script>
-</body>
-</html>
+html,body{padding:0;margin:0;width:100%;height:100%;overflow:hidden;background:#eeeef3;color:var(--ink);font-family:"Pretendard", "Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
+button{font:inherit;cursor:pointer} a{color:inherit}
+.deck{min-height:100dvh;display:grid;place-items:center;padding:14px 24px 76px}
+.screen{width:min(100%,calc((100dvh - 100px) * 1.77778));max-height:calc(100dvh - 100px);aspect-ratio:16/9;background:var(--paper);position:relative;overflow:hidden;border:2px solid #c6c6d1;border-radius:13px;box-shadow:0 10px 50px #2325421e}
+.screen:before{content:"";position:absolute;inset:0;background:radial-gradient(#ded9d2 .55px,transparent .55px) 0 0/25px 25px;opacity:.18;pointer-events:none}
+.slide{position:absolute;inset:0;padding:clamp(22px,3.4vw,64px);display:none;grid-template-rows:auto 1fr;gap:5%;visibility:hidden}
+.slide.active{display:grid;visibility:visible}
+.head{display:flex;justify-content:space-between;gap:15px;align-items:center;font-weight:740;font-size:clamp(12px,1.05vw,18px)}
+.brand{letter-spacing:-.04em}.count{font-size:clamp(10px,1vw,15px);font-variant-numeric:tabular-nums}
+.content{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:center;gap:3.5%;min-height:0}
+.slide.menu .content,.slide.architecture .content,.slide.research .content,.slide.work .content{grid-template-columns:1fr}
+.copy{align-self:start;min-width:0}
+.kicker{font-size:clamp(10px,.9vw,15px);font-weight:800;letter-spacing:.14em;color:#807d9a;margin:0 0 1.1rem}
+h1{font-size:clamp(28px,3.36vw,61px);line-height:1.25;font-weight:900;letter-spacing:-.075em;word-break:keep-all;margin:.2rem 0 20px}
+em{font-style:normal;color:#6450ba}
+.desc{font-size:clamp(13px,1.22vw,21px);line-height:1.75;color:#596273;letter-spacing:-.04em;font-weight:570;margin:20px 0}
+.visual{min-width:0;min-height:0;position:relative;display:flex;align-items:center;justify-content:center}
+.visual .character{width:min(78%,430px);max-height:100%;height:auto;filter:drop-shadow(0 8px 8px #33415e14)}
+.illust{height:90%;width:min(90%,440px);background:#f0efe9;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.bg-warm{background:#f0e8dd}
+.captionCard{position:absolute;bottom:6%;right:4%;border:2px solid #d5d7e3;background:white;border-radius:13px;padding:16px;font-size:clamp(11px,1vw,17px);font-weight:650;line-height:1.7;box-shadow:6px 7px 0 #eeeef2}
+.miniList{display:grid;gap:12px;margin:4% 0}.miniList div{background:#f5f4fa;border:1px solid #e0deed;padding:14px 20px;border-radius:15px;font-size:clamp(15px,1.42vw,25px);font-weight:760;letter-spacing:-.05em}.miniList b{color:white;background:#222b4b;border-radius:50%;width:31px;height:31px;display:inline-flex;align-items:center;justify-content:center;margin-right:12px;font-size:13px}
+.slide.menu .visual{justify-content:space-between}.slide.menu .miniList{width:60%}.slide.menu .visual>.character{width:27%;margin-right:3%}
+.pills{display:grid;grid-template-columns:1fr 1fr;gap:14px}.pills>div{min-height:112px;background:#f7f5fe;border:1px solid #d8d5e6;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;padding:10px;font-size:clamp(11px,1.12vw,19px)}.pills svg{width:43px;height:43px}.pills>div:nth-child(2){font-size:36px}.pills strong{font-size:clamp(11px,1.05vw,17px)}.talkBoy{position:absolute;right:-5%;bottom:-26%;width:32%}.talkBoy .character{width:100%}
+.paper{width:65%;min-height:240px;border-radius:18px;border:2px solid #d1d6e2;background:#fafbff;box-shadow:8px 8px 0 #f0eff1;padding:30px;display:flex;flex-direction:column;gap:15px}.paper small{font-weight:900;color:#536084}.paper strong{font-size:clamp(19px,1.8vw,32px);line-height:1.25;color:#212e62}.paper span{font-size:clamp(12px,1.08vw,19px);color:#686e7f}.medals{width:32%;display:grid;gap:16px}.medals div{padding:19px;background:#fff8f0;border:1px solid #eddec6;border-radius:14px;font-size:clamp(13px,1.2vw,19px);font-weight:760}.slide.research .visual{gap:2%;align-items:stretch;max-height:60%}
+.stressArt{width:95%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}.stressArt>.character{width:69%}.bubble{position:absolute;background:#fff;border:2px solid #d6d9e2;border-radius:22px;font-size:clamp(11px,1.1vw,18px);font-weight:750;padding:12px;box-shadow:4px 5px 0 #e8e8f0}.b1{top:8%;left:0}.b2{top:30%;right:0}.b3{bottom:13%;left:0}.bottomStrip{position:absolute;bottom:0;right:5%;background:#f3e6b6;padding:10px 19px;border-radius:15px;font-weight:800;font-size:clamp(11px,1vw,17px)}
+.signposts{height:90%;width:100%;position:relative;display:flex;justify-content:center;flex-direction:column;gap:20px;align-items:center}.sign{background:#f1f2f5;border:3px solid #7e8698;border-radius:10px;padding:17px 23px;font-weight:800;font-size:clamp(17px,1.6vw,27px);width:72%;transform:rotate(-6deg)}.sign small{font-size:50%;font-weight:550}.sign.bold{transform:rotate(6deg);background:#ffe7a7;border-color:#d9ad53}.signposts .person{position:absolute;bottom:-44%;right:-19%;width:50%}.person>.character{width:100%}
+.calendar{background:#fff0cc;border-radius:17px;padding:18px;font-weight:900;font-size:clamp(30px,2.9vw,52px);text-align:center;width:55%;position:absolute;top:0;right:0;box-shadow:5px 5px 0 #f3e7cd}.calendar small{font-size:clamp(11px,.85vw,15px);display:block;color:#866e42}.coding{background:#e8ecf5;padding:30px;border:2px solid #cdd3e1;border-radius:17px;display:flex;align-items:center;gap:15px;transform:rotate(-3deg);width:90%}.coding svg{width:75px}.coding p{font:clamp(11px,1vw,17px)/1.7 ui-monospace,monospace}.message{position:absolute;bottom:4%;background:#fff;border-radius:13px;border:1px solid #ddd;padding:14px;font-size:clamp(11px,1vw,17px);font-weight:760}
+.interviewTable{display:flex;align-items:center;justify-content:space-evenly;gap:10px;height:62%;width:100%;background:#f2f0f9;border-radius:16px}.interviewTable>span{font-size:clamp(10px,1.1vw,16px);background:#e4e5ed;border-radius:12px;padding:15px 10px;font-weight:900}.interviewTable .personFace{font-size:clamp(45px,6vw,105px);background:transparent}.codefail{position:absolute;bottom:12%;right:2%;background:#27304b;color:#fff;border-radius:10px;padding:12px;font:clamp(12px,1.1vw,18px) ui-monospace,monospace;transform:rotate(4deg)}.codefail span{color:#ed939b}.revealResult{position:absolute;inset:0;display:none;background:#f7fcf6;border:2px solid #b4d8c6;border-radius:20px;align-items:center;justify-content:center;flex-direction:column;gap:16px;text-align:center;font-size:clamp(19px,2.2vw,38px);color:#247452;box-shadow:0 13px 34px #576a5720}.revealResult.show{display:flex}.envelope svg{width:110px}.revealResult small{font-size:clamp(9px,.75vw,13px);color:#89918b}
+.jobCards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;width:100%}.jobCards>div{background:#f4f4fc;padding:30px 16px;border:1px solid #deddef;border-radius:20px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}.jobCards svg{height:85px;width:85px}.jobCards b{font-size:clamp(15px,1.6vw,27px)}.jobCards span{font-size:clamp(11px,1vw,17px);color:#73778c}.sub{font-size:clamp(12px,1.2vw,20px);font-weight:680;color:#6d7085;text-align:center}
+.slide.work .visual,.slide.architecture .visual{flex-direction:column}
+.flowchart{display:flex;align-items:center;justify-content:center;width:100%;gap:8px}.flowchart>div{width:22%;min-height:170px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;background:#f4f2fc;border:1px solid #d7d3ea;border-radius:20px;padding:12px}.flowchart>div strong{color:#8672ba;font-size:clamp(11px,1vw,18px)}.flowchart b{font-size:clamp(18px,1.9vw,31px)}.flowchart small{font-size:clamp(11px,.95vw,16px);color:#76798b}.flowchart i{font-size:clamp(16px,2vw,32px);font-weight:800;font-style:normal}
+.steps{width:100%;display:grid;gap:18px}.steps>div{background:#f7f8fc;padding:20px;border:1px solid #dfe2ec;border-radius:13px;font-size:clamp(14px,1.3vw,23px);font-weight:760}.steps span{display:inline-block;background:#262e50;color:#fff;border-radius:25px;font-size:clamp(11px,1vw,17px);padding:7px 12px;margin-right:15px}
+.lessons{display:grid;gap:15px;width:100%}.lessons>div{padding:22px;background:#f5f1ff;border-radius:17px;font-size:clamp(15px,1.4vw,24px)}.lessons b{color:#6c54bb}.endBoy{position:absolute;right:-8%;bottom:-20%;width:40%}.endBoy .character{width:100%}.endline{position:absolute;bottom:0;left:5%;font-size:clamp(12px,1.1vw,18px);font-weight:800;color:#7c7594}
+.controls{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 12px;background:#1b2341;border-radius:50px;box-shadow:0 10px 30px #15204440;z-index:10;color:white}
+.controls button{border:0;color:white;background:transparent;border-radius:50px;padding:10px 13px;font-weight:750;white-space:nowrap;font-size:13px}.controls button:hover{background:#ffffff27}.controls button:focus-visible{outline:2px solid #fff}.controls .counter{font-size:12px;white-space:nowrap;min-width:50px;text-align:center;color:#d4d7e7}
+.notes{position:fixed;right:20px;bottom:77px;z-index:15;width:min(480px,calc(100vw - 40px));max-height:65vh;overflow:auto;background:#20273d;color:white;padding:26px;border-radius:20px;box-shadow:0 18px 60px #1315227a;display:none}.notes.open{display:block}.notes h3{font-size:17px;margin:0 0 10px}.notes p{font-size:15px;line-height:1.8;white-space:pre-line;margin:0}
+.noteHint{font-size:11px;color:#aaa;text-align:center}
+@media(max-width:800px){.deck{padding:8px 8px 75px}.screen{width:100%;max-height:calc(100dvh - 100px);border-radius:5px}.slide{padding:18px}.copy h1{font-size:clamp(22px,4.8vw,45px)}.desc{font-size:clamp(10px,2.6vw,16px)}.pills>div{min-height:75px}.pills svg{width:27px}.pills>div:nth-child(2){font-size:24px}.miniList div{padding:7px;font-size:clamp(11px,2.3vw,19px)}.slide.menu .miniList{width:70%}.slide.menu .visual>.character{width:23%}.miniList b{width:21px;height:21px;font-size:10px}.paper{padding:10px;min-height:140px}.medals div{padding:8px}.jobCards>div{padding:12px 8px}.jobCards svg{width:45px;height:45px}.flowchart>div{min-height:100px}.steps>div,.lessons>div{padding:8px}.sign{padding:7px}.controls{width:max-content;max-width:98%}.controls button{padding:9px 8px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+@media print{body{height:auto;overflow:visible;background:#fff}.deck{display:block;padding:0}.screen{width:100%;max-height:none;box-shadow:none;border:0;aspect-ratio:auto;overflow:visible}.slide,.slide.active{position:relative;display:grid;visibility:visible;aspect-ratio:16/9;break-after:page;border:1px solid #ccc}.controls,.notes{display:none!important}}
+</style></head><body><div class="deck"><main class="screen" id="screen" aria-label="바시인의 밤 강연"><section class="slide hero active" aria-label="1번째 슬라이드" data-index="0"><header class="head"><span class="brand">바시인의 밤 멘토 강연</span><span class="count">01 / 12</span></header><div class="content"><div class="copy"><p class="kicker">INTRO</p><h1>바이오를 공부한 내가<br><em>엔지니어가 되기까지</em></h1><p class="desc">바시인의 밤 | 선배의 진로 이야기</p></div><div class="visual"><div class="illust bg-warm"><svg class="character" viewBox="0 0 270 280" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><ellipse cx="137" cy="269" rx="84" ry="9" fill="#d9d4ce" opacity=".55"/><path d="M72 255 Q62 183 95 151 Q119 139 162 146 Q194 159 203 255Z" fill="#596b85" stroke="#37364a" stroke-width="3"/><path d="M105 152 Q132 181 156 153" fill="none" stroke="#d0dbe5" stroke-width="7"/><path d="M132 163 L128 250" stroke="#2c3e55" opacity=".4" stroke-width="3"/><path d="M87 184 Q60 191 47 224 M179 183 Q210 195 217 223" fill="none" stroke="#515268" stroke-width="22" stroke-linecap="round"/><path d="M110 156 v-20 h43 v20" fill="#edc2a5" stroke="#75564d" stroke-width="3"/><ellipse cx="133" cy="91" rx="58" ry="66" fill="#f4cdae" stroke="#6b5250" stroke-width="3"/><ellipse cx="75" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><ellipse cx="190" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><path d="M77 79 Q59 39 86 28 Q110 6 133 20 Q169 6 190 44 Q207 62 191 83 L179 60 Q159 65 153 48 Q134 63 118 54 Q104 73 83 66 Z" fill="#302c32" stroke="#302c32" stroke-width="4"/><path d="M90 56 Q105 24 128 34 M135 35 Q155 27 180 48" stroke="#4b4143" fill="none" stroke-width="7" stroke-linecap="round"/><ellipse cx="115" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><ellipse cx="145" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><path d="M117 99 q14 14 28 0" fill="none" stroke="#594b4b" stroke-width="3" stroke-linecap="round"/><ellipse cx="95" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/><ellipse cx="164" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/></svg></div><div class="captionCard">고려대학교 바이오시스템의과학부 졸업<br>現 쓰리빌리언 Bioinformatics Engineer</div></div></div></section><section class="slide menu" aria-label="2번째 슬라이드" data-index="1"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">02 / 12</span></header><div class="content"><div class="copy"><p class="kicker">CONTENTS</p><h1>오늘은 이런 이야기를<br>하려고 합니다.</h1></div><div class="visual"><div class="miniList"><div><b>01</b> 대학원에 간 이유</div><div><b>02</b> 대학원 생활의 현실</div><div><b>03</b> 취업 준비와 면접</div><div><b>04</b> 지금, 엔지니어로 하는 일</div><div><b>05</b> 돌아보며 얻은 것들</div></div><svg class="character" viewBox="0 0 270 280" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><ellipse cx="137" cy="269" rx="84" ry="9" fill="#d9d4ce" opacity=".55"/><path d="M72 255 Q62 183 95 151 Q119 139 162 146 Q194 159 203 255Z" fill="#596b85" stroke="#37364a" stroke-width="3"/><path d="M105 152 Q132 181 156 153" fill="none" stroke="#d0dbe5" stroke-width="7"/><path d="M132 163 L128 250" stroke="#2c3e55" opacity=".4" stroke-width="3"/><path d="M87 184 Q60 191 47 224 M179 183 Q210 195 217 223" fill="none" stroke="#515268" stroke-width="22" stroke-linecap="round"/><path d="M110 156 v-20 h43 v20" fill="#edc2a5" stroke="#75564d" stroke-width="3"/><ellipse cx="133" cy="91" rx="58" ry="66" fill="#f4cdae" stroke="#6b5250" stroke-width="3"/><ellipse cx="75" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><ellipse cx="190" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><path d="M77 79 Q59 39 86 28 Q110 6 133 20 Q169 6 190 44 Q207 62 191 83 L179 60 Q159 65 153 48 Q134 63 118 54 Q104 73 83 66 Z" fill="#302c32" stroke="#302c32" stroke-width="4"/><path d="M90 56 Q105 24 128 34 M135 35 Q155 27 180 48" stroke="#4b4143" fill="none" stroke-width="7" stroke-linecap="round"/><ellipse cx="115" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><ellipse cx="145" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><path d="M117 99 q14 14 28 0" fill="none" stroke="#594b4b" stroke-width="3" stroke-linecap="round"/><ellipse cx="95" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/><ellipse cx="164" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/></svg></div></div></section><section class="slide four" aria-label="3번째 슬라이드" data-index="2"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">03 / 12</span></header><div class="content"><div class="copy"><p class="kicker">STUDENT DAYS</p><h1>대학원에 간 이유는<br><em>생각보다 여러 가지.</em></h1></div><div class="visual"><div class="pills"><div><svg viewBox="0 0 64 64"><path d="m4 24 28-12 28 12-28 12z" fill="#d8c7f3" stroke="#25304b" stroke-width="3"/><path d="M15 31v15q17 12 34 0V31" fill="none" stroke="#25304b" stroke-width="3"/><path d="M58 25v22" stroke="#25304b" stroke-width="3"/></svg><strong>교수가 되고 싶었다</strong></div><div>🪖<strong>전문연구요원을 생각했다</strong></div><div><svg viewBox="0 0 64 64"><path d="M18 6c37 16-9 36 28 52M46 6C9 22 55 42 18 58" fill="none" stroke="#8969b8" stroke-width="5"/><path d="M23 16h19M18 30h28M21 43h22" stroke="#e7ad73" stroke-width="4"/></svg><strong>유전학이 재밌었다</strong></div><div><svg viewBox="0 0 64 64"><rect x="4" y="12" width="56" height="41" rx="6" fill="#d9e4ee" stroke="#273b58" stroke-width="3"/><path d="m24 23-9 9 9 8M40 23l9 9-9 8" stroke="#31557f" stroke-width="4" fill="none"/><path d="m36 19-8 26" stroke="#a582cf" stroke-width="3"/></svg><strong>구글링·코딩이 좋았다</strong></div></div><div class="talkBoy"><svg class="character" viewBox="0 0 270 280" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><ellipse cx="137" cy="269" rx="84" ry="9" fill="#d9d4ce" opacity=".55"/><path d="M72 255 Q62 183 95 151 Q119 139 162 146 Q194 159 203 255Z" fill="#596b85" stroke="#37364a" stroke-width="3"/><path d="M105 152 Q132 181 156 153" fill="none" stroke="#d0dbe5" stroke-width="7"/><path d="M132 163 L128 250" stroke="#2c3e55" opacity=".4" stroke-width="3"/><path d="M87 184 Q60 191 47 224 M179 183 Q210 195 217 223" fill="none" stroke="#515268" stroke-width="22" stroke-linecap="round"/><path d="M110 156 v-20 h43 v20" fill="#edc2a5" stroke="#75564d" stroke-width="3"/><ellipse cx="133" cy="91" rx="58" ry="66" fill="#f4cdae" stroke="#6b5250" stroke-width="3"/><ellipse cx="75" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><ellipse cx="190" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><path d="M77 79 Q59 39 86 28 Q110 6 133 20 Q169 6 190 44 Q207 62 191 83 L179 60 Q159 65 153 48 Q134 63 118 54 Q104 73 83 66 Z" fill="#302c32" stroke="#302c32" stroke-width="4"/><path d="M90 56 Q105 24 128 34 M135 35 Q155 27 180 48" stroke="#4b4143" fill="none" stroke-width="7" stroke-linecap="round"/><ellipse cx="115" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><ellipse cx="145" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><path d="M121 104 q9 -4 17 0" stroke="#594b4b" stroke-width="3" fill="none"/><ellipse cx="95" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/><ellipse cx="164" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/></svg></div></div></div></section><section class="slide research" aria-label="4번째 슬라이드" data-index="3"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">04 / 12</span></header><div class="content"><div class="copy"><p class="kicker">RESEARCH</p><h1>연구실에서는<br><em>이런 연구를 했다.</em></h1></div><div class="visual"><div class="paper"><small>RESEARCH / 2022</small><strong>Single-cell transcriptomic landscape of breast cancer immune microenvironment heterogeneity</strong><span>Experimental & Molecular Medicine</span><span>Chanwoong Hwa · co-first author</span></div><div class="medals"><div>🏆 학생 최우수논문상 (2022)</div><div>⭐ 학회 포스터상 (2023)</div><div style="font-size:12px;color:#89919c">논문·수상 자료는 최종 대외 공개 전 재확인</div></div></div></div></section><section class="slide stress" aria-label="5번째 슬라이드" data-index="4"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">05 / 12</span></header><div class="content"><div class="copy"><p class="kicker">REALITY</p><h1>그런데 대학원 생활은<br><em>생각보다 쉽지 않았다.</em></h1></div><div class="visual"><div class="stressArt"><svg class="character" viewBox="0 0 270 280" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><ellipse cx="137" cy="269" rx="84" ry="9" fill="#d9d4ce" opacity=".55"/><path d="M72 255 Q62 183 95 151 Q119 139 162 146 Q194 159 203 255Z" fill="#596b85" stroke="#37364a" stroke-width="3"/><path d="M105 152 Q132 181 156 153" fill="none" stroke="#d0dbe5" stroke-width="7"/><path d="M132 163 L128 250" stroke="#2c3e55" opacity=".4" stroke-width="3"/><path d="M87 184 Q60 191 47 224 M179 183 Q210 195 217 223" fill="none" stroke="#515268" stroke-width="22" stroke-linecap="round"/><path d="M110 156 v-20 h43 v20" fill="#edc2a5" stroke="#75564d" stroke-width="3"/><ellipse cx="133" cy="91" rx="58" ry="66" fill="#f4cdae" stroke="#6b5250" stroke-width="3"/><ellipse cx="75" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><ellipse cx="190" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><path d="M77 79 Q59 39 86 28 Q110 6 133 20 Q169 6 190 44 Q207 62 191 83 L179 60 Q159 65 153 48 Q134 63 118 54 Q104 73 83 66 Z" fill="#302c32" stroke="#302c32" stroke-width="4"/><path d="M90 56 Q105 24 128 34 M135 35 Q155 27 180 48" stroke="#4b4143" fill="none" stroke-width="7" stroke-linecap="round"/><path d="M108 89 l11 3 M140 92 l10 -3" stroke="#423936" stroke-width="3" stroke-linecap="round"/><path d="M119 105 h23" stroke="#594b4b" stroke-width="3" stroke-linecap="round"/><ellipse cx="95" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/><ellipse cx="164" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/><path d="M199 74 q24 20 0 35 q-15 -19 0 -35" fill="#79c7e9" stroke="#4c96c1" stroke-width="2"/><rect x="41" y="174" width="182" height="91" rx="8" fill="#a9b5c3" stroke="#525d6c" stroke-width="4"/><circle cx="132" cy="219" r="10" fill="#e7e9eb"/></svg><div class="bubble b1">연구 주제는?</div><div class="bubble b2">버그 또 발견…</div><div class="bubble b3">수업도 들어야지!</div></div><div class="bottomStrip">가장 어려웠던 건 '하루하루 꾸준히 하는 것'</div></div></div></section><section class="slide choice" aria-label="6번째 슬라이드" data-index="5"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">06 / 12</span></header><div class="content"><div class="copy"><p class="kicker">TURNING POINT</p><h1>어느 순간,<br><em>길을 바꾸게 됐다.</em></h1></div><div class="visual"><div class="signposts"><div class="sign dim">박사과정<br><small>원래 생각한 길</small></div><div class="sign bold">새로운 진로<br><small>다시 찾는 중</small></div><div class="person"><svg class="character" viewBox="0 0 270 280" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><ellipse cx="137" cy="269" rx="84" ry="9" fill="#d9d4ce" opacity=".55"/><path d="M72 255 Q62 183 95 151 Q119 139 162 146 Q194 159 203 255Z" fill="#596b85" stroke="#37364a" stroke-width="3"/><path d="M105 152 Q132 181 156 153" fill="none" stroke="#d0dbe5" stroke-width="7"/><path d="M132 163 L128 250" stroke="#2c3e55" opacity=".4" stroke-width="3"/><path d="M87 184 Q60 191 47 224 M179 183 Q210 195 217 223" fill="none" stroke="#515268" stroke-width="22" stroke-linecap="round"/><path d="M110 156 v-20 h43 v20" fill="#edc2a5" stroke="#75564d" stroke-width="3"/><ellipse cx="133" cy="91" rx="58" ry="66" fill="#f4cdae" stroke="#6b5250" stroke-width="3"/><ellipse cx="75" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><ellipse cx="190" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><path d="M77 79 Q59 39 86 28 Q110 6 133 20 Q169 6 190 44 Q207 62 191 83 L179 60 Q159 65 153 48 Q134 63 118 54 Q104 73 83 66 Z" fill="#302c32" stroke="#302c32" stroke-width="4"/><path d="M90 56 Q105 24 128 34 M135 35 Q155 27 180 48" stroke="#4b4143" fill="none" stroke-width="7" stroke-linecap="round"/><ellipse cx="115" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><ellipse cx="145" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><path d="M121 104 q9 -4 17 0" stroke="#594b4b" stroke-width="3" fill="none"/><ellipse cx="95" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/><ellipse cx="164" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/></svg></div></div></div></div></section><section class="slide prep" aria-label="7번째 슬라이드" data-index="6"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">07 / 12</span></header><div class="content"><div class="copy"><p class="kicker">JOB SEARCH</p><h1>지원은 했는데,<br><em>코딩 테스트가 있다고?</em></h1></div><div class="visual"><div class="calendar">D-14 <small>알고리즘 벼락치기</small></div><div class="coding"><svg viewBox="0 0 64 64"><rect x="4" y="12" width="56" height="41" rx="6" fill="#d9e4ee" stroke="#273b58" stroke-width="3"/><path d="m24 23-9 9 9 8M40 23l9 9-9 8" stroke="#31557f" stroke-width="4" fill="none"/><path d="m36 19-8 26" stroke="#a582cf" stroke-width="3"/></svg><p>for (day = 1; day ≤ 14; day++) {<br>　알고리즘 공부();<br>}</p></div><div class="message">대학원 때 들어본 희귀질환 진단 기업, 쓰리빌리언</div></div></div></section><section class="slide interview" aria-label="8번째 슬라이드" data-index="7"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">08 / 12</span></header><div class="content"><div class="copy"><p class="kicker">INTERVIEW</p><h1>면접장에서<br><em>파일 여는 법을 잊었다.</em></h1></div><div class="visual"><div class="interviewTable"><span>면접관</span><span class="personFace">😶</span><span>면접관</span></div><div class="codefail">with open( <span>???</span> )</div><div class="revealResult" id="revealResult"><div class="envelope"><svg viewBox="0 0 64 64"><rect x="5" y="12" width="54" height="40" rx="5" fill="#e1eddf" stroke="#2c6e5b" stroke-width="3"/><path d="M7 17l25 19 25-19" fill="none" stroke="#2c6e5b" stroke-width="3"/></svg></div><b>최종 합격을 축하드립니다!</b><small>※ 실제 합격 메일을 재구성한 연출</small></div></div></div></section><section class="slide work" aria-label="9번째 슬라이드" data-index="8"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">09 / 12</span></header><div class="content"><div class="copy"><p class="kicker">WORK</p><h1>지금은 이런 일을<br><em>하고 있습니다.</em></h1></div><div class="visual"><div class="jobCards"><div><svg viewBox="0 0 64 64"><path d="M18 6c37 16-9 36 28 52M46 6C9 22 55 42 18 58" fill="none" stroke="#8969b8" stroke-width="5"/><path d="M23 16h19M18 30h28M21 43h22" stroke="#e7ad73" stroke-width="4"/></svg><b>유전체 변이 해석</b><span>ACMG 근거 · 정합성</span></div><div><svg viewBox="0 0 64 64"><rect x="10" y="8" width="44" height="48" rx="8" fill="#e6e9f0" stroke="#33435b" stroke-width="3"/><path d="M11 23h42M11 39h42" stroke="#33435b" stroke-width="3"/><circle cx="20" cy="16" r="3" fill="#68ad83"/><circle cx="20" cy="32" r="3" fill="#68ad83"/><circle cx="20" cy="48" r="3" fill="#68ad83"/></svg><b>대규모 파이프라인</b><span>자동 재분석 · 운영 안정성</span></div><div><svg viewBox="0 0 64 64"><rect x="4" y="12" width="56" height="41" rx="6" fill="#d9e4ee" stroke="#273b58" stroke-width="3"/><path d="m24 23-9 9 9 8M40 23l9 9-9 8" stroke="#31557f" stroke-width="4" fill="none"/><path d="m36 19-8 26" stroke="#a582cf" stroke-width="3"/></svg><b>데이터 엔지니어링</b><span>검증 · 성능 · 협업</span></div></div><p class="sub">희귀질환 진단을 뒷받침하는 시스템을 만듭니다.</p></div></div></section><section class="slide architecture" aria-label="10번째 슬라이드" data-index="9"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">10 / 12</span></header><div class="content"><div class="copy"><p class="kicker">3ASC</p><h1>문제: 대규모 유전체 데이터를<br><em>AI 학습에 쓰려면?</em></h1></div><div class="visual"><div class="flowchart"><div><strong>01</strong><b>수집</b><small>데이터 소스</small></div><i>→</i><div><strong>02</strong><b>표준화</b><small>스키마·특징</small></div><i>→</i><div><strong>03</strong><b>검증</b><small>품질·정합성</small></div><i>→</i><div><strong>04</strong><b>활용</b><small>학습·서빙</small></div></div><p class="sub">실제 프로젝트: 3ASC · 모델 개발은 별도 담당</p></div></div></section><section class="slide lesson" aria-label="11번째 슬라이드" data-index="10"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">11 / 12</span></header><div class="content"><div class="copy"><p class="kicker">LESSON</p><h1>코드를 쓰기 전에,<br><em>문제를 먼저 정의한다.</em></h1></div><div class="visual"><div class="steps"><div><span>01</span> 문제를 정확히 이해한다</div><div><span>02</span> 해결 구조를 설계한다</div><div><span>03</span> 구현하고 검증한다</div><div><span>04</span> 유지 가능하게 만든다</div></div><div class="talkBoy"><svg class="character" viewBox="0 0 270 280" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><ellipse cx="137" cy="269" rx="84" ry="9" fill="#d9d4ce" opacity=".55"/><path d="M72 255 Q62 183 95 151 Q119 139 162 146 Q194 159 203 255Z" fill="#596b85" stroke="#37364a" stroke-width="3"/><path d="M105 152 Q132 181 156 153" fill="none" stroke="#d0dbe5" stroke-width="7"/><path d="M132 163 L128 250" stroke="#2c3e55" opacity=".4" stroke-width="3"/><path d="M87 184 Q60 191 47 224 M179 183 Q210 195 217 223" fill="none" stroke="#515268" stroke-width="22" stroke-linecap="round"/><path d="M110 156 v-20 h43 v20" fill="#edc2a5" stroke="#75564d" stroke-width="3"/><ellipse cx="133" cy="91" rx="58" ry="66" fill="#f4cdae" stroke="#6b5250" stroke-width="3"/><ellipse cx="75" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><ellipse cx="190" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><path d="M77 79 Q59 39 86 28 Q110 6 133 20 Q169 6 190 44 Q207 62 191 83 L179 60 Q159 65 153 48 Q134 63 118 54 Q104 73 83 66 Z" fill="#302c32" stroke="#302c32" stroke-width="4"/><path d="M90 56 Q105 24 128 34 M135 35 Q155 27 180 48" stroke="#4b4143" fill="none" stroke-width="7" stroke-linecap="round"/><ellipse cx="115" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><ellipse cx="145" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><path d="M117 99 q14 14 28 0" fill="none" stroke="#594b4b" stroke-width="3" stroke-linecap="round"/><ellipse cx="95" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/><ellipse cx="164" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/></svg></div></div></div></section><section class="slide end" aria-label="12번째 슬라이드" data-index="11"><header class="head"><span class="brand">바시인의 밤 · 화찬웅</span><span class="count">12 / 12</span></header><div class="content"><div class="copy"><p class="kicker">FOR JUNIORS</p><h1>진로는 처음 생각한 대로만<br><em>흘러가지 않더라.</em></h1></div><div class="visual"><div class="lessons"><div>좋아하는 일을 <b>직접 해보기</b></div><div>계획이 바뀌어도 <b>괜찮기</b></div><div>성장하려면 <b>꾸준히 해보기</b></div></div><div class="endBoy"><svg class="character" viewBox="0 0 270 280" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><ellipse cx="137" cy="269" rx="84" ry="9" fill="#d9d4ce" opacity=".55"/><path d="M72 255 Q62 183 95 151 Q119 139 162 146 Q194 159 203 255Z" fill="#596b85" stroke="#37364a" stroke-width="3"/><path d="M105 152 Q132 181 156 153" fill="none" stroke="#d0dbe5" stroke-width="7"/><path d="M132 163 L128 250" stroke="#2c3e55" opacity=".4" stroke-width="3"/><path d="M87 184 Q60 191 47 224 M179 183 Q210 195 217 223" fill="none" stroke="#515268" stroke-width="22" stroke-linecap="round"/><path d="M110 156 v-20 h43 v20" fill="#edc2a5" stroke="#75564d" stroke-width="3"/><ellipse cx="133" cy="91" rx="58" ry="66" fill="#f4cdae" stroke="#6b5250" stroke-width="3"/><ellipse cx="75" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><ellipse cx="190" cy="97" rx="9" ry="14" fill="#edc2a5" stroke="#6b5250" stroke-width="2"/><path d="M77 79 Q59 39 86 28 Q110 6 133 20 Q169 6 190 44 Q207 62 191 83 L179 60 Q159 65 153 48 Q134 63 118 54 Q104 73 83 66 Z" fill="#302c32" stroke="#302c32" stroke-width="4"/><path d="M90 56 Q105 24 128 34 M135 35 Q155 27 180 48" stroke="#4b4143" fill="none" stroke-width="7" stroke-linecap="round"/><ellipse cx="115" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><ellipse cx="145" cy="88" rx="3.5" ry="5.5" fill="#40383b"/><path d="M117 99 q14 14 28 0" fill="none" stroke="#594b4b" stroke-width="3" stroke-linecap="round"/><ellipse cx="95" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/><ellipse cx="164" cy="104" rx="10" ry="5" fill="#e7a59f" opacity=".44"/></svg></div><div class="endline">여러분만의 방향을 찾길 바랍니다.</div></div></div></section></main></div><div class="controls"><button id="prev" aria-label="이전 슬라이드">←</button><span class="counter" id="counter">01 / 12</span><button id="next" aria-label="다음 슬라이드">→</button><button id="notesBtn" aria-label="발표자 노트">노트</button><button id="full" aria-label="전체화면">전체화면</button></div><aside class="notes" id="notes" aria-live="polite"><h3 id="noteTitle"></h3><p id="noteText"></p></aside><script>
+const slideNotes=["처음부터 엔지니어가 목표였던 건 아닙니다. 오늘은 어떤 대단한 성공담이라기보다, 진로를 여러 번 고민하고 우여곡절 끝에 지금 일을 하게 된 이야기입니다.","후배들이 진로를 정할 때 참고할 수 있도록 대학원 진학과 중단, 취업 준비, 현업 사례까지 이야기합니다.","교수라는 꿈이 있었고 군대 문제도 있었어요. 유전학 수업이 재밌었고 생물통계학을 배우면서 자료를 찾고 코딩하는 과정이 의외로 정말 재밌더라고요. 그래서 '이걸 더 해보고 싶다'는 생각으로 대학원을 선택했습니다.","실제 석사 시절 연구와 공동 제1저자 논문 이야기. 과정에서 데이터 분석을 통해 생물학적 질문을 다루는 재미를 얻었습니다. 학술적 성취가 있었지만 그와 대학원 생활을 지속하는 문제는 또 다르다는 점도 중요합니다. 논문 링크: https://www.nature.com/articles/s12276-022-00795-z","스스로 연구 내용을 찾아야 했고 수업과 연구 일정도 관리해야 했어요. 그때는 ChatGPT가 없어서 버그가 나면 논문과 구글 검색을 뒤지며 반나절을 쓰는 일이 흔했습니다. 놀고 싶기도 했고요. 꾸준함이 쉽지 않았습니다.","개인적으로 여러 어려움이 겹쳐 박사과정을 그만두게 되었습니다. 구체적인 사정까지 이야기할 필요는 없어요. 조금 쉬면서 스스로 어떤 일을 하고 싶은지 다시 생각했고, 석사 전문연구요원으로 경력을 이어갈 방법을 찾았습니다.","휴식 후 석사 전문연구요원을 알아보다 대학원 시절부터 알고 있던 쓰리빌리언에 관심을 갖게 됐습니다. 지원해 보니 코딩 테스트가 있어서 2주 동안 알고리즘을 정말 몰아서 공부했습니다.","직무 면접에서는 너무 긴장해서 파일 여는 코드조차 기억하지 못했어요. 대표님과 리더분들을 만난 면접도 뭘 답했는지 기억이 잘 안 났습니다. 넥타이를 풀어헤치고 집에 돌아가서 정말 떨어진 줄 알았는데, 생각지도 못한 합격 메일을 받았습니다. 키보드 Enter를 누르거나 다음 장면으로 넘길 때 메일을 공개합니다.","쓰리빌리언의 Bioinformatics Engineer로 일하면서 ACMG 근거 기반 변이 해석 파이프라인을 다듬고, 대규모 환자 데이터 재분석과 품질 검증, AI 모델을 위한 데이터 시스템을 운영하고 있습니다. 환자 진단을 위해 문제가 생기지 않도록 만드는 일이 중요합니다.","실제 회사의 3ASC 프로젝트입니다. 단순히 모델을 만드는 게 아니라 데이터 수집, 데이터 소스 이관, 특징 정의, 품질 검증, 학습 데이터와 서빙 데이터 간 정합성 확보 등 문제 해결을 위한 구조가 필요합니다. 발표 중 구체적인 환자 수 규모는 대외 공개 가능한지 확인한 뒤 언급하세요.","코딩 자체는 기본기지만 그 이상으로 중요한 건 어떤 문제인지, 데이터가 어디서 오는지, 어떻게 해결할지 설계하고 검증하는 능력이라고 느낍니다. 대학원에서 어려웠던 스스로 연구 문제를 찾는 역량이 현업에서도 이어집니다.","교수가 되고 싶어 대학원에 갔지만 지금은 엔지니어로 일하고 있습니다. 대학원에서 어렵게 얻은 경험들이 다른 형태로 이어졌습니다. 계획한 길이 아니라고 실패는 아니고, 여러 경험 속에서 내가 무엇을 좋아하고 잘하는지 알아가면 좋겠습니다."];
+let page=0,revealed=false;const els=Array.from(document.querySelectorAll(".slide"));
+function paint(){els.forEach((x,i)=>{x.classList.toggle("active",i===page);x.setAttribute("aria-hidden",i===page?"false":"true")});document.getElementById("counter").textContent=String(page+1).padStart(2,"0")+" / 12";document.getElementById("noteTitle").textContent=String(page+1).padStart(2,"0")+" · 발표자 노트";document.getElementById("noteText").textContent=slideNotes[page];document.getElementById("revealResult").classList.toggle("show",page===7&&revealed);document.getElementById("prev").disabled=page===0;}
+function next(){if(page===7&&!revealed){revealed=true;paint();return;}if(page<els.length-1){page++;paint();}}
+function prev(){if(page===7&&revealed){revealed=false;paint();return}if(page>0){page--;paint()}}
+document.getElementById("next").onclick=next;document.getElementById("prev").onclick=prev;
+document.getElementById("notesBtn").onclick=()=>document.getElementById("notes").classList.toggle("open");
+document.getElementById("full").onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>{})};
+document.addEventListener("keydown",e=>{if(["ArrowRight"," ","PageDown"].includes(e.key)){e.preventDefault();next();}else if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();prev()}else if(e.key.toLowerCase()==="n"){document.getElementById("notes").classList.toggle("open")}else if(e.key.toLowerCase()==="f"){document.getElementById("full").click()}else if(e.key==="Enter"&&page===7&&!revealed){revealed=true;paint();}});
+let tx;document.getElementById("screen").addEventListener("touchstart",e=>{tx=e.touches[0].clientX},{passive:true});document.getElementById("screen").addEventListener("touchend",e=>{if(tx==null)return;const d=e.changedTouches[0].clientX-tx;if(d>70)prev();if(d< -70)next();tx=null},{passive:true});paint();
+</script></body></html>
